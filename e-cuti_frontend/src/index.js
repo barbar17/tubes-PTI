@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Beranda from './Pages/Beranda/Beranda';
+import Pengajuan from './Pages/Pengajuan/Pengajuan';
+import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='*' element={<App />}>
+          <Route path='beranda' element={<Beranda />} />
+          <Route path='pengajuan_e-cuti' element={<Pengajuan />} />
+          <Route path='informasi_masa_cuti' element={<InformasiMasaCuti />} />
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
