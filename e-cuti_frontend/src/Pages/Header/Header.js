@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Link } from './Menu'
+import { Menus } from './Menu'
+import { Link } from 'react-router-dom'
 
 function Header() {
 
-    const navigation = Link()
+    const navigation = Menus()
 
     return (
         <>
@@ -16,7 +17,7 @@ function Header() {
                         <h1>PT SUGAR LABINTA</h1>
                     </div>
                 </div>
-                <h1>Nama Pegawai</h1>
+                <Link to={'/profil'} >Nama Pegawai</Link>
             </div>
 
             <div className='w-full flex bg-main h-14 items-center justify-center'>

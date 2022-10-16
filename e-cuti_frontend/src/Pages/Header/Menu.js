@@ -1,5 +1,5 @@
 
-export function Link() {
+export function Menus() {
     const link = [
         {
             title: 'Beranda',

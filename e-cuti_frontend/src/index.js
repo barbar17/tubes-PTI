@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Beranda from './Pages/Beranda/Beranda';
 import Pengajuan from './Pages/Pengajuan/Pengajuan';
 import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
+import Profil from './Pages/Profil/Profil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,9 @@ root.render(
           <Route path='informasi_masa_cuti' element={<InformasiMasaCuti />} />
 
         </Route>
+
+        <Route path='profil' element={<Profil />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
