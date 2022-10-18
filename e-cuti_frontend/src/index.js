@@ -8,12 +8,14 @@ import Beranda from './Pages/Beranda/Beranda';
 import Pengajuan from './Pages/Pengajuan/Pengajuan';
 import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
 import Profil from './Pages/Profil/Profil';
+import Login from './Pages/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path='/' element={<Login />} />
         <Route path='*' element={<App />}>
           <Route path='beranda' element={<Beranda />} />
           <Route path='pengajuan_e-cuti' element={<Pengajuan />} />
