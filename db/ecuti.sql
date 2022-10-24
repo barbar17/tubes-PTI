@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 05:11 PM
+-- Generation Time: Oct 24, 2022 at 11:50 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -48,8 +48,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`name`, `id`, `ttl`, `jeniskelamin`, `divisi`, `agama`, `alamat`, `telepon`, `email`, `username`, `password`, `createdAt`, `updatedAt`) VALUES
-('akbar', '12345', 'balam, 19-12-1919', 'pria', 'produksi', 'islam', 'jl.antasati no.44, bandar lampung', '0987654321', 'jhondoe@email.com', 'akbarbarbar', '$2b$10$TXo3ofEBHrSEcpiHpq1ThOcbxUyThDUiyb0D9GP.WwUegkrbhGgzC', '2022-10-24 14:48:37', '2022-10-24 14:48:37'),
-('jhon doe', '54321', 'balam, 19-12-1919', 'pria', 'produksi', 'islam', 'jl.antasati no.44, bandar lampung', '0987654321', 'jhondoe@email.com', 'jhondoe54321', '$2b$10$KfGqL2HJABMk7GNlDi3q8OJkCq0KsKsgd5YzHXTs8MO8OduBj6.QW', '2022-10-24 14:46:33', '2022-10-24 14:46:33');
+('akbar', '12345', 'balam, 19-12-1919', 'pria', 'produksi', 'islam', 'jl.antasati no.44, bandar lampung', '0987654321', 'jhondoe@email.com', 'akbarbarbar', '$2b$10$MTKaDJeMS13Xsxhs9kvZY.58ETO3BNVvszMgb2nhmC04cabYfVXyC', '2022-10-24 20:33:11', '2022-10-24 20:33:11');
 
 --
 -- Indexes for dumped tables
