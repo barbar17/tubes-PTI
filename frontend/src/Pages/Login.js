@@ -20,7 +20,7 @@ function Login() {
                     <input type={'text'} className='bg-white border-none my-2 p-3 text-lg rounded-md focus:outline-none ' placeholder='ex: 123456' />
                     <span className='text-white text-xl'>Password</span>
                     <input type={'password'} className='bg-white border-none my-2 p-3 text-lg rounded-md focus:outline-none ' placeholder='Password' />
-                    <button onClick={() => navigate('beranda')} className='bg-slate-200 w-1/3 px-2 py-2 rounded-md self-center flex items-center justify-center gap-2 '>
+                    <button onClick={() => navigate('/user/beranda')} className='bg-slate-200 w-1/3 px-2 py-2 rounded-md self-center flex items-center justify-center gap-2 '>
                         <span>Login</span>
                         <FiLogIn />
                     </button>
