@@ -40,7 +40,7 @@ function Login() {
     return (
         <div className='min-h-screen flex flex-col bg-login bg-no-repeat bg-cover justify-between'>
             <div className='flex justify-center items-center grow gap-20'>
-                <img src='gambar/logo.svg' />
+                <img src='gambar/logo.svg' alt='logo' />
                 <div className='text-6xl bg-gray-400 bg-opacity-40 w-[650px] text-center rounded-md flex flex-col p-5'>
                     <span>E-CUTI</span>
                     <span>PT SUGAR LABINTA</span>

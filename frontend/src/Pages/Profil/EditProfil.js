@@ -1,18 +1,19 @@
 import React from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { BsUpload } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
-function Profil() {
+function EditProfil() {
+
+  const navigation = useNavigate()
+
   return (
     <div className="min-h-screen w-full bg-slate-200 font-display">
       <div className="min-h-screen flex flex-col justify-between">
         <div className="container flex flex-col grow mx-auto my-10 border border-gray-400 shadow-2xl">
           <div className="w-full flex bg-main h-20 items-center text-white text-5xl px-8">
-            <Link to={"/"}>
-              <IoArrowBackSharp />
-            </Link>
+            <IoArrowBackSharp onClick={() => navigation(-1)} className="hover:cursor-pointer" />
             <span className="px-8">Biodata Pegawai</span>
           </div>
           <div className="flex relative">
@@ -67,4 +68,4 @@ function Profil() {
   );
 }
 
-export default Profil;
+export default EditProfil;
