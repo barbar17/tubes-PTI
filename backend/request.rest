@@ -1,0 +1,39 @@
+GET http://localhost:5000/pegawai
+
+###
+GET http://localhost:5000/pegawai/12345
+
+###
+POST http://localhost:5000/pegawai
+Content-Type: application/json
+
+{
+    "name":"jhon doe",
+    "id":"54321",
+    "ttl":"balam, 19-12-1919",
+    "jeniskelamin":"pria",
+    "divisi":"produksi",
+    "agama":"islam",
+    "alamat":"jl.antasati no.44, bandar lampung",
+    "telepon":"0987654321",
+    "email":"jhondoe@email.com"
+}
+
+###
+PATCH  http://localhost:5000/pegawai/12345
+Content-Type: application/json
+
+{
+    "name":"barbar",
+    "id":"12345",
+    "ttl":"balam, 19-12-1919",
+    "jeniskelamin":"pria",
+    "divisi":"produksi",
+    "agama":"islam",
+    "alamat":"jl.antasati no.44, Ketapang",
+    "telepon":"0987654321",
+    "email":"barbar@email.com"
+}
+
+###
+DELETE  http://localhost:5000/pegawai/54321
