@@ -3,6 +3,7 @@ import cors from 'cors';
 
 //import Route
 import PegawaiRoute from "./routes/PegawaiRoute.js"
+import LoginRoute from "./routes/LoginRoute.js"
 
 const app = express();
 
@@ -13,3 +14,4 @@ app.use(express.json());
 
 //end point
 app.use(PegawaiRoute);
+app.use(LoginRoute);

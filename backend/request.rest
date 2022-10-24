@@ -39,3 +39,12 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:5000/pegawai/54321
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "akbarbarbar",
+    "password": "09876"
+}
