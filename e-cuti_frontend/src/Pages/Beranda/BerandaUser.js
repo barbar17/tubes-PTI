@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiUser, FiUserX } from 'react-icons/fi'
 
-function Beranda() {
+function BerandaUser() {
     return (
         <div className='flex flex-col w-full items-center justify-center py-10 px-20 gap-20'>
             <div className='flex justify-around w-full'>
@@ -61,4 +61,4 @@ function Beranda() {
     )
 }
 
-export default Beranda
+export default BerandaUser

@@ -1,7 +1,5 @@
 import Footer from "./Pages/Footer/Footer";
-import Login from "./Pages/Login";
 import { Outlet } from 'react-router-dom'
-import Beranda from "./Pages/Beranda/Beranda";
 import Header from "./Pages/Header/Header";
 
 
@@ -13,7 +11,6 @@ function App() {
           <Header />
           <Outlet />
         </div>
-        {/* <Login /> */}
         <Footer />
       </div>
     </div>

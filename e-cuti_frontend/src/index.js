@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Beranda from './Pages/Beranda/Beranda';
+
+
+import BerandaUser from './Pages/Beranda/BerandaUser';
+import BerandaAdmin from './Pages/Beranda/BerandaAdmin';
 import Pengajuan from './Pages/Pengajuan/Pengajuan';
 import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
 import Profil from './Pages/Profil/Profil';
 import Login from './Pages/Login';
+
+const user = 'pegawai';
+const admin = 'manajer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +23,8 @@ root.render(
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='*' element={<App />}>
-          <Route path='beranda' element={<Beranda />} />
+          <Route path='beranda' element={<BerandaUser />} />
+          <Route path='berandaadmin' element={<BerandaAdmin />} />
           <Route path='pengajuan_e-cuti' element={<Pengajuan />} />
           <Route path='informasi_masa_cuti' element={<InformasiMasaCuti />} />
 
