@@ -22,12 +22,16 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='*' element={<App />}>
+
+        <Route path='user' element={<App />}>
           <Route path='beranda' element={<BerandaUser />} />
-          <Route path='berandaadmin' element={<BerandaAdmin />} />
           <Route path='pengajuan_e-cuti' element={<Pengajuan />} />
           <Route path='informasi_masa_cuti' element={<InformasiMasaCuti />} />
 
+        </Route>
+
+        <Route path='admin' element={<App />}>
+          <Route path='beranda' element={<BerandaAdmin />} />
         </Route>
 
         <Route path='profil' element={<Profil />} />

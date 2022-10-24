@@ -8,15 +8,17 @@ POST http://localhost:5000/pegawai
 Content-Type: application/json
 
 {
-    "name":"jhon doe",
-    "id":"54321",
+    "name":"akbar",
+    "id":"12345",
     "ttl":"balam, 19-12-1919",
     "jeniskelamin":"pria",
     "divisi":"produksi",
     "agama":"islam",
     "alamat":"jl.antasati no.44, bandar lampung",
     "telepon":"0987654321",
-    "email":"jhondoe@email.com"
+    "email":"jhondoe@email.com",
+    "username":"akbarbarbar",
+    "password":"09876"
 }
 
 ###

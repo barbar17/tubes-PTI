@@ -11,7 +11,7 @@ function Header() {
         <>
             <div className='flex w-full justify-between items-center px-10 py-5'>
                 <div className='flex items-center gap-10'>
-                    <img src='gambar/logo.svg' alt='logo' className='w-[150px] h-[150px] object-cover object-center' />
+                    <img src='/gambar/logo.svg' alt='logo' className='w-[150px] h-[150px] object-cover object-center' />
                     <div className='flex flex-col text-4xl font-semibold'>
                         <h1>E-CUTI</h1>
                         <h1>PT SUGAR LABINTA</h1>

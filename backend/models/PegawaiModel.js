@@ -12,7 +12,9 @@ const Pegawai = db.define('pegawai', {
     agama: { type: DataTypes.STRING, allowNull: false },
     alamat: { type: DataTypes.STRING, allowNull: false },
     telepon: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false }
+    email: { type: DataTypes.STRING, allowNull: false },
+    username: { type: DataTypes.STRING, allowNull: false },
+    password: { type: DataTypes.STRING, allowNull: false },
 }, {
     freezeTableName: true
 })
