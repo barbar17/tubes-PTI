@@ -17,7 +17,14 @@ function Header() {
                         <h1>PT SUGAR LABINTA</h1>
                     </div>
                 </div>
-                <Link to={'/profil'} >Nama Pegawai</Link>
+                <div className='flex flex-col min-w-[100px] justify-center items-end'>
+                    <Link to={'/profil'} className="text-3xl">Widodo</Link>
+                    <Link
+                        to={'/'}
+                        className=" text-white bg-card-red text-center py-1 px-2 items-center justify-center text-lg rounded-md">
+                        Log Out
+                    </Link>
+                </div>
             </div>
 
             <div className='w-full flex bg-main h-14 items-center justify-center'>
