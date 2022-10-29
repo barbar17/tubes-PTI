@@ -17,7 +17,8 @@ module.exports = {
 
       },
       backgroundImage: {
-        'login': 'url(../public/gambar/bg.png)'
+        'login': 'url(../public/gambar/bg.png)',
+        'main-bg': 'url(../public/gambar/main-bg.jpg)'
       }
     },
   },

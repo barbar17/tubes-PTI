@@ -11,10 +11,8 @@ import BerandaAdmin from './Pages/Beranda/BerandaAdmin';
 import Pengajuan from './Pages/Pengajuan/Pengajuan';
 import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
 import Profil from './Pages/Profil/Profil';
+import EditProfil from './Pages/Profil/EditProfil';
 import Login from './Pages/Login';
-
-const user = 'pegawai';
-const admin = 'manajer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -35,6 +33,7 @@ root.render(
         </Route>
 
         <Route path='profil' element={<Profil />} />
+        <Route path='profil/edit' element={<EditProfil />} />
 
       </Routes>
     </BrowserRouter>
