@@ -12,7 +12,7 @@ function InformasiMasaCuti() {
           Detail Informasi Masa Cuti
         </div>
         <div className="flex justify-around w-full">
-          <div className=" w-full h-20 flex text-white text-2xl font-bold items-center p-10 text-black">
+          <div className=" w-full h-20 flex text-2xl font-bold items-center p-10 text-black">
             Cuti Hari Minggu
           </div>
           <div class="flex items-center justify-center bg-gray-200">
@@ -85,7 +85,7 @@ function InformasiMasaCuti() {
           </div>
         </div>
         <div className="flex justify-around w-full">
-          <div className=" w-full h-20 flex text-white text-2xl font-bold items-center p-10 text-black">
+          <div className=" w-full h-20 flex text-2xl font-bold items-center p-10 text-black">
             Cuti Tahunan
           </div>
           <div class="flex items-center justify-center bg-gray-200">
@@ -158,7 +158,7 @@ function InformasiMasaCuti() {
           </div>
         </div>
         <div className="flex justify-around w-full">
-          <div className=" w-full h-20 flex text-white text-2xl font-bold items-center p-10 text-black">
+          <div className=" w-full h-20 flex text-2xl font-bold items-center p-10 text-black">
             Cuti Izin
           </div>
           <div class="flex items-center justify-center bg-gray-200">
@@ -231,7 +231,7 @@ function InformasiMasaCuti() {
           </div>
         </div>
         <div className="flex justify-around w-full">
-          <div className=" w-full h-20 flex text-white text-2xl font-bold items-center p-10 text-black">
+          <div className=" w-full h-20 flex text-2xl font-bold items-center p-10 text-black">
             Cuti Libur Nasional
           </div>
           <div class="flex items-center justify-center bg-gray-200">
@@ -304,7 +304,7 @@ function InformasiMasaCuti() {
           </div>
         </div>
         <div className="flex justify-around w-full">
-          <div className=" w-full h-20 flex text-white text-2xl font-bold items-center p-10 text-black">
+          <div className=" w-full h-20 flex text-2xl font-bold items-center p-10 text-black">
             Cuti Dispensasi
           </div>
           <div class="flex items-center justify-center bg-gray-200">
