@@ -1,4 +1,4 @@
-export function MenusUser() {
+export function Menus() {
   const link = [
     {
       title: "Beranda",

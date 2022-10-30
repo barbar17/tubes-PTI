@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export function MenusAdmin() {
 <<<<<<< Updated upstream
   const link = [
@@ -56,6 +57,19 @@ export function MenusAdmin() {
 
     ]
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of a8648307 (editadmin)
 
-  return link;
+export function MenusAdmin() {
+    const link = [
+        {
+            title: 'Beranda',
+            path: '/admin/beranda',
+            active: "h-full w-[250px] px-5 text-white bg-active-btn flex items-center justify-center",
+            notActive: "h-full w-[250px] px-5 text-white flex items-center justify-center hover:bg-active-btn transition-colors"
+        },
+
+    ]
+
+    return link
 }

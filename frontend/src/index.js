@@ -13,8 +13,11 @@ import InformasiMasaCuti from './Pages/ImformasiMasaCuti/InformasiMasaCuti';
 import Profil from './Pages/Profil/Profil';
 import EditProfil from './Pages/Profil/EditProfil';
 import Login from './Pages/Login';
+<<<<<<< HEAD
 import DataPegawaiAdmin from './Pages/DataPegawai/DataPegawaiAdmin';
 import DaftarPengajuanCutiAdmin from './Pages/DaftarPengajuanCuti/DaftarPengajuanCutiAdmin';
+=======
+>>>>>>> parent of a8648307 (editadmin)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,8 +35,11 @@ root.render(
 
         <Route path='admin' element={<App />}>
           <Route path='beranda' element={<BerandaAdmin />} />
+<<<<<<< HEAD
           <Route path='data_pegawai' element={<DataPegawaiAdmin />} />
           <Route path='daftar_pengajua_cuti' element={<DaftarPengajuanCutiAdmin />} />
+=======
+>>>>>>> parent of a8648307 (editadmin)
         </Route>
 
         <Route path='profil' element={<Profil />} />

@@ -1,5 +1,6 @@
 import React from "react";
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 function DaftarPengajuanCutiAdmin() {
   return (
@@ -130,6 +131,10 @@ function DataPegawaiAdmin() {
     </div>
   )
 >>>>>>> Stashed changes
+=======
+function DataPegawaiAdmin() {
+  return <div>DataPegawaiAdmin</div>;
+>>>>>>> parent of a8648307 (editadmin)
 }
 
-export default DaftarPengajuanCutiAdmin;
+export default DataPegawaiAdmin;
