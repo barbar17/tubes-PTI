@@ -5,7 +5,7 @@ const DataTypes = Sequelize;
 
 const SuratCuti = db.define('suratCuti', {
     name: { type: DataTypes.STRING, allowNull: false },
-    id: { type: DataTypes.INT, primaryKey: true, autoIncrement: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     divisi: { type: DataTypes.STRING, allowNull: false },
     jatahcuti: { type: DataTypes.STRING, allowNull: false },
     tglmulai: { type: DataTypes.DATE },
