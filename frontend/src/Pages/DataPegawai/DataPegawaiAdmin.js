@@ -3,9 +3,9 @@ import React from "react";
 function DataPegawaiAdmin() {
   return (
     <div className="w-full p-10 h-full">
-      <div className="w-full">
+      <div className="w-full bg-white pb-2">
         <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg">Data Pegawai</div>
-        <table className="table-auto w-full text-center bg-white text-xl ">
+        <table className="table-auto w-full text-center text-xl">
           <thead>
             <tr className="border-b-2">
               <th className="py-2">#</th>
