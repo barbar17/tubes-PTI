@@ -8,7 +8,7 @@ function DaftarPengajuanCutiAdmin() {
     return (
         <div className="flex flex-col w-full">
             <div className="flex justify-around w-full">
-                <div className="absolute w-4/5 -mt-64 ml-[900px]">
+                <div className="absolute w-[800px] top-0 left-1/2 -translate-x-1/2 z-10">
                     <KonfirmasiAdmin
                         trigger={buttonKonfirmAdm}
                         setTrigger={setButtonKonfirmAdm}

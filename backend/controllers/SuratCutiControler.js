@@ -22,26 +22,45 @@ export const getSuratCutiById = async (req, res) => {
     }
 }
 
+export const getSuratCutiByPegawai = async (req, res) => {
+    try {
+        const response = await SuratCuti.findAll({
+            where: {
+                userid: req.params.id
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const createSuratCuti = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;
     const divisi = req.body.divisi;
     const jatahcuti = req.body.jatahcuti;
+    const tglpengajuan = req.body.tglpengajuan;
     const tglmulai = req.body.tglmulai;
-    const tglslsai = req.body.tglslsai;
+    const tglselesai = req.body.tglselesai;
     const jeniscuti = req.body.jeniscuti;
     const alasan = req.body.alasan;
+    const userid = req.body.userid;
+    const status = req.body.status;
 
     try {
         await SuratCuti.create({
-            name: name,
             id: id,
+            name: name,
+            userid: userid,
             divisi: divisi,
             jatahcuti: jatahcuti,
+            tglpengajuan: tglpengajuan,
             tglmulai: tglmulai,
-            tglslsai: tglslsai,
+            tglselesai: tglselesai,
             jeniscuti: jeniscuti,
-            alasan: alasan
+            alasan: alasan,
+            status: status,
         });
         res.status(201).json({ msg: "Surat Created" });
     } catch (error) {
@@ -63,18 +82,20 @@ export const updateSuratCuti = async (req, res) => {
     const divisi = req.body.divisi;
     const jatahcuti = req.body.jatahcuti;
     const tglmulai = req.body.tglmulai;
-    const tglslsai = req.body.tglslsai;
+    const tglselesai = req.body.tglselesai;
     const jeniscuti = req.body.jeniscuti;
     const alasan = req.body.alasan;
+    const userid = req.body.userid;
 
     try {
         await SuratCuti.update({
-            name: name,
             id: id,
+            name: name,
+            userid: userid,
             divisi: divisi,
             jatahcuti: jatahcuti,
             tglmulai: tglmulai,
-            tglslsai: tglslsai,
+            tglselesai: tglselesai,
             jeniscuti: jeniscuti,
             alasan: alasan
         }, {
@@ -95,7 +116,7 @@ export const deleteSuratCuti = async (req, res) => {
                 id: req.params.id
             }
         });
-        res.status(202).json({ msg: "User Deleted" });
+        res.status(202).json({ msg: "Surat Cuti Deleted" });
     } catch (error) {
         console.log(error.message);
     }

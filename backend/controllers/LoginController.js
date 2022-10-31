@@ -21,7 +21,7 @@ export const Login = async (req, res) => {
         bcrypt.compare(password, account.password).then((match) => {
             if (!match) return res.json({ error: "Username atau Password Salah" });
             else {
-                const accessToken = jwt.sign({ username: account.username, id: account.id, tipeakun: account.tipeakun }, "tokenizer2022");
+                const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: account.tipeakun }, "tokenizer2022");
                 res.send(accessToken);
             }
         })

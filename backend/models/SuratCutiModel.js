@@ -4,14 +4,18 @@ import db from "../config/Database.js";
 const DataTypes = Sequelize;
 
 const SuratCuti = db.define('suratCuti', {
-    name: { type: DataTypes.STRING, allowNull: false },
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    name: { type: DataTypes.STRING, allowNull: false },
+    userid: { type: DataTypes.STRING, allowNull: false },
     divisi: { type: DataTypes.STRING, allowNull: false },
     jatahcuti: { type: DataTypes.STRING, allowNull: false },
-    tglmulai: { type: DataTypes.DATE },
-    tglselesai: { type: DataTypes.DATE },
+    tglpengajuan: { type: DataTypes.DATEONLY },
+    tglmulai: { type: DataTypes.DATEONLY },
+    tglselesai: { type: DataTypes.DATEONLY },
     jeniscuti: { type: DataTypes.STRING, allowNull: false },
-    alasan: { type: DataTypes.TEXT, allowNull: false },
+    alasan: { type: DataTypes.STRING, allowNull: false },
+    status: { type: DataTypes.STRING, allowNull: false },
+    komentar: { type: DataTypes.TEXT },
 }, {
     freezeTableName: true
 })

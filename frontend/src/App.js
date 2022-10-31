@@ -8,13 +8,10 @@ import axios from "axios";
 function App() {
 
   const [user, setUser] = useState();
-  const tipeAkun = user?.tipeakun;
+  const userId = user?.id
   const [authState, setAuthState] = useState(false);
 
   const userToken = sessionStorage.getItem('token');
-
-  console.log(user)
-  console.log(authState)
 
   const checkToken = async (token) => {
     await axios.get('http://localhost:5000/validate-token', {
@@ -41,8 +38,8 @@ function App() {
       <div className="min-h-screen flex flex-col justify-between">
         <AuthContext.Provider value={{ authState, setAuthState }}>
           <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl">
-            <Header />
-            <Outlet />
+            <Header user={user?.name} id={user?.id} />
+            <Outlet context={{ userId }} />
           </div>
           <Footer />
         </AuthContext.Provider>

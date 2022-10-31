@@ -1,12 +1,18 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import { MenusUser } from './MenuUser'
-import { MenusAdmin } from './MenuAdmin'
-import { Link } from 'react-router-dom'
+import { MenusUser } from './MenuUser'
+// import { MenusAdmin } from './MenuAdmin'
+import { Link, useNavigate } from 'react-router-dom'
 
-function Header() {
+function Header({ user, id }) {
 
-    const navigation = MenusAdmin()
+    const navigation = MenusUser()
+    const go = useNavigate()
+
+    const logOut = () => {
+        sessionStorage.removeItem("token");
+        go('/')
+    }
 
     return (
         <>
@@ -19,12 +25,12 @@ function Header() {
                     </div>
                 </div>
                 <div className='flex flex-col min-w-[100px] justify-center items-end'>
-                    <Link to={'/profil'} className="text-3xl">Widodo</Link>
-                    <Link
-                        to={'/'}
+                    <Link to={`/profil/user/${id}`} className="text-3xl">{user}</Link>
+                    <button
+                        onClick={() => logOut()}
                         className=" text-white bg-card-red text-center py-1 px-2 items-center justify-center text-lg rounded-md">
                         Log Out
-                    </Link>
+                    </button>
                 </div>
             </div>
 

@@ -15,6 +15,9 @@ import EditProfil from './Pages/Profil/EditProfil';
 import Login from './Pages/Login';
 import DataPegawaiAdmin from './Pages/DataPegawai/DataPegawaiAdmin';
 import DaftarPengajuanCutiAdmin from './Pages/DaftarPengajuanCuti/DaftarPengajuanCutiAdmin';
+import ProfilAdmin from './Pages/Profil/ProfilAdmin';
+import EditProfilAdmin from './Pages/Profil/EditProfilAdmin';
+import LaporanCutiAdmin from './Pages/LaporanCuti/LaporanCutiAdmin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -34,10 +37,14 @@ root.render(
           <Route path='beranda' element={<BerandaAdmin />} />
           <Route path='data_pegawai' element={<DataPegawaiAdmin />} />
           <Route path='daftar_pengajuan_cuti' element={<DaftarPengajuanCutiAdmin />} />
+          <Route path='laporan_cuti' element={<LaporanCutiAdmin />} />
         </Route>
 
-        <Route path='profil' element={<Profil />} />
-        <Route path='profil/edit' element={<EditProfil />} />
+        <Route path='profil/user/:id' element={<Profil />} />
+        <Route path='profil/user/edit/:id' element={<EditProfil />} />
+
+        <Route path='profil/admin/:id' element={<ProfilAdmin />} />
+        <Route path='profil/admin/edit/:id' element={<EditProfilAdmin />} />
 
       </Routes>
     </BrowserRouter>

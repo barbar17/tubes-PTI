@@ -56,3 +56,27 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/validate-token
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFrYmFyMjAwMSIsInRpcGVha3VuIjoidXNlciIsImlhdCI6MTY2NzE5NTg1MX0.nLtae5LOnh_RroMSu-PJWUiOoifw7UPwMw6-plyxeTo
+
+
+###
+POST http://localhost:5000/suratCuti
+Content-Type: application/json
+
+{
+    "name": "maulana",
+    "userid": "12345",
+    "divisi": "Produksi",
+    "jatahcuti": "25 Hari",
+    "tglpengajuan": "2022-11-12",
+    "tglmulai": "2022-12-13",
+    "tglselesai": "2022-12-17",
+    "jeniscuti": "Cuti Tahunan",
+    "alasan": "Sakit",
+    "status": "Sedang Diproses"
+}
+
+###
+GET http://localhost:5000/suratCuti/pegawai/12345
+
+###
+DELETE  http://localhost:5000/suratCuti/1
