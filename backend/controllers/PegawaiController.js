@@ -35,6 +35,7 @@ export const createPegawai = async (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+    const tipeakun = req.body.tipeakun;
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
@@ -49,7 +50,8 @@ export const createPegawai = async (req, res) => {
                 telepon: telepon,
                 email: email,
                 username: username,
-                password: hash
+                password: hash,
+                tipeakun: tipeakun,
             });
             res.status(201).json({ msg: "User Created" });
         })
@@ -78,6 +80,7 @@ export const updatePegawai = async (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+    const tipeakun = req.body.tipeakun;
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
@@ -93,6 +96,7 @@ export const updatePegawai = async (req, res) => {
                 email: email,
                 username: username,
                 password: hash,
+                tipeakun: tipeakun,
             }, {
                 where: {
                     id: req.params.id

@@ -8,17 +8,18 @@ POST http://localhost:5000/pegawai
 Content-Type: application/json
 
 {
-    "name":"akbar",
-    "id":"12345",
-    "ttl":"balam, 19-12-1919",
-    "jeniskelamin":"pria",
-    "divisi":"produksi",
-    "agama":"islam",
-    "alamat":"jl.antasati no.44, bandar lampung",
-    "telepon":"0987654321",
-    "email":"jhondoe@email.com",
-    "username":"akbarbarbar",
-    "password":"09876"
+    "name": "akbar",
+    "id": "12345",
+    "ttl": "Balam, 17-01-2001",
+    "jeniskelamin": "Pria",
+    "divisi": "Produksi",
+    "agama": "Islam",
+    "alamat": "Jl.Pangeran Senopati Raya, Balam",
+    "telepon": "081234567890",
+    "email": "akbar.12345@email.com",
+    "username": "akbar2001",
+    "password": "09876",
+    "tipeakun": "user"
 }
 
 ###
@@ -26,15 +27,18 @@ PATCH  http://localhost:5000/pegawai/12345
 Content-Type: application/json
 
 {
-    "name":"barbar",
-    "id":"12345",
-    "ttl":"balam, 19-12-1919",
-    "jeniskelamin":"pria",
-    "divisi":"produksi",
-    "agama":"islam",
-    "alamat":"jl.antasati no.44, Ketapang",
-    "telepon":"0987654321",
-    "email":"barbar@email.com"
+    "name": "maulana",
+    "id": "12345",
+    "ttl": "Balam, 17-01-2001",
+    "jeniskelamin": "Pria",
+    "divisi": "Produksi",
+    "agama": "Islam",
+    "alamat": "Jl.Pangeran Senopati Raya, Balam",
+    "telepon": "081234567890",
+    "email": "akbar.12345@email.com",
+    "username": "akbar2001",
+    "password": "09876",
+    "tipeakun": "user"
 }
 
 ###
@@ -48,3 +52,7 @@ Content-Type: application/json
     "username": "akbarbarbar",
     "password": "09876"
 }
+
+###
+GET http://localhost:5000/validate-token
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFrYmFyMjAwMSIsInRpcGVha3VuIjoidXNlciIsImlhdCI6MTY2NzE5NTg1MX0.nLtae5LOnh_RroMSu-PJWUiOoifw7UPwMw6-plyxeTo

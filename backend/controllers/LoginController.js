@@ -1,5 +1,7 @@
-import bcrypt from "bcrypt"
-import Pegawai from "../models/PegawaiModel.js"
+import bcrypt from "bcrypt";
+import Pegawai from "../models/PegawaiModel.js";
+import jwt from "jsonwebtoken";
+
 
 export const Login = async (req, res) => {
     const username = req.body.username;
@@ -19,8 +21,13 @@ export const Login = async (req, res) => {
         bcrypt.compare(password, account.password).then((match) => {
             if (!match) return res.json({ error: "Username atau Password Salah" });
             else {
-                res.json("Login berhasil")
+                const accessToken = jwt.sign({ username: account.username, id: account.id, tipeakun: account.tipeakun }, "tokenizer2022");
+                res.send(accessToken);
             }
         })
     }
+}
+
+export const getPermision = async (req, res) => {
+    res.json(req.user)
 }

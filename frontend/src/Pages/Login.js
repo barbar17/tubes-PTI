@@ -12,21 +12,24 @@ function Login() {
     const [password, setPassword] = useState('');
 
     const login = async (account) => {
-        axios.post("http://localhost:5000/login", account, {
+        await axios.post("http://localhost:5000/login", account, {
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(account)
         }).then((response) => {
-            if (response.data.error) {
-                alert(response.data.error);
-            }
+            if (response.data.error) alert(response.data.error);
             else {
+                setSessionToken(response.data);
                 navigate("/user/beranda");
                 setUsername('');
                 setPassword('');
             }
         })
+    }
+
+    const setSessionToken = (userToken) => {
+        sessionStorage.setItem('token', userToken);
     }
 
     const handleSubmit = async event => {
