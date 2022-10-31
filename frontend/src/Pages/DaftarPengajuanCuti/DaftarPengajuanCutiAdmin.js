@@ -7,7 +7,7 @@ function DaftarPengajuanCutiAdmin() {
             <div className="w-full">
                 <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg">Daftar Pengajuan Cuti</div>
                 <div className='flex flex-col p-5 bg-white'>
-                    <div className='relative w-80' >
+                    <div className='relative w-80 mb-5' >
                         <input
                             type={'text'}
                             className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-10 text-sm focus:shadow-slate-400 focus:shadow-md transition-all"
