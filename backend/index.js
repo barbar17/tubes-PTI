@@ -5,6 +5,7 @@ import cors from 'cors';
 import PegawaiRoute from "./routes/PegawaiRoute.js"
 import LoginRoute from "./routes/LoginRoute.js"
 import SuratCutiRoute from "./routes/SuratCutiRoute.js"
+import AdminRoute from "./routes/AdminRoute.js"
 
 const app = express();
 
@@ -17,3 +18,4 @@ app.use(express.json());
 app.use(PegawaiRoute);
 app.use(LoginRoute);
 app.use(SuratCutiRoute);
+app.use(AdminRoute);
