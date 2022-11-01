@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function DataPegawaiAdmin() {
   return (
@@ -27,9 +28,9 @@ function DataPegawaiAdmin() {
               <td>*****</td>
               <td>
                 <div className="w-full h-full flex justify-evenly">
-                  <button className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
+                  <Link to={'/admin/data_pegawai/edit'} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
                     Edit
-                  </button>
+                  </Link>
                   <button className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">
                     Hapus
                   </button>

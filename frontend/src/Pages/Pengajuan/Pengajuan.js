@@ -10,31 +10,42 @@ function Pengajuan() {
   const [tglselesai, setTglselesai] = useState('')
   const [jeniscuti, setJeniscuti] = useState('')
   const [alasancuti, setAlasancuti] = useState('')
+  const [file, setFile] = useState('')
+  const [previewfile, setPreviewFile] = useState('')
+
   const now = new Date();
   const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
 
+  const loadFoto = (event) => {
+    const foto = event.target.files[0];
+    setFile(foto);
+    setPreviewFile(URL.createObjectURL(foto));
+  }
+
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
-    const formData = JSON.stringify({
-      "name": nama,
-      "userid": id,
-      "divisi": divisi,
-      "jatahcuti": jatahcuti,
-      "tglpengajuan": currentDate,
-      "tglmulai": tglmulai,
-      "tglselesai": tglselesai,
-      "jeniscuti": jeniscuti,
-      "alasan": alasancuti,
-      "status": "Sedang Diproses",
-    });
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("name", nama)
+    formData.append("userid", id)
+    formData.append("divisi", divisi)
+    formData.append("jatahcuti", jatahcuti)
+    formData.append("tglpengajuan", currentDate)
+    formData.append("tglmulai", tglmulai)
+    formData.append("tglselesai", tglselesai)
+    formData.append("jeniscuti", jeniscuti)
+    formData.append("alasan", alasancuti)
+    formData.append("status", "Sedang Diproses")
+
     try {
       await axios.post("http://localhost:5000/suratCuti", formData, {
         headers: {
-          'Content-Type': 'application/json'
+          "Content-type": "multipart/form-data"
         }
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   }
 
@@ -153,15 +164,13 @@ function Pengajuan() {
                   <span>File Tambahan</span>
                 </td>
                 <td> :
-                  <input
-                    type="file"
-                    className="rounded-lg ml-2 border-slate-400 border"
-                  />
+                  <input type={'file'} id="files" accept={'image/*'} onChange={loadFoto} className="rounded-lg ml-2 border-slate-400 border" />
                 </td>
               </tr>
               <tr>
                 <td>
                   <button
+                    type="submit"
                     className="text-white bg-main h-12 w-32 rounded-lg"
                   >
                     Submit

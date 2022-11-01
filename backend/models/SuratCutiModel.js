@@ -16,6 +16,8 @@ const SuratCuti = db.define('suratCuti', {
     alasan: { type: DataTypes.STRING, allowNull: false },
     status: { type: DataTypes.STRING, allowNull: false },
     komentar: { type: DataTypes.TEXT },
+    file: { type: DataTypes.STRING },
+    fileurl: { type: DataTypes.STRING }
 }, {
     freezeTableName: true
 })

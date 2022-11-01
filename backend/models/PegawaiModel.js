@@ -16,6 +16,10 @@ const Pegawai = db.define('pegawai', {
     username: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     tipeakun: { type: DataTypes.STRING, allowNull: false },
+    foto: { type: DataTypes.STRING },
+    fotourl: { type: DataTypes.STRING },
+    ttd: { type: DataTypes.STRING },
+    ttdurl: { type: DataTypes.STRING }
 }, {
     freezeTableName: true
 })

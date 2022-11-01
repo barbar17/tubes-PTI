@@ -18,6 +18,7 @@ import DaftarPengajuanCutiAdmin from './Pages/DaftarPengajuanCuti/DaftarPengajua
 import ProfilAdmin from './Pages/Profil/ProfilAdmin';
 import EditProfilAdmin from './Pages/Profil/EditProfilAdmin';
 import LaporanCutiAdmin from './Pages/LaporanCuti/LaporanCutiAdmin';
+import EditAkunPegawai from './Pages/DataPegawai/EditAkunPegawai';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +39,7 @@ root.render(
           <Route path='data_pegawai' element={<DataPegawaiAdmin />} />
           <Route path='daftar_pengajuan_cuti' element={<DaftarPengajuanCutiAdmin />} />
           <Route path='laporan_cuti' element={<LaporanCutiAdmin />} />
+          <Route path='data_pegawai/edit' element={<EditAkunPegawai />} />
         </Route>
 
         <Route path='profil/user/:id' element={<Profil />} />

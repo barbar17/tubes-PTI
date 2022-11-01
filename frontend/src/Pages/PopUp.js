@@ -1,8 +1,11 @@
 import axios from "axios";
 import React from "react";
 import { IoIosClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom"
 
 function PopUp(props) {
+
+  const navigation = useNavigate()
 
   const deletePengajuanCuti = async (id) => {
     try {
@@ -65,6 +68,14 @@ function PopUp(props) {
             <tr>
               <td>Alasan Cuti</td>
               <td>: {props.detailCuti.alasan}</td>
+            </tr>
+            <tr>
+              <td>file tambahan</td>
+              <td>
+                <button className="h-fit w-fit" onClick={() => window.open(props.detailCuti?.fileurl, "_blank")}>
+                  <img src={props.detailCuti?.fileurl} alt='fotoprofil' className="w-[250px] h-[100px] object-contain object-center" />
+                </button>
+              </td>
             </tr>
             <tr>
               <td>komentar</td>

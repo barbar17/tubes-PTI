@@ -20,7 +20,7 @@ function DaftarPengajuanCutiAdmin() {
                 <div className="w-full">
                     <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg">Daftar Pengajuan Cuti</div>
                     <div className="flex flex-col px-5 bg-white pb-3">
-                        <div className='flex flex-col p-5 bg-white'>
+                        <div className='flex p-5 bg-white justify-between'>
                             <div className='relative w-80' >
                                 <input
                                     type={'text'}
@@ -31,6 +31,9 @@ function DaftarPengajuanCutiAdmin() {
                                     <BiSearchAlt className='text-2xl' color='black' />
                                 </div>
                             </div>
+                            <button onClick={() => alert("berhasil di click")} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                Tambah
+                            </button>
                         </div>
 
                         <table className="table-auto w-full text-center text-xl ">

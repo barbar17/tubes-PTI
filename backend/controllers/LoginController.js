@@ -31,3 +31,18 @@ export const Login = async (req, res) => {
 export const getPermision = async (req, res) => {
     res.json(req.user)
 }
+
+export const resetToken = async (req, res) => {
+    const username = req.body.username
+
+    let account = await Pegawai.findOne({
+        where: {
+            username: username
+        }
+    })
+
+    if (account) {
+        const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: account.tipeakun }, "tokenizer2022");
+        res.send(accessToken);
+    }
+}

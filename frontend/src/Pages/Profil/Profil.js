@@ -14,7 +14,6 @@ function Profil() {
     const getProfilPegawai = async () => {
         const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
         setProfil(response.data)
-        console.log(response.data)
     }
 
     useEffect(() => {
@@ -33,13 +32,13 @@ function Profil() {
                     <div className="flex w-full px-10 grow items-stretch justify-between">
                         <div className='flex'>
                             <div className="flex flex-col item-center justify-center mx-10 space-y-10">
-                                <img src="/gambar/robi.jpeg" alt='fotoprofil' className="w-[250px] h-[333px] object-cover object-center" />
+                                <img src={profil?.fotourl} alt='fotoprofil' className="w-[250px] h-[333px] object-cover object-center" />
                                 <img src="/gambar/ttd.jpeg" alt='ttd' className="w-[250px] h-fit object-cover object-center" />
                             </div>
 
                             <div className="flex flex-col h-full items-center justify-center">
                                 <table className='border-separate border-spacing-2 text-2xl'>
-                                    <body>
+                                    <tbody>
                                         <tr>
                                             <td>nama</td>
                                             <td className='p-2'>: {profil?.name}</td>
@@ -76,7 +75,7 @@ function Profil() {
                                             <td>Email</td>
                                             <td className='p-2'>: {profil?.email}</td>
                                         </tr>
-                                    </body>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

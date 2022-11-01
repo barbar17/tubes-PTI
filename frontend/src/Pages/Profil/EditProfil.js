@@ -20,6 +20,15 @@ function EditProfil() {
   const [alamat, setAlamat] = useState('')
   const [telepon, setTelepon] = useState('')
   const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [fotopegawai, setFotopegawai] = useState('')
+  const [previewfoto, setPreviewfoto] = useState('')
+
+  const loadFoto = (event) => {
+    const foto = event.target.files[0];
+    setFotopegawai(foto);
+    setPreviewfoto(URL.createObjectURL(foto));
+  }
 
   const getProfilPegawai = async () => {
     const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
@@ -32,6 +41,57 @@ function EditProfil() {
     setAlamat(response.data.alamat);
     setTelepon(response.data.telepon);
     setEmail(response.data.email);
+    setUsername(response.data.username);
+  }
+
+  const updateProfil = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    formData.append("file", fotopegawai);
+    formData.append("name", name);
+    formData.append("id", id);
+    formData.append("ttl", ttl);
+    formData.append("jeniskelamin", jeniskelamin);
+    formData.append("divisi", divisi);
+    formData.append("agama", agama);
+    formData.append("alamat", alamat);
+    formData.append("telepon", telepon);
+    formData.append("email", email);
+
+    try {
+      await axios.patch(`http://localhost:5000/pegawai/${id}`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data"
+        }
+      });
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
+      resetToken(username)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const resetToken = async (username) => {
+    try {
+      axios.post('http://localhost:5000/resetToken', { username: username }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(username)
+      }).then((response) => {
+        if (response.data.error) alert(response.data.error);
+        else {
+          sessionStorage.removeItem("token");
+          sessionStorage.setItem('token', response.data);
+          navigation(-1)
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -48,35 +108,41 @@ function EditProfil() {
             <span className="px-8">Biodata Pegawai</span>
           </div>
 
-          <form className="flex w-full px-10 grow items-stretch justify-between">
+          <form className="flex w-full px-10 grow items-stretch justify-between" onSubmit={updateProfil}>
             <div className='flex'>
               <div className="flex flex-col item-center justify-center mx-10 space-y-10">
-                <div className="flex border border-gray-400 shadow-2xl w-[250px] h-[333px] object-cover object-center items-center justify-center ">
-                  <button className="text-white bg-main h-12 w-36 items-center justify-center text-2xl rounded-lg">
-                    <BsUpload className="mt-2 ml-6" />
-                    <span className="flex ml-14 -mt-6">Foto</span>
-                  </button>
+                <div className="relative flex border border-gray-400 shadow-2xl w-[250px] h-[333px] object-cover object-center items-center justify-center ">
+                  {
+                    previewfoto ? (
+                      <img src={previewfoto} alt='fotoprofil' className="w-[250px] h-[333px] object-cover object-center" />
+                    ) : (<></>)
+                  }
+                  <input type={'file'} id="files" style={{ display: "none" }} accept={'image/*'} onChange={loadFoto} />
+                  <label htmlFor="files" className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-5 left-1/2 -translate-x-1/2 z-10 text-xl rounded-lg hover:cursor-pointer">
+                    <BsUpload />
+                    <span>Foto</span>
+                  </label>
                 </div>
 
-                <div className="flex border border-gray-400 shadow-2xl w-[250px] h-[150px] object-cover object-center items-center justify-center ">
-                  <button className="text-white bg-main h-12 w-36 items-center justify-center text-2xl rounded-lg">
-                    <BsUpload className="mt-2 ml-6" />
-                    <span className="flex ml-14 -mt-6">TTD</span>
+                <div className="relative flex border border-gray-400 shadow-2xl w-[250px] h-[150px] object-cover object-center items-center justify-center ">
+                  <button className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center text-xl rounded-lg">
+                    <BsUpload />
+                    <span>TTD</span>
                   </button>
                 </div>
               </div>
 
               <div className="flex flex-col h-full items-center justify-center">
                 <table className='border-separate border-spacing-2 text-2xl'>
-                  <body>
+                  <tbody>
                     <tr>
                       <td>nama</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setName(event.target.value)} value={name} /></td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td>ID</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setUserId(event.target.value)} value={userId} /></td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td>Tempat/Tgl Lahir</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setTtl(event.target.value)} value={ttl} /></td>
@@ -105,13 +171,14 @@ function EditProfil() {
                       <td>Email</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setEmail(event.target.value)} value={email} /></td>
                     </tr>
-                  </body>
+                  </tbody>
                 </table>
               </div>
             </div>
 
             <div className='flex items-start justify-start p-5'>
               <button
+                type="submit"
                 className="text-white bg-main h-12 w-36 items-center justify-center text-3xl rounded-lg">
                 Simpan
               </button>
@@ -120,7 +187,7 @@ function EditProfil() {
         </div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 }
 
