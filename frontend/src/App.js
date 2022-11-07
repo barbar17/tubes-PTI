@@ -38,7 +38,7 @@ function App() {
       <div className="min-h-screen flex flex-col justify-between">
         <AuthContext.Provider value={{ authState, setAuthState }}>
           <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl">
-            <Header user={user?.name} id={user?.id} />
+            <Header user={user?.name} id={user?.id} tipeakun={user?.tipeakun} />
             <Outlet context={{ userId }} />
           </div>
           <Footer />

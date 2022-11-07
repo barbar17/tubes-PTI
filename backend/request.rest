@@ -80,3 +80,25 @@ GET http://localhost:5000/suratCuti/pegawai/12345
 
 ###
 DELETE  http://localhost:5000/suratCuti/1
+
+###
+POST http://localhost:5000/admin
+Content-Type: application/json
+
+{
+    "name": "widodo",
+    "id": "09876",
+    "ttl": "Balam, 17-01-2001",
+    "jeniskelamin": "Pria",
+    "divisi": "Produksi",
+    "agama": "Islam",
+    "alamat": "Jl.Belwis, Lampung Selatan",
+    "telepon": "080987654321",
+    "email": "widodo.09876@email.com",
+    "username": "widodo098",
+    "password": "12345",
+    "tipeakun": "admin"
+}
+
+###
+DELETE  http://localhost:5000/admin/09876

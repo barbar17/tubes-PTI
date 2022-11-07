@@ -49,18 +49,42 @@ export const createSuratCuti = async (req, res) => {
     const alasan = req.body.alasan;
     const userid = req.body.userid;
     const status = req.body.status;
-    const file = req.files.file;
-    const fileSize = file.data.length;
-    const ext = path.extname(file.name);
-    const fileName = file.md5 + ext;
-    const url = `${req.protocol}://${req.get("host")}/pengajuanCuti/${fileName}`;
-    const allowedType = ['.png', '.jpeg', '.jpg'];
+    const file = req?.files?.file;
 
-    if (!allowedType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "Invalide Image Type" });
-    if (fileSize > 5000000) return res.status(422).json({ msg: "Image Must Be Less Than 5Mb" });
+    if (file) {
+        const fileSize = file.data.length;
+        const ext = path.extname(file.name);
+        const fileName = file.md5 + ext;
+        const url = `${req.protocol}://${req.get("host")}/pengajuanCuti/${fileName}`;
+        const allowedType = ['.png', '.jpeg', '.jpg'];
 
-    file.mv(`./public/pengajuanCuti/${fileName}`, async (err) => {
-        if (err) return res.status(500).json({ msg: err.message });
+        if (!allowedType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "Invalide Image Type" });
+        if (fileSize > 5000000) return res.status(422).json({ msg: "Image Must Be Less Than 5Mb" });
+
+        file.mv(`./public/pengajuanCuti/${fileName}`, async (err) => {
+            if (err) return res.status(500).json({ msg: err.message });
+            try {
+                await SuratCuti.create({
+                    id: id,
+                    name: name,
+                    userid: userid,
+                    divisi: divisi,
+                    jatahcuti: jatahcuti,
+                    tglpengajuan: tglpengajuan,
+                    tglmulai: tglmulai,
+                    tglselesai: tglselesai,
+                    jeniscuti: jeniscuti,
+                    alasan: alasan,
+                    status: status,
+                    file: fileName,
+                    fileurl: url,
+                });
+                res.status(201).json({ msg: "Surat Created" });
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+    } else {
         try {
             await SuratCuti.create({
                 id: id,
@@ -74,14 +98,13 @@ export const createSuratCuti = async (req, res) => {
                 jeniscuti: jeniscuti,
                 alasan: alasan,
                 status: status,
-                file: fileName,
-                fileurl: url,
             });
             res.status(201).json({ msg: "Surat Created" });
         } catch (error) {
             console.log(error.message);
         }
-    })
+    }
+
 }
 
 export const updateSuratCuti = async (req, res) => {

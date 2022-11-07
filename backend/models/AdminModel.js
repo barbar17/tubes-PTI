@@ -3,7 +3,7 @@ import db from "../config/Database.js";
 
 const DataTypes = Sequelize;
 
-const Admin = db.define('admin',{
+const Admin = db.define('admin', {
     name: { type: DataTypes.STRING, allowNull: false },
     id: { type: DataTypes.STRING, primaryKey: true },
     ttl: { type: DataTypes.STRING, allowNull: false },
@@ -15,6 +15,11 @@ const Admin = db.define('admin',{
     email: { type: DataTypes.STRING, allowNull: false },
     username: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
+    tipeakun: { type: DataTypes.STRING, allowNull: false },
+    foto: { type: DataTypes.STRING },
+    fotourl: { type: DataTypes.STRING },
+    ttd: { type: DataTypes.STRING },
+    ttdurl: { type: DataTypes.STRING }
 }, {
     freezeTableName: true
 })

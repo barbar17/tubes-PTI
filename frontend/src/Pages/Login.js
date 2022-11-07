@@ -20,8 +20,8 @@ function Login() {
         }).then((response) => {
             if (response.data.error) alert(response.data.error);
             else {
-                setSessionToken(response.data);
-                navigate("/user/beranda");
+                setSessionToken(response.data.accessToken);
+                navigate(`/${response.data.tipeakun}/beranda`);
                 setUsername('');
                 setPassword('');
             }

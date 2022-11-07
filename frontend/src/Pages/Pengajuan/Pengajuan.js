@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 function Pengajuan() {
   const [nama, setNama] = useState('')
@@ -15,6 +16,8 @@ function Pengajuan() {
 
   const now = new Date();
   const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+
+  const go = useNavigate()
 
   const loadFoto = (event) => {
     const foto = event.target.files[0];
@@ -44,6 +47,7 @@ function Pengajuan() {
           "Content-type": "multipart/form-data"
         }
       });
+      go('/user/beranda')
     } catch (error) {
       console.log(error.response.data);
     }

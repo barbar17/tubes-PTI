@@ -2,7 +2,7 @@ import Admin from "../models/AdminModel.js";
 import bcrypt, { hash } from 'bcrypt';
 
 export const getAdmin = async (req, res) => {
-    try{
+    try {
         const response = await Admin.findAll();
         res.status(200).json(response);
     } catch (error) {
@@ -35,6 +35,7 @@ export const createAdmin = async (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+    const tipeakun = req.body.tipeakun;
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
@@ -49,7 +50,8 @@ export const createAdmin = async (req, res) => {
                 telepon: telepon,
                 email: email,
                 username: username,
-                password: hash
+                password: hash,
+                tipeakun: tipeakun,
             });
             res.status(201).json({ msg: "User Created" });
         })
@@ -64,7 +66,7 @@ export const updateAdmin = async (req, res) => {
             id: req.params.id
         }
     })
-    
+
     if (!Admin) return res.status(404).json({ msg: "Admin Tidak Ditemukan" })
 
     const name = req.body.name;

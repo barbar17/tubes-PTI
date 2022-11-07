@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import { MenusUser } from './MenuUser'
+import { MenusUser } from './MenuUser'
 import { MenusAdmin } from './MenuAdmin'
 import { Link, useNavigate } from 'react-router-dom'
 
-function Header({ user, id }) {
+function Header({ user, id, tipeakun }) {
 
-    const navigation = MenusAdmin()
+    let navigation = tipeakun === 'user' ? MenusUser() : MenusAdmin();
+
     const go = useNavigate()
 
     const logOut = () => {
