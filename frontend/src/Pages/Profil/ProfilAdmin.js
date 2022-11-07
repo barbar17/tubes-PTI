@@ -27,7 +27,7 @@ function ProfilAdmin() {
                 <div className="container flex flex-col grow mx-auto my-10 border border-gray-400 shadow-2xl">
                     <div className="w-full flex bg-main h-20 items-center text-white text-5xl px-8">
                         <IoArrowBackSharp onClick={() => navigation(-1)} className="hover:cursor-pointer" />
-                        <span className="px-8">Biodata Pegawai</span>
+                        <span className="px-8">Biodata Admin</span>
                     </div>
                     <div className="flex w-full px-10 grow items-stretch justify-between">
                         <div className='flex'>
