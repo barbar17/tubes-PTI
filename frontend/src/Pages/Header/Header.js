@@ -26,7 +26,7 @@ function Header({ user, id, tipeakun }) {
                     </div>
                 </div>
                 <div className='flex flex-col min-w-[100px] justify-center items-end'>
-                    <Link to={`/profil/user/${id}`} className="text-3xl">{user}</Link>
+                    <Link to={`/profil/${tipeakun}/${id}`} className="text-3xl">{user}</Link>
                     <button
                         onClick={() => logOut()}
                         className=" text-white bg-card-red text-center py-1 px-2 items-center justify-center text-lg rounded-md">

@@ -29,7 +29,7 @@ export const Login = async (req, res) => {
             if (!match) return res.json({ error: "Username atau Password Salah" });
             else {
                 const tipeakun = account.tipeakun
-                const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: tipeakun }, "tokenizer2022");
+                const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: tipeakun, divisi: account.divisi }, "tokenizer2022");
                 res.send({ accessToken: accessToken, tipeakun: tipeakun });
             }
         })
@@ -48,6 +48,14 @@ export const resetToken = async (req, res) => {
             username: username
         }
     })
+
+    if (!account) {
+        account = await Admin.findOne({
+            where: {
+                username: username
+            }
+        })
+    }
 
     if (account) {
         const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: account.tipeakun }, "tokenizer2022");

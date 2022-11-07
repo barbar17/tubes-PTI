@@ -82,26 +82,25 @@ export const updateAdmin = async (req, res) => {
     const password = req.body.password;
 
     try {
-        await bcrypt.hash(password, 10).then((hash) => {
-            Admin.update({
-                name: name,
-                id: id,
-                ttl: ttl,
-                jeniskelamin: jeniskelamin,
-                divisi: divisi,
-                agama: agama,
-                alamat: alamat,
-                telepon: telepon,
-                email: email,
-                username: username,
-                password: hash,
-            }, {
-                where: {
-                    id: req.params.id
-                }
-            });
-            res.status(200).json({ msg: "User Updated" });
-        })
+
+        Admin.update({
+            name: name,
+            id: id,
+            ttl: ttl,
+            jeniskelamin: jeniskelamin,
+            divisi: divisi,
+            agama: agama,
+            alamat: alamat,
+            telepon: telepon,
+            email: email,
+            username: username,
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json({ msg: "User Updated" });
+
     } catch (error) {
         console.log(error.message);
     }

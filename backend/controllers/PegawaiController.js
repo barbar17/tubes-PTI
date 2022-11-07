@@ -25,6 +25,20 @@ export const getPegawaiById = async (req, res) => {
     }
 }
 
+export const getPegawaiByDivisi = async (req, res) => {
+    try {
+        const response = await Pegawai.findAll({
+            where: {
+                divisi: req.params.divisi
+            },
+            attributes: ['id', 'name', 'divisi', 'username', 'jeniskelamin', 'telepon']
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const createPegawai = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;
