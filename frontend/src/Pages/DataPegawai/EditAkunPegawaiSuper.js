@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditAkunPegawai() {
+function EditAkunPegawaiSuper() {
   const [nama, setNama] = useState("");
   const [nip, setNip] = useState("");
   const [divisi, setDivisi] = useState("");
@@ -25,7 +25,7 @@ function EditAkunPegawai() {
                   <input
                     type={"text"}
                     className="rounded-lg border-slate-400 border "
-                    placeholder="WIdodo "
+                    placeholder="Widodo "
                     value={nama}
                     onChange={(event) => setNama(event.target.value)}
                     required
@@ -114,4 +114,4 @@ function EditAkunPegawai() {
   );
 }
 
-export default EditAkunPegawai;
+export default EditAkunPegawaiSuper;

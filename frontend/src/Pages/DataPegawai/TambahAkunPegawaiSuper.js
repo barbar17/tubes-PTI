@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { BiTab } from "react-icons/bi";
 
-function EditAkunPegawai() {
-  const [nama, setNama] = useState("");
-  const [nip, setNip] = useState("");
-  const [divisi, setDivisi] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
+function TambahAkunPegawaiSuper() {
   return (
     <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
       <div className="w-full">
         <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg text-center">
-          Edit Akun Pegawai
+          Tambah Akun Pegawai
         </div>
         <div className=" w-full flex items-center justify-center bg-white text-xl p-10">
           <table className="border-separate border-spacing-y-2 border-spacing-x-5">
@@ -23,12 +18,8 @@ function EditAkunPegawai() {
                 <td>
                   :{" "}
                   <input
-                    type={"text"}
-                    className="rounded-lg border-slate-400 border "
-                    placeholder="WIdodo "
-                    value={nama}
-                    onChange={(event) => setNama(event.target.value)}
-                    required
+                    type="text"
+                    className="rounded-lg border-slate-400 border"
                   />
                 </td>
               </tr>
@@ -41,10 +32,6 @@ function EditAkunPegawai() {
                   <input
                     type="text"
                     className="rounded-lg border-slate-400 border"
-                    placeholder="12345 "
-                    value={nip}
-                    onChange={(event) => setNip(event.target.value)}
-                    required
                   />
                 </td>
               </tr>
@@ -57,10 +44,6 @@ function EditAkunPegawai() {
                   <input
                     type="text"
                     className="rounded-lg border-slate-400 border"
-                    placeholder="Produksi "
-                    value={divisi}
-                    onChange={(event) => setDivisi(event.target.value)}
-                    required
                   />
                 </td>
               </tr>
@@ -73,10 +56,6 @@ function EditAkunPegawai() {
                   <input
                     type="text"
                     className="rounded-lg border-slate-400 border"
-                    placeholder="Widodo2000 "
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    required
                   />
                 </td>
               </tr>
@@ -89,10 +68,6 @@ function EditAkunPegawai() {
                   <input
                     type="text"
                     className="rounded-lg border-slate-400 border"
-                    placeholder="passwordku123 "
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
                   />
                 </td>
               </tr>
@@ -114,4 +89,4 @@ function EditAkunPegawai() {
   );
 }
 
-export default EditAkunPegawai;
+export default TambahAkunPegawaiSuper;
