@@ -39,6 +39,18 @@ export const getPegawaiByDivisi = async (req, res) => {
     }
 }
 
+export const countPegawaiByDivisi = async (req, res) => {
+    try {
+        const response = await Pegawai.count({
+            where: {
+                divisi: req.params.divisi
+            }
+        });
+    } catch (error) {
+
+    }
+}
+
 export const createPegawai = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;
