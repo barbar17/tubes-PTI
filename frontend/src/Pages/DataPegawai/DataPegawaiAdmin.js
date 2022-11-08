@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Function/AuthContext";
+import { BiSearchAlt } from 'react-icons/bi'
 
 function DataPegawaiAdmin() {
 
   const [pegawai, setPegawai] = useState();
 
   const props = useContext(AuthContext)
+
+  let [searchParams, setSearchParams] = useSearchParams()
 
   const getPegawaiByDivisi = async () => {
     const response = await axios.get(`http://localhost:5000/pegawai-per-divisi/${props.divisi}`);
@@ -23,6 +26,30 @@ function DataPegawaiAdmin() {
     <div className="w-full p-10 h-full">
       <div className="w-full bg-white pb-2">
         <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg">Data Pegawai</div>
+        <div className="flex w-full justify-between px-10 py-5">
+          <div className='relative w-80' >
+            <input
+              type={'text'}
+              className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-10 text-sm focus:shadow-slate-400 focus:shadow-md transition-all"
+              placeholder='Ketik untuk mencari... '
+              onChange={(event) => {
+                let filter = event.target.value;
+                if (filter) {
+                  setSearchParams({ filter });
+                } else {
+                  setSearchParams({});
+                }
+              }}
+              value={searchParams.get("filter") || ""}
+            />
+            <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
+              <BiSearchAlt className='text-2xl' color='black' />
+            </div>
+          </div>
+          <button onClick={() => alert("berhasil di click")} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
+            Tambah
+          </button>
+        </div>
         <table className="table-auto w-full text-center text-xl">
           <thead>
             <tr className="border-b-2">
@@ -38,7 +65,18 @@ function DataPegawaiAdmin() {
           </thead>
           <tbody>
             {
-              pegawai?.map((item, index) => {
+              pegawai?.filter((item) => {
+                let filter = searchParams.get("filter");
+                if (!filter) return true;
+                let id = item.id.toLowerCase();
+                let name = item.name.toLowerCase();
+                let username = item.username.toLowerCase();
+                return (
+                  id.includes(filter.toLowerCase()) ||
+                  name.includes(filter.toLowerCase()) ||
+                  username.includes(filter.toLowerCase())
+                )
+              }).map((item, index) => {
                 return (
                   <tr key={index}>
                     <td className="py-2">{index + 1}</td>

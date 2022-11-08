@@ -25,41 +25,41 @@ import TambahAkunPegawaiSuper from "./Pages/DataPegawai/TambahAkunPegawaiSuper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
 
-        <Route path="user" element={<App />}>
-          <Route path="beranda" element={<BerandaUser />} />
-          <Route path="pengajuan_e-cuti" element={<Pengajuan />} />
-          <Route path="informasi_masa_cuti" element={<InformasiMasaCuti />} />
-        </Route>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login />} />
 
-        <Route path="admin" element={<App />}>
-          <Route path="beranda" element={<BerandaAdmin />} />
-          <Route path="data_pegawai" element={<DataPegawaiAdmin />} />
-          <Route
-            path="daftar_pengajuan_cuti"
-            element={<DaftarPengajuanCutiAdmin />}
-          />
-          <Route path="laporan_cuti" element={<LaporanCutiAdmin />} />
-          <Route path="data_pegawai/edit" element={<EditAkunPegawai />} />
-        </Route>
+      <Route path="user" element={<App />}>
+        <Route path="beranda" element={<BerandaUser />} />
+        <Route path="pengajuan_e-cuti" element={<Pengajuan />} />
+        <Route path="informasi_masa_cuti" element={<InformasiMasaCuti />} />
+      </Route>
 
-        <Route path="super" element={<App />}>
-          <Route path="beranda" element={<BerandaSuper />} />
-          <Route path="data_pegawai" element={<TambahAkunPegawaiSuper />} />
-        </Route>
+      <Route path="admin" element={<App />}>
+        <Route path="beranda" element={<BerandaAdmin />} />
+        <Route path="data_pegawai" element={<DataPegawaiAdmin />} />
+        <Route
+          path="daftar_pengajuan_cuti"
+          element={<DaftarPengajuanCutiAdmin />}
+        />
+        <Route path="laporan_cuti" element={<LaporanCutiAdmin />} />
+        <Route path="data_pegawai/edit" element={<EditAkunPegawai />} />
+      </Route>
 
-        <Route path="profil/user/:id" element={<Profil />} />
-        <Route path="profil/user/edit/:id" element={<EditProfil />} />
+      <Route path="super" element={<App />}>
+        <Route path="beranda" element={<BerandaSuper />} />
+        <Route path="data_pegawai" element={<TambahAkunPegawaiSuper />} />
+      </Route>
 
-        <Route path="profil/admin/:id" element={<ProfilAdmin />} />
-        <Route path="profil/admin/edit/:id" element={<EditProfilAdmin />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+      <Route path="profil/user/:id" element={<Profil />} />
+      <Route path="profil/user/edit/:id" element={<EditProfil />} />
+
+      <Route path="profil/admin/:id" element={<ProfilAdmin />} />
+      <Route path="profil/admin/edit/:id" element={<EditProfilAdmin />} />
+    </Routes>
+  </BrowserRouter>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

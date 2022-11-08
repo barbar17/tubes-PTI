@@ -37,6 +37,19 @@ export const getSuratCutiByPegawai = async (req, res) => {
     }
 }
 
+export const getSuratCutiByDivisi = async (req, res) => {
+    try {
+        const response = await SuratCuti.findAll({
+            where: {
+                divisi: req.params.divisi
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const createSuratCuti = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;

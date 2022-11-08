@@ -144,10 +144,11 @@ function Pengajuan() {
                 </td>
                 <td> :
                   <select className="border ml-2 border-slate-400 rounded-lg" onChange={(event) => setJeniscuti(event.target.value)} >
-                    <option>Libur Nasional</option>
                     <option>Hari Minggu</option>
                     <option>Cuti Tahunan</option>
                     <option>Cuti Izin</option>
+                    <option>Libur Nasional</option>
+                    <option>Cuti Dispensasi</option>
                   </select>
                 </td>
               </tr>
