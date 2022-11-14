@@ -34,13 +34,13 @@ function EditProfilAdmin() {
     setFotoadmin(foto);
     setPreviewfoto(URL.createObjectURL(foto));
   }
+
   const loadTtd = (event) => {
     setIsTtdChange(true)
     const ttd = event.target.files[0];
     setTtdadmin(ttd);
     setPreviewttd(URL.createObjectURL(ttd));
   }
-
 
   const getProfilAdmin = async () => {
     const response = await axios.get(`http://localhost:5000/admin/${id}`);
