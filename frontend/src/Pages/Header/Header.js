@@ -6,8 +6,8 @@ import { MenusSuper } from "./MenuSuper";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header({ user, id, tipeakun }) {
-  let navigation = tipeakun === "user" ? MenusUser() : MenusAdmin();
-  MenusSuper();
+  let navigation = tipeakun === "user" ? MenusUser() :
+    tipeakun === "admin" ? MenusAdmin() : MenusSuper();
 
   const go = useNavigate();
 

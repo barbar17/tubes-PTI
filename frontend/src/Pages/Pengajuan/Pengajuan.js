@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../../Function/AuthContext";
 
 function Pengajuan() {
+  const props = useContext(AuthContext)
+  console.log(props)
   const [nama, setNama] = useState('')
   const [id, setId] = useState('')
   const [divisi, setDivisi] = useState('')
-  const [jatahcuti, setJatahcuti] = useState('')
+  const [jatahcuti, setJatahcuti] = useState(20)
   const [tglmulai, setTglmulai] = useState('')
   const [tglselesai, setTglselesai] = useState('')
   const [jeniscuti, setJeniscuti] = useState('')
@@ -23,6 +26,14 @@ function Pengajuan() {
     const foto = event.target.files[0];
     setFile(foto);
     setPreviewFile(URL.createObjectURL(foto));
+  }
+
+  const getPegawaiById = async () => {
+    const response = await axios.get(`http://localhost:5000/pegawai/${props.userId}`);
+    console.log(response.data)
+    setNama(response.data.name)
+    setId(response.data.id)
+    setDivisi(response.data.divisi)
   }
 
   const savePengajuanCuti = async (event) => {
@@ -53,6 +64,11 @@ function Pengajuan() {
     }
   }
 
+  useEffect(() => {
+    getPegawaiById()
+  }, [props])
+
+
   return (
     <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
       <div className="w-full">
@@ -70,7 +86,9 @@ function Pengajuan() {
                   <input
                     type="text"
                     className="rounded-md ml-2 border-slate-400 border py-1 px-2 "
-                    onChange={(event) => setNama(event.target.value)}
+                    value={nama}
+                    disabled
+                    readOnly
                   />
                 </td>
               </tr>
@@ -82,7 +100,9 @@ function Pengajuan() {
                   <input
                     type="text"
                     className="rounded-md ml-2 border-slate-400 border py-1 px-2"
-                    onChange={(event) => setId(event.target.value)}
+                    value={id}
+                    disabled
+                    readOnly
                   />
                 </td>
               </tr>
@@ -94,7 +114,9 @@ function Pengajuan() {
                   <input
                     type="text"
                     className="rounded-md ml-2 border-slate-400 border py-1 px-2"
-                    onChange={(event) => setDivisi(event.target.value)}
+                    value={divisi}
+                    disabled
+                    readOnly
                   />
                 </td>
               </tr>
@@ -106,7 +128,9 @@ function Pengajuan() {
                   <input
                     type="text"
                     className="rounded-md ml-2 border-slate-400 border py-1 px-2"
-                    onChange={(event) => setJatahcuti(event.target.value)}
+                    value={jatahcuti}
+                    disabled
+                    readOnly
                   />
                 </td>
               </tr>

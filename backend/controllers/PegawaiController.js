@@ -97,30 +97,105 @@ export const updatePegawai = async (req, res) => {
 
     if (!pegawai) return res.status(404).json({ msg: "Pegawai Tidak Ditemukan" })
 
-    console.log(pegawai.foto)
 
     let filenameFoto = "";
+    let filenameTtd = "";
+    let fotourl = "";
+    let ttdurl = "";
     if (req.files === null) {
         filenameFoto = pegawai.foto;
+        filenameTtd = pegawai.ttd;
     } else {
-        console.log(req.files)
-        const file = req.files.file;
-        const fileSize = file.data.length;
-        const ext = path.extname(file.name);
-        filenameFoto = file.md5 + ext;
+        const isFotoChange = req.body.isFotoChange;
+        const isTtdChange = req.body.isTtdChange;
+
+        let fileFoto;
+        let fileTtd;
+        let fileSizeFoto;
+        let fileSizeTtd;
+        let extFoto;
+        let extTtd;
+
         const allowType = ['.png', '.jpeg', '.jpg'];
 
-        if (!allowType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "invalide image type" });
-        if (fileSize > 5000000) return res.status(422).json({ msg: "image must be less then 5mb" });
+        if (isFotoChange === "true" && isTtdChange === "false") {
+            filenameTtd = pegawai.ttd;
 
-        if (pegawai.foto) {
-            const filepath = `./public/pegawai/foto/${pegawai.foto}`;
-            fs.unlinkSync(filepath)
+            fileFoto = req.files.file;
+            extFoto = path.extname(fileFoto.name);
+            filenameFoto = fileFoto.md5 + pegawai.id + extFoto;
+            fileSizeFoto = fileFoto.data.length;
+
+            fotourl = `${req.protocol}://${req.get("host")}/pegawai/foto/${filenameFoto}`;
+
+            if (!allowType.includes(extFoto.toLowerCase())) return res.status(422).json({ msg: "invalide image type" });
+            if (fileSizeFoto > 5000000) return res.status(422).json({ msg: "image must be less then 5mb" });
+
+            if (pegawai.foto) {
+                const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`;
+                fs.unlinkSync(filepathFoto)
+            }
+
+            fileFoto.mv(`./public/pegawai/foto/${filenameFoto}`, (err) => {
+                if (err) return res.status(500).json({ msg: err.message });
+            })
+        } else if (isFotoChange === "false" && isTtdChange === "true") {
+            filenameFoto = pegawai.foto;
+
+            fileTtd = req.files.file;
+            extTtd = path.extname(fileTtd.name);
+            filenameTtd = fileTtd.md5 + pegawai.id + extTtd;
+            fileSizeTtd = fileTtd.data.length;
+
+            ttdurl = `${req.protocol}://${req.get("host")}/pegawai/ttd/${filenameTtd}`;
+
+            if (!allowType.includes(extTtd.toLowerCase())) return res.status(422).json({ msg: "invalide image type" });
+            if (fileSizeTtd > 5000000) return res.status(422).json({ msg: "image must be less then 5mb" });
+
+            if (pegawai.ttd) {
+                const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`;
+                fs.unlinkSync(filepathTtd)
+            }
+
+            fileTtd.mv(`./public/pegawai/ttd/${filenameTtd}`, (err) => {
+                if (err) return res.status(500).json({ msg: err.message });
+            })
+        } else if (isFotoChange === "true" && isTtdChange === "true") {
+            fileFoto = req.files.file[0];
+            extFoto = path.extname(fileFoto.name);
+            filenameFoto = fileFoto.md5 + pegawai.id + extFoto;
+            fileSizeFoto = fileFoto.data.length;
+            fotourl = `${req.protocol}://${req.get("host")}/pegawai/foto/${filenameFoto}`;
+
+            fileTtd = req.files.file[1];
+            extTtd = path.extname(fileTtd.name);
+            filenameTtd = fileTtd.md5 + pegawai.id + extTtd;
+            fileSizeTtd = fileTtd.data.length;
+            ttdurl = `${req.protocol}://${req.get("host")}/pegawai/ttd/${filenameTtd}`;
+
+            if (!allowType.includes(extFoto.toLowerCase()) || !allowType.includes(extTtd.toLowerCase())) return res.status(422).json({ msg: "invalide image type" });
+            if (fileSizeFoto > 5000000 || fileSizeTtd > 5000000) return res.status(422).json({ msg: "image must be less then 5mb" });
+
+            if (pegawai.ttd && !pegawai.foto) {
+                const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`;
+                fs.unlinkSync(filepathTtd)
+            } else if (pegawai.foto && !pegawai.ttd) {
+                const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`;
+                fs.unlinkSync(filepathFoto)
+            } else {
+                const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`;
+                const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`;
+                fs.unlinkSync(filepathFoto)
+                fs.unlinkSync(filepathTtd)
+            }
+
+            fileTtd.mv(`./public/pegawai/ttd/${filenameTtd}`, (err) => {
+                if (err) return res.status(500).json({ msg: err.message });
+                fileFoto.mv(`./public/pegawai/foto/${filenameFoto}`, (err) => {
+                    if (err) return res.status(500).json({ msg: err.message });
+                })
+            })
         }
-
-        file.mv(`./public/pegawai/foto/${filenameFoto}`, (err) => {
-            if (err) return res.status(500).json({ msg: err.message });
-        })
     }
 
     const name = req.body.name;
@@ -132,7 +207,6 @@ export const updatePegawai = async (req, res) => {
     const alamat = req.body.alamat;
     const telepon = req.body.telepon;
     const email = req.body.email;
-    const fotourl = `${req.protocol}://${req.get("host")}/pegawai/foto/${filenameFoto}`;
 
     try {
         Pegawai.update({
@@ -146,7 +220,9 @@ export const updatePegawai = async (req, res) => {
             telepon: telepon,
             email: email,
             foto: filenameFoto,
-            fotourl: fotourl,
+            fotourl: fotourl ? fotourl : pegawai.fotourl,
+            ttd: filenameTtd,
+            ttdurl: ttdurl ? ttdurl : pegawai.ttdurl
         }, {
             where: {
                 id: req.params.id
@@ -159,12 +235,26 @@ export const updatePegawai = async (req, res) => {
 }
 
 export const deletePegawai = async (req, res) => {
+    const pegawai = await Pegawai.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+
+    if (!pegawai) return res.status(404).json({ msg: "Pegawai Tidak Ditemukan" });
+
     try {
+        const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
+        const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
+        fs.unlinkSync(filepathFoto);
+        fs.unlinkSync(filepathTtd);
         await Pegawai.destroy({
             where: {
                 id: req.params.id
             }
         });
+
+
         res.status(202).json({ msg: "User Deleted" });
     } catch (error) {
         console.log(error.message);

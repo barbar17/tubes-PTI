@@ -8,17 +8,17 @@ POST http://localhost:5000/pegawai
 Content-Type: application/json
 
 {
-    "name": "akbar",
-    "id": "12345",
-    "ttl": "Balam, 17-01-2001",
+    "name": "robi",
+    "id": "32145",
+    "ttl": "Balam, 17-10-1912",
     "jeniskelamin": "Pria",
     "divisi": "Produksi",
     "agama": "Islam",
     "alamat": "Jl.Pangeran Senopati Raya, Balam",
     "telepon": "081234567890",
-    "email": "akbar.12345@email.com",
-    "username": "akbar2001",
-    "password": "09876",
+    "email": "robi.32145@email.com",
+    "username": "robi321",
+    "password": "12345",
     "tipeakun": "user"
 }
 
@@ -27,17 +27,17 @@ PATCH  http://localhost:5000/pegawai/12345
 Content-Type: application/json
 
 {
-    "name": "maulana",
-    "id": "12345",
-    "ttl": "Balam, 17-01-2001",
+    "name": "robi",
+    "id": "32145",
+    "ttl": "Balam, 17-10-1912",
     "jeniskelamin": "Pria",
     "divisi": "Produksi",
     "agama": "Islam",
     "alamat": "Jl.Pangeran Senopati Raya, Balam",
     "telepon": "081234567890",
-    "email": "akbar.12345@email.com",
-    "username": "akbar2001",
-    "password": "09876",
+    "email": "robi.32145@email.com",
+    "username": "robi321",
+    "password": "12345",
     "tipeakun": "user"
 }
 

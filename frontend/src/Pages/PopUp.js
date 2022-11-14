@@ -5,7 +5,6 @@ import { IoIosClose } from "react-icons/io";
 function PopUp(props) {
 
   const isFileUrl = props.detailCuti.fileurl
-  console.log(isFileUrl)
 
   const deletePengajuanCuti = async (id) => {
     try {
@@ -74,8 +73,8 @@ function PopUp(props) {
               <td>
                 {
                   isFileUrl ? (
-                    <button className="h-fit w-fit" onClick={() => window.open(props.detailCuti?.fileurl, "_blank")}>
-                      <img src={props.detailCuti?.fileurl} alt='fotoprofil' className="w-[250px] h-[100px] object-contain object-center" />
+                    <button className="h-fit w-fit px-2 rounded-sm bg-gray-300 hover:bg-gray-700 hover:text-white" onClick={() => window.open(props.detailCuti?.fileurl, "_blank")}>
+                      Lihat
                     </button>
                   ) : (
                     <div>
