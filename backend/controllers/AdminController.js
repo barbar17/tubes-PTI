@@ -160,7 +160,7 @@ export const updateAdmin = async (req, res) => {
             } else if (admin.foto && !admin.ttd) {
                 const filepathFoto = `./public/admin/foto/${admin.foto}`;
                 fs.unlinkSync(filepathFoto)
-            } else {
+            } else if (admin.foto && admin.ttd) {
                 const filepathFoto = `./public/admin/foto/${admin.foto}`;
                 const filepathTtd = `./public/admin/ttd/${admin.ttd}`;
                 fs.unlinkSync(filepathFoto)

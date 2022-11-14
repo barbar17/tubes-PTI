@@ -55,30 +55,30 @@ export const countPegawaiByDivisi = async (req, res) => {
 export const createPegawai = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;
-    const ttl = req.body.ttl;
-    const jeniskelamin = req.body.jeniskelamin;
+    // const ttl = req.body.ttl;
+    // const jeniskelamin = req.body.jeniskelamin;
     const divisi = req.body.divisi;
-    const agama = req.body.agama;
-    const alamat = req.body.alamat;
-    const telepon = req.body.telepon;
-    const email = req.body.email;
+    // const agama = req.body.agama;
+    // const alamat = req.body.alamat;
+    // const telepon = req.body.telepon;
+    // const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    const tipeakun = req.body.tipeakun;
-    const cutidiambil = req.body.totalDay
+    const tipeakun = "user";
+    const cutidiambil = 0;
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
             Pegawai.create({
                 name: name,
                 id: id,
-                ttl: ttl,
-                jeniskelamin: jeniskelamin,
+                // ttl: ttl,
+                // jeniskelamin: jeniskelamin,
                 divisi: divisi,
-                agama: agama,
-                alamat: alamat,
-                telepon: telepon,
-                email: email,
+                // agama: agama,
+                // alamat: alamat,
+                // telepon: telepon,
+                // email: email,
                 username: username,
                 password: hash,
                 tipeakun: tipeakun,
@@ -220,7 +220,7 @@ export const updatePegawai = async (req, res) => {
             } else if (pegawai.foto && !pegawai.ttd) {
                 const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`;
                 fs.unlinkSync(filepathFoto)
-            } else {
+            } else if (pegawai.foto && pegawai.ttd) {
                 const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`;
                 const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`;
                 fs.unlinkSync(filepathFoto)

@@ -1,14 +1,13 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 
-const Database =  Sequelize;
+const DataTypes = Sequelize;
 
-const Pegawai = db.define('pegawai', {
-    name: { type: DataTypes.STRING, allowNull:  false},
+const Super = db.define('superadmin', {
+    name: { type: DataTypes.STRING, allowNull: false },
     id: { type: DataTypes.STRING, primaryKey: true },
     ttl: { type: DataTypes.STRING, allowNull: false },
     jeniskelamin: { type: DataTypes.STRING, allowNull: false },
-    divisi: { type: DataTypes.STRING, allowNull: false },
     agama: { type: DataTypes.STRING, allowNull: false },
     alamat: { type: DataTypes.STRING, allowNull: false },
     telepon: { type: DataTypes.STRING, allowNull: false },
@@ -20,11 +19,11 @@ const Pegawai = db.define('pegawai', {
     fotourl: { type: DataTypes.STRING },
     ttd: { type: DataTypes.STRING },
     ttdurl: { type: DataTypes.STRING }
-},{
-    freezeTableName : true
+}, {
+    freezeTableName: true
 })
 
-export default Pegawai;
+export default Super;
 
 (async () => {
     await db.sync();

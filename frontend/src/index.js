@@ -18,10 +18,12 @@ import DaftarPengajuanCutiAdmin from "./Pages/DaftarPengajuanCuti/DaftarPengajua
 import ProfilAdmin from "./Pages/Profil/ProfilAdmin";
 import EditProfilAdmin from "./Pages/Profil/EditProfilAdmin";
 import LaporanCutiAdmin from "./Pages/LaporanCuti/LaporanCutiAdmin";
+import TambahAkunPegawai from "./Pages/DataPegawai/TambahAkunPegawai";
 import EditAkunPegawai from "./Pages/DataPegawai/EditAkunPegawai";
 import BerandaSuper from "./Pages/Beranda/BerandaSuper";
 import EditAkunPegawaiSuper from "./Pages/DataPegawai/EditAkunPegawaiSuper";
 import TambahAkunPegawaiSuper from "./Pages/DataPegawai/TambahAkunPegawaiSuper";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -39,12 +41,10 @@ root.render(
       <Route path="admin" element={<App />}>
         <Route path="beranda" element={<BerandaAdmin />} />
         <Route path="data_pegawai" element={<DataPegawaiAdmin />} />
-        <Route
-          path="daftar_pengajuan_cuti"
-          element={<DaftarPengajuanCutiAdmin />}
-        />
+        <Route path="daftar_pengajuan_cuti" element={<DaftarPengajuanCutiAdmin />} />
         <Route path="laporan_cuti" element={<LaporanCutiAdmin />} />
         <Route path="data_pegawai/edit" element={<EditAkunPegawai />} />
+        <Route path="tambah_pegawai" element={<TambahAkunPegawai />} />
       </Route>
 
       <Route path="super" element={<App />}>

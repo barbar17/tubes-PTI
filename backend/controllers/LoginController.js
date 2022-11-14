@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import Pegawai from "../models/PegawaiModel.js";
 import Admin from "../models/AdminModel.js";
+import Super from "../models/SuperAdminModel.js";
 import jwt from "jsonwebtoken";
 
 
@@ -16,6 +17,14 @@ export const Login = async (req, res) => {
 
     if (!account) {
         account = await Admin.findOne({
+            where: {
+                username: username
+            }
+        })
+    }
+
+    if (!account) {
+        account = await Super.findOne({
             where: {
                 username: username
             }

@@ -8,7 +8,7 @@ export const getSuperAdmin = async (req, res) => {
     try {
         const response = await SuperAdmin.findAll();
         res.status(200).json(response);
-    } catch  (error) {
+    } catch (error) {
         console.log(error.massage);
     }
 }
@@ -17,7 +17,7 @@ export const getSuperAdminById = async (req, res) => {
     try {
         const response = await SuperAdmin.findOne({
             where: {
-                id : req.params.id
+                id: req.params.id
             }
         });
         res.status(200).json(response);
@@ -39,7 +39,7 @@ export const createSuperAdmin = async (req, res) => {
     const password = req.body.password;
     const tipeakun = req.body.tipeakun;
 
-    try{
+    try {
         await bcrypt.hash(password, 10).then((hash) => {
             SuperAdmin.create({
                 name: name,
@@ -54,21 +54,21 @@ export const createSuperAdmin = async (req, res) => {
                 password: hash,
                 tipeakun: tipeakun,
             });
-            res.status(201).json({ msg: "Super Admin Created"});
+            res.status(201).json({ msg: "Super Admin Created" });
         })
     } catch (error) {
         console.log(error.massage);
     }
-    }
+}
 
 export const updateSuperAdmin = async (req, res) => {
     const superadmin = await SuperAdmin.findOne({
-        where : {
+        where: {
             id: req.params.id
         }
     })
 
-    if (!SuperAdmin) return res.status(404).json({ msg: "Super Admin tidak Ditemukan"})
+    if (!SuperAdmin) return res.status(404).json({ msg: "Super Admin tidak Ditemukan" })
 
     let filenameFoto = "";
     let filenameTtd = "";
@@ -154,7 +154,7 @@ export const updateSuperAdmin = async (req, res) => {
             } else if (superadmin.foto && !superadmin.ttd) {
                 const filepathFoto = `./public/superadmin/foto/${superadmin.foto}`;
                 fs.unlinkSync(filepathFoto)
-            } else {
+            } else if (superadmin.foto && superadmin.ttd) {
                 const filepathFoto = `./public/superadmin/foto/${superadmin.foto}`;
                 const filepathTtd = `./public/superadmin/ttd/${superadmin.ttd}`;
                 fs.unlinkSync(filepathFoto)
@@ -193,12 +193,12 @@ export const updateSuperAdmin = async (req, res) => {
             fotourl: fotourl ? fotourl : superadmin.fotourl,
             ttdd: filenameTtd,
             ttdurl: ttdurl ? ttdurl : superadmin.ttdurl
-        },{
-            where:{
+        }, {
+            where: {
                 id: req.params
             }
         });
-        res.status(200).json({ msg: "Super Admin Updated"});
+        res.status(200).json({ msg: "Super Admin Updated" });
     } catch (error) {
         console.log(error.massage);
     }
@@ -222,10 +222,10 @@ export const deleteSuperAdmin = async (req, res) => {
             where: {
                 id: req.params.id
             }
-    });
+        });
 
-    res.status(202).json({ msg: "Super admin Deleted"});
-} catch (error){
-    console.log(error.massage);
-}
+        res.status(202).json({ msg: "Super admin Deleted" });
+    } catch (error) {
+        console.log(error.massage);
+    }
 }

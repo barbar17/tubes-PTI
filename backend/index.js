@@ -8,6 +8,7 @@ import PegawaiRoute from "./routes/PegawaiRoute.js"
 import LoginRoute from "./routes/LoginRoute.js"
 import SuratCutiRoute from "./routes/SuratCutiRoute.js"
 import AdminRoute from "./routes/AdminRoute.js"
+import SuperRoute from "./routes/SuperAdminRoute.js"
 
 const app = express();
 
@@ -23,3 +24,4 @@ app.use(PegawaiRoute);
 app.use(LoginRoute);
 app.use(SuratCutiRoute);
 app.use(AdminRoute);
+app.use(SuperRoute);

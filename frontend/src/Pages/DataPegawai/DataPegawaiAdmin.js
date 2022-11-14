@@ -48,9 +48,9 @@ function DataPegawaiAdmin() {
               <BiSearchAlt className='text-2xl' color='black' />
             </div>
           </div>
-          <button onClick={() => alert("berhasil di click")} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
+          <Link to={"/admin/tambah_pegawai"} className="my-auto flex text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
             Tambah
-          </button>
+          </Link>
         </div>
         <table className="table-auto w-full text-center text-xl">
           <thead>

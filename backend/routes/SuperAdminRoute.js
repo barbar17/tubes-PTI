@@ -5,7 +5,7 @@ import {
     createSuperAdmin,
     updateSuperAdmin,
     deleteSuperAdmin,
-} from "../controllers/SuperAdminControler";
+} from "../controllers/SuperAdminControler.js";
 
 const router = express.Router();
 

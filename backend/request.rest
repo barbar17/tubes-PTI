@@ -110,3 +110,21 @@ GET  http://localhost:5000/pegawai-per-divisi/Produksi
 
 ###
 GET  http://localhost:5000/admin/09876
+
+###
+POST http://localhost:5000/superadmin
+Content-Type: application/json
+
+{
+    "name": "Dilan",
+    "id": "1998",
+    "ttl": "Balam, 17-01-2001",
+    "jeniskelamin": "Pria",
+    "agama": "Islam",
+    "alamat": "Jl.Belwis, Lampung Selatan",
+    "telepon": "080987654321",
+    "email": "Dilan.1998@email.com",
+    "username": "dilan1998",
+    "password": "12345",
+    "tipeakun": "super"
+}
