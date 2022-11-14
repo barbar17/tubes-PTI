@@ -12,6 +12,25 @@ function App() {
   const divisi = user?.divisi
   const [authState, setAuthState] = useState(false);
 
+  const now = new Date()
+  const newYear = now.getDate() + " " + (now.getMonth() + 1)
+
+  const resetTotalCuti = async () => {
+    try {
+      await axios.patch(`http://localhost:5000/pegawai/reset/totalCuti/${userId}`, {
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  if (newYear == "1 1") {
+    resetTotalCuti()
+  }
+
   const userToken = sessionStorage.getItem('token');
 
   const checkToken = async (token) => {

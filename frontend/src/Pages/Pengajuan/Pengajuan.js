@@ -16,9 +16,15 @@ function Pengajuan() {
   const [alasancuti, setAlasancuti] = useState('')
   const [file, setFile] = useState('')
   const [previewfile, setPreviewFile] = useState('')
+  const [cutiDiambil, setCutiDiambil] = useState('')
 
   const now = new Date();
   const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+
+  const startDate = new Date(tglmulai);
+  const finishDate = new Date(tglselesai);
+  const totalTime = finishDate.getTime() - startDate.getTime()
+  const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24));
 
   const go = useNavigate()
 
@@ -30,7 +36,7 @@ function Pengajuan() {
 
   const getPegawaiById = async () => {
     const response = await axios.get(`http://localhost:5000/pegawai/${props.userId}`);
-    console.log(response.data)
+    setCutiDiambil(response.data.cutidiambil)
     setNama(response.data.name)
     setId(response.data.id)
     setDivisi(response.data.divisi)
@@ -58,6 +64,13 @@ function Pengajuan() {
           "Content-type": "multipart/form-data"
         }
       });
+
+      await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.userId}`, { "totalCuti": totalDay }, {
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+
       go('/user/beranda')
     } catch (error) {
       console.log(error.response.data);
@@ -67,7 +80,6 @@ function Pengajuan() {
   useEffect(() => {
     getPegawaiById()
   }, [props])
-
 
   return (
     <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
@@ -122,13 +134,13 @@ function Pengajuan() {
               </tr>
               <tr>
                 <td>
-                  <span>Jatah Cuti</span>
+                  <span>Jatah Cuti Tahunan</span>
                 </td>
                 <td> :
                   <input
                     type="text"
                     className="rounded-md ml-2 border-slate-400 border py-1 px-2"
-                    value={jatahcuti}
+                    value={(jatahcuti - cutiDiambil) + " Hari"}
                     disabled
                     readOnly
                   />

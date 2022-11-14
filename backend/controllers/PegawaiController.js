@@ -2,6 +2,7 @@ import Pegawai from "../models/PegawaiModel.js";
 import bcrypt from 'bcrypt';
 import fs from "fs"
 import path from "path";
+import { Sequelize } from "sequelize";
 
 export const getPegawai = async (req, res) => {
     try {
@@ -64,6 +65,7 @@ export const createPegawai = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const tipeakun = req.body.tipeakun;
+    const cutidiambil = req.body.totalDay
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
@@ -80,9 +82,45 @@ export const createPegawai = async (req, res) => {
                 username: username,
                 password: hash,
                 tipeakun: tipeakun,
+                cutidiambil: cutidiambil
             });
             res.status(201).json({ msg: "User Created" });
         })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const updateTotalCuti = async (req, res) => {
+    const totalCuti = req.body.totalCuti
+    console.log(totalCuti)
+    console.log(req.params.id)
+    try {
+        Pegawai.update({
+            cutidiambil: Sequelize.literal(`cutidiambil + ${totalCuti}`)
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        console.log("UPDATE")
+        res.status(200).json({ msg: "User Updated" });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const resetTotalCuti = async (req, res) => {
+    try {
+        Pegawai.update({
+            cutidiambil: 0
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        console.log("UPDATE")
+        res.status(200).json({ msg: "User Updated" });
     } catch (error) {
         console.log(error.message);
     }

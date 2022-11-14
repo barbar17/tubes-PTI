@@ -19,7 +19,8 @@ Content-Type: application/json
     "email": "robi.32145@email.com",
     "username": "robi321",
     "password": "12345",
-    "tipeakun": "user"
+    "tipeakun": "user",
+    "totalDay": 0
 }
 
 ###

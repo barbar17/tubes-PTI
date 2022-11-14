@@ -6,9 +6,22 @@ function PopUp(props) {
 
   const isFileUrl = props.detailCuti.fileurl
 
+  const startDate = new Date(props.detailCuti.tglmulai);
+  const finishDate = new Date(props.detailCuti.tglselesai);
+  const totalTime = finishDate.getTime() - startDate.getTime()
+  const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24)) * -1;
+  console.log(totalDay)
+
   const deletePengajuanCuti = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/suratCuti/${id}`)
+
+      await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.detailCuti.userid}`, { "totalCuti": totalDay }, {
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+
       props.getPengajuanCuti();
       props.setTrigger(false);
     } catch (error) {
@@ -34,7 +47,7 @@ function PopUp(props) {
             </tr>
             <tr>
               <td>ID</td>
-              <td>: {props.detailCuti.id}</td>
+              <td>: {props.detailCuti.userid}</td>
             </tr>
             <tr>
               <td>Divisi</td>

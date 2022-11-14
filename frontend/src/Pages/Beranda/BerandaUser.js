@@ -13,10 +13,16 @@ function BerandaUser() {
     const [pengajuanCuti, setPengajuanCuti] = useState();
 
     const [detailCuti, setDetailCuti] = useState('');
+    const [cutiDiambil, setCutiDiambil] = useState('')
 
     const handlePopUp = (item) => {
         setButtonPopUp(true)
         setDetailCuti(item)
+    }
+
+    const getPegawaiById = async () => {
+        const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
+        setCutiDiambil(response.data.cutidiambil)
     }
 
     const getPengajuanCuti = async () => {
@@ -26,6 +32,7 @@ function BerandaUser() {
 
     useEffect(() => {
         getPengajuanCuti()
+        getPegawaiById()
         // eslint-disable-next-line
     }, [id])
 
@@ -39,7 +46,7 @@ function BerandaUser() {
                     <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
                         <div className="flex flex-col ">
                             <span className="text-card-green text-2xl">Total Cuti Tersedia</span>
-                            <span className="text-4xl">5 Hari</span>
+                            <span className="text-4xl">20 Hari</span>
                         </div>
                         <FiUser className="text-8xl" />
                     </div>
@@ -49,7 +56,7 @@ function BerandaUser() {
                     <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
                         <div className="flex flex-col ">
                             <span className="text-card-red text-2xl">Sisa Cuti Tersedia</span>
-                            <span className="text-4xl">5 Hari</span>
+                            <span className="text-4xl">{20 - cutiDiambil} Hari</span>
                         </div>
                         <FiUserX className="text-8xl" />
                     </div>

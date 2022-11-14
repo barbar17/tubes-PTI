@@ -1,6 +1,7 @@
 import SuratCuti from "../models/SuratCutiModel.js";
 import fs from 'fs'
 import path from "path";
+import { Sequelize } from "sequelize";
 
 export const getSuratCuti = async (req, res) => {
     try {
@@ -49,6 +50,19 @@ export const getSuratCutiByDivisi = async (req, res) => {
         console.log(error.message);
     }
 }
+
+// export const getTotalCutiByPegawai = async (req, res) => {
+//     try {
+//         const response = await SuratCuti.findAll({
+//             where: {
+//                 userid: req.params.id
+//             },
+//             attributes: ['jeniscuti', [Sequelize.fn('sum', Sequelize.col(''))]]
+//         })
+//     } catch (error) {
+//         console.log(error.message)
+//     }
+// }
 
 export const createSuratCuti = async (req, res) => {
     const name = req.body.name;
@@ -171,8 +185,10 @@ export const deleteSuratCuti = async (req, res) => {
     if (!suratCuti) return res.status(404).json({ msg: "No Data Found" });
 
     try {
-        const file = `./public/pengajuanCuti/${suratCuti.file}`;
-        fs.unlinkSync(file);
+        if (suratCuti.file) {
+            const file = `./public/pengajuanCuti/${suratCuti.file}`;
+            fs.unlinkSync(file);
+        }
         await SuratCuti.destroy({
             where: {
                 id: req.params.id
