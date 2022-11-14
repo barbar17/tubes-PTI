@@ -101,8 +101,8 @@ function PopUp(props) {
             </tr>
           </tbody>
         </table>
-        <div className="w-full h-24 text-xl bg-slate-300">
-          <p className="ml-4">{props.detailCuti.komentar}</p>
+        <div className="w-full h-24 text-xl bg-slate-300 px-2 py-1">
+          <p>{props.detailCuti.komentar}</p>
         </div>
         <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
           Hapus

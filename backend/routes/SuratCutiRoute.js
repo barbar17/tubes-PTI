@@ -5,7 +5,7 @@ import {
     getSuratCutiByPegawai,
     getSuratCutiByDivisi,
     createSuratCuti,
-    updateSuratCuti,
+    declinedSuratCuti,
     deleteSuratCuti,
     acceptedSuratCuti
 } from "../controllers/SuratCutiControler.js";
@@ -17,7 +17,7 @@ router.get('/suratCuti/:id', getSuratCutiById);
 router.get('/suratCuti/pegawai/:id', getSuratCutiByPegawai);
 router.get('/suratCuti/divisi/:divisi', getSuratCutiByDivisi);
 router.post('/suratCuti', createSuratCuti);
-router.patch('/suratCuti/:id', updateSuratCuti);
+router.patch('/suratCuti/declined/:id', declinedSuratCuti);
 router.patch('/suratCuti/accepted/:id', acceptedSuratCuti);
 router.delete('/suratCuti/:id', deleteSuratCuti);
 

@@ -28,7 +28,7 @@ export const getPegawaiById = async (req, res) => {
 
 export const getPegawaiByDivisi = async (req, res) => {
     try {
-        const response = await Pegawai.findAll({
+        const response = await Pegawai.findAndCountAll({
             where: {
                 divisi: req.params.divisi
             },

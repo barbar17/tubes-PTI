@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import axios from "axios";
 
 function KonfirmasiAdmin(props) {
 
     console.log(props)
+
+    const [komentar, setKomentar] = useState('');
 
     const handleSetuju = async () => {
         let status = '';
@@ -18,6 +20,22 @@ function KonfirmasiAdmin(props) {
 
         try {
             await axios.patch(`http://localhost:5000/suratCuti/accepted/${props.detailCuti.id}`, { status: status }, {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        props.setTrigger(false)
+        props.getSuraCutiByDivisi()
+    }
+
+    const handleTolak = async () => {
+        let status = 'Ditolak';
+
+        try {
+            await axios.patch(`http://localhost:5000/suratCuti/declined/${props.detailCuti.id}`, { status: status, komentar: komentar }, {
                 headers: {
                     "Content-type": "application/json"
                 }
@@ -79,10 +97,26 @@ function KonfirmasiAdmin(props) {
                             <td>: {props.detailCuti.alasan}</td>
                         </tr>
                         <tr>
+                            <td>file tambahan</td>
+                            <td>
+                                {
+                                    props.detailCuti.fileurl ? (
+                                        <button className="h-fit w-fit px-2 rounded-sm bg-gray-300 hover:bg-gray-700 hover:text-white" onClick={() => window.open(props.detailCuti?.fileurl, "_blank")}>
+                                            Lihat
+                                        </button>
+                                    ) : (
+                                        <div>
+                                            <span>: Tidak ada</span>
+                                        </div>
+                                    )
+                                }
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Komentar</td>
                             <td className="w-[500px]">
                                 <textarea
-                                    type="text"
+                                    onChange={(event) => setKomentar(event.target.value)}
                                     className="w-full h-24 text-xl bg-slate-300 px-1 py-2"
                                 />
                             </td>
@@ -94,7 +128,7 @@ function KonfirmasiAdmin(props) {
                                 <button onClick={() => handleSetuju()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                     Setuju
                                 </button>
-                                <button className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                <button onClick={() => handleTolak()} className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                     Tolak
                                 </button>
                             </td>

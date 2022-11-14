@@ -16,7 +16,7 @@ function DataPegawaiAdmin() {
 
   const getPegawaiByDivisi = async () => {
     const response = await axios.get(`http://localhost:5000/pegawai-per-divisi/${props.divisi}`);
-    setPegawai(response.data)
+    setPegawai(response.data.rows)
   }
 
   useEffect(() => {

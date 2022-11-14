@@ -43,7 +43,7 @@ export const getSuratCutiByPegawai = async (req, res) => {
 
 export const getSuratCutiByDivisi = async (req, res) => {
     try {
-        const response = await SuratCuti.findAll({
+        const response = await SuratCuti.findAndCountAll({
             where: {
                 divisi: req.params.divisi,
                 status: req.headers.status
@@ -162,7 +162,7 @@ export const acceptedSuratCuti = async (req, res) => {
     }
 }
 
-export const updateSuratCuti = async (req, res) => {
+export const declinedSuratCuti = async (req, res) => {
     const suratCuti = await SuratCuti.findOne({
         where: {
             id: req.params.id
@@ -171,27 +171,13 @@ export const updateSuratCuti = async (req, res) => {
 
     if (!suratCuti) return res.status(404).json({ msg: "Surat Cuti Tidak Ditemukan" })
 
-    const name = req.body.name;
-    const id = req.body.id;
-    const divisi = req.body.divisi;
-    const jatahcuti = req.body.jatahcuti;
-    const tglmulai = req.body.tglmulai;
-    const tglselesai = req.body.tglselesai;
-    const jeniscuti = req.body.jeniscuti;
-    const alasan = req.body.alasan;
-    const userid = req.body.userid;
+    const status = req.body.status;
+    const komentar = req.body.komentar;
 
     try {
         await SuratCuti.update({
-            id: id,
-            name: name,
-            userid: userid,
-            divisi: divisi,
-            jatahcuti: jatahcuti,
-            tglmulai: tglmulai,
-            tglselesai: tglselesai,
-            jeniscuti: jeniscuti,
-            alasan: alasan,
+            status: status,
+            komentar: komentar
         }, {
             where: {
                 id: req.params.id
