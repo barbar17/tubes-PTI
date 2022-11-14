@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from 'axios';
 import { FiUser, FiUserX } from "react-icons/fi";
+import { BsWallet, BsWallet2 } from "react-icons/bs";
 import PopUp from "../PopUp";
 import { useState } from "react";
 import { useOutletContext } from 'react-router-dom'
@@ -48,7 +49,7 @@ function BerandaUser() {
                             <span className="text-card-green text-2xl">Total Cuti Tersedia</span>
                             <span className="text-4xl">20 Hari</span>
                         </div>
-                        <FiUser className="text-8xl" />
+                        <BsWallet className="text-8xl" />
                     </div>
                 </div>
 
@@ -58,7 +59,7 @@ function BerandaUser() {
                             <span className="text-card-red text-2xl">Sisa Cuti Tersedia</span>
                             <span className="text-4xl">{20 - cutiDiambil} Hari</span>
                         </div>
-                        <FiUserX className="text-8xl" />
+                        <BsWallet2 className="text-8xl" />
                     </div>
                 </div>
             </div>
