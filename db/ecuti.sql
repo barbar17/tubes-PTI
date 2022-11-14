@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2022 at 02:02 AM
+-- Generation Time: Nov 14, 2022 at 10:05 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -30,35 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `name` varchar(255) NOT NULL,
   `id` varchar(255) NOT NULL,
-  `ttl` varchar(255) NOT NULL,
-  `jeniskelamin` varchar(255) NOT NULL,
+  `ttl` varchar(255) DEFAULT NULL,
+  `jeniskelamin` varchar(255) DEFAULT NULL,
   `divisi` varchar(255) NOT NULL,
-  `agama` varchar(255) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `telepon` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pegawai`
---
-
-CREATE TABLE `pegawai` (
-  `name` varchar(255) NOT NULL,
-  `id` varchar(255) NOT NULL,
-  `ttl` varchar(255) NOT NULL,
-  `jeniskelamin` varchar(255) NOT NULL,
-  `divisi` varchar(255) NOT NULL,
-  `agama` varchar(255) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `telepon` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `agama` varchar(255) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `tipeakun` varchar(255) NOT NULL,
@@ -71,11 +49,46 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`name`, `id`, `ttl`, `jeniskelamin`, `divisi`, `agama`, `alamat`, `telepon`, `email`, `username`, `password`, `tipeakun`, `foto`, `fotourl`, `ttd`, `ttdurl`, `createdAt`, `updatedAt`) VALUES
+('widodo', '09876', 'Balam, 17-01-2001', 'Pria', 'Produksi', 'Islam', 'Jl.Belwis, Lampung Selatan', '080987654321', 'widodo.09876@email.com', 'widodo098', '$2b$10$7uZMhaP29AHjaMHFSHf3XOKPYrk8H1lUtWI7TQ4hgUthhx/Tfguxi', 'admin', NULL, NULL, NULL, NULL, '2022-11-14 08:35:31', '2022-11-14 08:35:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pegawai`
+--
+
+CREATE TABLE `pegawai` (
+  `name` varchar(255) NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `ttl` varchar(255) DEFAULT NULL,
+  `jeniskelamin` varchar(255) DEFAULT NULL,
+  `divisi` varchar(255) NOT NULL,
+  `agama` varchar(255) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `tipeakun` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `fotourl` varchar(255) DEFAULT NULL,
+  `ttd` varchar(255) DEFAULT NULL,
+  `ttdurl` varchar(255) DEFAULT NULL,
+  `cutidiambil` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`name`, `id`, `ttl`, `jeniskelamin`, `divisi`, `agama`, `alamat`, `telepon`, `email`, `username`, `password`, `tipeakun`, `foto`, `fotourl`, `ttd`, `ttdurl`, `createdAt`, `updatedAt`) VALUES
-('akbar', '12345', 'Balam, 17-01-2001', 'Pria', 'Produksi', 'Islam', 'Jl.Pangeran Senopati Raya, Balam', '081234567890', 'akbar.12345@email.com', 'akbar2001', '$2b$10$4.eX9JV.rGVxMsbMgWclvufrvztr9FTemXpSp3Vdj9iJOHf0tv.Ja', 'user', '27245e5926ae27938d2d6ba2965c5073.jpg', 'http://localhost:5000/pegawai/foto/27245e5926ae27938d2d6ba2965c5073.jpg', NULL, NULL, '2022-10-31 22:08:01', '2022-11-01 00:51:45');
+INSERT INTO `pegawai` (`name`, `id`, `ttl`, `jeniskelamin`, `divisi`, `agama`, `alamat`, `telepon`, `email`, `username`, `password`, `tipeakun`, `foto`, `fotourl`, `ttd`, `ttdurl`, `cutidiambil`, `createdAt`, `updatedAt`) VALUES
+('robi', '32145', 'Balam, 17-10-1912', 'Pria', 'Produksi', 'Islam', 'Jl.Pangeran Senopati Raya, Balam', '081234567890', 'robi.32145@email.com', 'robi321', '$2b$10$GSqlUJOt6EJ/qKZPb3khieD.uavZ5TWYx/oJA/BC4p7JtGveKH0cK', 'user', NULL, NULL, NULL, NULL, 9, '2022-11-14 05:56:11', '2022-11-14 08:13:05');
 
 -- --------------------------------------------------------
 
@@ -132,7 +145,7 @@ ALTER TABLE `suratcuti`
 -- AUTO_INCREMENT for table `suratcuti`
 --
 ALTER TABLE `suratcuti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

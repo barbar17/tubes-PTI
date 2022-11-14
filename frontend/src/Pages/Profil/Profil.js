@@ -33,7 +33,7 @@ function Profil() {
                         <div className='flex'>
                             <div className="flex flex-col item-center justify-center mx-10 space-y-10">
                                 <img src={profil?.fotourl} alt='fotoprofil' className="w-[250px] h-[333px] object-cover object-center" />
-                                <img src={profil?.ttdurl} alt='ttd' className="w-[250px] h-fit object-cover object-center" />
+                                <img src={profil?.ttdurl} alt='ttd' className="w-[250px] h-[150px] object-cover object-center" />
                             </div>
 
                             <div className="flex flex-col h-full items-center justify-center">

@@ -9,6 +9,8 @@ function Header({ user, id, tipeakun }) {
   let navigation = tipeakun === "user" ? MenusUser() :
     tipeakun === "admin" ? MenusAdmin() : MenusSuper();
 
+  // let navigation = MenusAdmin()
+
   const go = useNavigate();
 
   const logOut = () => {

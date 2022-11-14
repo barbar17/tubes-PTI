@@ -23,12 +23,24 @@ function EditProfilAdmin() {
   const [username, setUsername] = useState('')
   const [fotoadmin, setFotoadmin] = useState('')
   const [previewfoto, setPreviewfoto] = useState('')
+  const [ttdadmin, setTtdadmin] = useState('')
+  const [previewttd, setPreviewttd] = useState('')
+  const [isFotoChange, setIsFotoChange] = useState(false);
+  const [isTtdChange, setIsTtdChange] = useState(false);
 
   const loadFoto = (event) => {
+    setIsFotoChange(true)
     const foto = event.target.files[0];
     setFotoadmin(foto);
     setPreviewfoto(URL.createObjectURL(foto));
   }
+  const loadTtd = (event) => {
+    setIsTtdChange(true)
+    const ttd = event.target.files[0];
+    setTtdadmin(ttd);
+    setPreviewttd(URL.createObjectURL(ttd));
+  }
+
 
   const getProfilAdmin = async () => {
     const response = await axios.get(`http://localhost:5000/admin/${id}`);
@@ -42,6 +54,8 @@ function EditProfilAdmin() {
     setTelepon(response.data.telepon);
     setEmail(response.data.email);
     setUsername(response.data.username);
+    setPreviewttd(response.data.ttdurl)
+    setPreviewfoto(response.data.fotourl)
   }
 
   const updateProfil = async (event) => {
@@ -49,6 +63,9 @@ function EditProfilAdmin() {
     const formData = new FormData();
 
     formData.append("file", fotoadmin);
+    formData.append("file", ttdadmin);
+    formData.append("isFotoChange", isFotoChange);
+    formData.append("isTtdChange", isTtdChange);
     formData.append("name", name);
     formData.append("id", id);
     formData.append("ttl", ttl);
@@ -66,6 +83,8 @@ function EditProfilAdmin() {
         }
       });
       resetToken(username)
+      setIsFotoChange(false)
+      setIsTtdChange(false)
     } catch (error) {
       console.log(error);
     }
@@ -122,10 +141,16 @@ function EditProfilAdmin() {
                 </div>
 
                 <div className="relative flex border border-gray-400 shadow-2xl w-[250px] h-[150px] object-cover object-center items-center justify-center ">
-                  <button className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center text-xl rounded-lg">
+                  {
+                    previewttd ? (
+                      <img src={previewttd} alt='fotoprofil' className="w-[250px] h-[150px] object-cover object-center" />
+                    ) : (<></>)
+                  }
+                  <input type={'file'} id="ttd" style={{ display: "none" }} accept={'image/*'} onChange={loadTtd} />
+                  <label htmlFor="ttd" className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center text-xl rounded-lg">
                     <BsUpload />
                     <span>TTD</span>
-                  </button>
+                  </label>
                 </div>
               </div>
 
