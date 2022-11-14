@@ -9,7 +9,8 @@ function DaftarPengajuanCutiAdmin() {
     const [buttonKonfirmAdm, setButtonKonfirmAdm] = useState(false);
 
     const [suratCuti, setSuratCuti] = useState();
-    console.log(suratCuti)
+    const [detailCuti, setDetailCuti] = useState('');
+
     const props = useContext(AuthContext)
 
     let [searchParams, setSearchParams] = useSearchParams();
@@ -20,22 +21,24 @@ function DaftarPengajuanCutiAdmin() {
 
     }
 
+    const handlePopUp = async (item) => {
+        setButtonKonfirmAdm(true);
+        setDetailCuti(item);
+    }
+
     useEffect(() => {
         getSuraCutiByDivisi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.divisi])
 
-    console.log(props)
-
     return (
         <div className="flex flex-col w-full">
-            <div className="flex justify-around w-full">
-                <div className="absolute w-[800px] top-0 left-1/2 -translate-x-1/2 z-10">
-                    <KonfirmasiAdmin
-                        trigger={buttonKonfirmAdm}
-                        setTrigger={setButtonKonfirmAdm}
-                    />
-                </div>
+            <div className="absolute w-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <KonfirmasiAdmin
+                    trigger={buttonKonfirmAdm}
+                    setTrigger={setButtonKonfirmAdm}
+                    detailCuti={detailCuti}
+                />
             </div>
 
             <div className="w-full p-10 h-full">
@@ -105,7 +108,7 @@ function DaftarPengajuanCutiAdmin() {
                                                         <Link to={`/profil/user/${item.userid}`} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                             Profil
                                                         </Link>
-                                                        <button onClick={() => setButtonKonfirmAdm(true)} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                                        <button onClick={() => handlePopUp(item)} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                             Detail
                                                         </button>
                                                     </div>
