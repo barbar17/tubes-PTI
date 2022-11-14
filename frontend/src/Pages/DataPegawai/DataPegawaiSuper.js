@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../Function/AuthContext";
+import { BiSearchAlt } from "react-icons/bi";
 
 function DataPegawaiSuper() {
-  return <div>DataPegawaiSuper</div>;
+  return (
+    <div className="w-full p-10 h-full">
+      <div className="w-full bg-white pb-2">
+        <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg">Data Pegawai</div>
+        <div className="flex w-full justify-between px-10 py-5">
+          <div className="relative w-80">
+            <input type={"text"} className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-10 text-sm focus:shadow-slate-400 focus:shadow-md transition-all" placeholder="Ketik untuk mencari... " />
+            <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
+              <BiSearchAlt className="text-2xl" color="black" />
+            </div>
+          </div>
+          <Link to={"/admin/tambah_pegawai"} className="my-auto flex text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
+            Tambah
+          </Link>
+        </div>
+        <table className="table-auto w-full text-center text-xl">
+          <thead>
+            <tr className="border-b-2">
+              <th className="py-2">#</th>
+              <th>ID</th>
+              <th>Nama</th>
+              <th>Jenis Kelamin</th>
+              <th>Divisi</th>
+              <th>Username</th>
+              <th>Telepon</th>
+              <th>Opsi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="py-2">1</td>
+              <td>12345</td>
+              <td>Widodo</td>
+              <td>Pria</td>
+              <td>Produksi</td>
+              <td>Widodo02</td>
+              <td>08999982738</td>
+              <td>
+                <div className="w-full h-full flex justify-evenly">
+                  <Link to={"/super/data_pegawai/edit"} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
+                    Edit
+                  </Link>
+                  <button className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">Hapus</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 export default DataPegawaiSuper;

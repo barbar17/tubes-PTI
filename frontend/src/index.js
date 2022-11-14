@@ -23,11 +23,13 @@ import EditAkunPegawai from "./Pages/DataPegawai/EditAkunPegawai";
 import BerandaSuper from "./Pages/Beranda/BerandaSuper";
 import EditAkunPegawaiSuper from "./Pages/DataPegawai/EditAkunPegawaiSuper";
 import TambahAkunPegawaiSuper from "./Pages/DataPegawai/TambahAkunPegawaiSuper";
-
+import DaftarPengajuanCutiSuper from "./Pages/DaftarPengajuanCuti/DaftarPengajuanCutiSuper";
+import BioPegawaiSuper from "./Pages/Profil/BioPegawaiSuper";
+import PopUpDeleteSuper from "./Pages/DataPegawai/PopUpDeleteSuper";
+import LaporanCutiSuperAdmin from "./Pages/LaporanCuti/LaporanCutiSuperAdmin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login />} />
@@ -49,7 +51,10 @@ root.render(
 
       <Route path="super" element={<App />}>
         <Route path="beranda" element={<BerandaSuper />} />
+        <Route path="data_pegawai" element={<DataPegawaiSuper />} />
+        <Route path="daftar_pengajuan_cuti" element={<DaftarPengajuanCutiSuper />} />
         <Route path="data_pegawai" element={<TambahAkunPegawaiSuper />} />
+        <Route path="laporan_cuti" element={<LaporanCutiSuperAdmin />} />
       </Route>
 
       <Route path="profil/user/:id" element={<Profil />} />
@@ -59,7 +64,6 @@ root.render(
       <Route path="profil/admin/edit/:id" element={<EditProfilAdmin />} />
     </Routes>
   </BrowserRouter>
-
 );
 
 // If you want to start measuring performance in your app, pass a function
