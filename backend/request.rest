@@ -87,8 +87,8 @@ POST http://localhost:5000/admin
 Content-Type: application/json
 
 {
-    "name": "widodo",
-    "id": "09876",
+    "name": "Salsa",
+    "id": "6666",
     "ttl": "Balam, 17-01-2001",
     "jeniskelamin": "Pria",
     "divisi": "Produksi",
@@ -96,9 +96,10 @@ Content-Type: application/json
     "alamat": "Jl.Belwis, Lampung Selatan",
     "telepon": "080987654321",
     "email": "widodo.09876@email.com",
-    "username": "widodo098",
+    "username": "salsa111",
     "password": "12345",
-    "tipeakun": "admin"
+    "tipeakun": "admin",
+    "adminlvl": "Admin 2"
 }
 
 ###

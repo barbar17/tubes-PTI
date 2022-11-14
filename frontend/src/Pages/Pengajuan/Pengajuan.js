@@ -44,6 +44,8 @@ function Pengajuan() {
 
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
+    if (jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
+
     const formData = new FormData();
 
     formData.append("file", file);
@@ -56,7 +58,7 @@ function Pengajuan() {
     formData.append("tglselesai", tglselesai)
     formData.append("jeniscuti", jeniscuti)
     formData.append("alasan", alasancuti)
-    formData.append("status", "Sedang Diproses")
+    formData.append("status", "Admin 1")
 
     try {
       await axios.post("http://localhost:5000/suratCuti", formData, {
@@ -164,14 +166,14 @@ function Pengajuan() {
                 <td>
                   <span>Tanggal Mulai</span>
                 </td>
-                <td> : <input type="date" className="form-control" onChange={(event) => setTglmulai(event.target.value)} />
+                <td> : <input type="date" className="form-control" onChange={(event) => setTglmulai(event.target.value)} min={currentDate} />
                 </td>
               </tr>
               <tr>
                 <td>
                   <span>Tanggal Selesai</span>
                 </td>
-                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} />
+                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} min={currentDate} />
                 </td>
               </tr>
               <tr>

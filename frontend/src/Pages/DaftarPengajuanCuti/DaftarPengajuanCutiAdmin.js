@@ -16,7 +16,12 @@ function DaftarPengajuanCutiAdmin() {
     let [searchParams, setSearchParams] = useSearchParams();
 
     const getSuraCutiByDivisi = async () => {
-        const response = await axios.get(`http://localhost:5000/suratCuti/divisi/${props.divisi}`);
+        const response = await axios.get(`http://localhost:5000/suratCuti/divisi/${props.divisi}`, {
+            headers: {
+                status: props?.adminlvl
+            }
+        }
+        );
         setSuratCuti(response.data)
 
     }
@@ -37,7 +42,9 @@ function DaftarPengajuanCutiAdmin() {
                 <KonfirmasiAdmin
                     trigger={buttonKonfirmAdm}
                     setTrigger={setButtonKonfirmAdm}
+                    getSuraCutiByDivisi={getSuraCutiByDivisi}
                     detailCuti={detailCuti}
+                    adminlvl={props.adminlvl}
                 />
             </div>
 

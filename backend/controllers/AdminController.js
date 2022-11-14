@@ -39,6 +39,7 @@ export const createAdmin = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const tipeakun = req.body.tipeakun;
+    const adminlvl = req.body.adminlvl
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
@@ -55,6 +56,7 @@ export const createAdmin = async (req, res) => {
                 username: username,
                 password: hash,
                 tipeakun: tipeakun,
+                adminlvl: adminlvl
             });
             res.status(201).json({ msg: "User Created" });
         })
@@ -184,7 +186,6 @@ export const updateAdmin = async (req, res) => {
     const telepon = req.body.telepon;
     const email = req.body.email;
 
-
     try {
 
         Admin.update({
@@ -214,7 +215,19 @@ export const updateAdmin = async (req, res) => {
 }
 
 export const deleteAdmin = async (req, res) => {
+    const admin = await Admin.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+
+    if (!admin) return res.status(404).json({ msg: "Pegawai Tidak Ditemukan" });
+
     try {
+        const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
+        const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
+        fs.unlinkSync(filepathFoto);
+        fs.unlinkSync(filepathTtd);
         await Admin.destroy({
             where: {
                 id: req.params.id

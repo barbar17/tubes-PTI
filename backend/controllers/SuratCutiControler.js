@@ -30,7 +30,10 @@ export const getSuratCutiByPegawai = async (req, res) => {
         const response = await SuratCuti.findAll({
             where: {
                 userid: req.params.id
-            }
+            },
+            order: [
+                ['id', 'DESC'],
+            ],
         });
         res.status(200).json(response);
     } catch (error) {
@@ -42,7 +45,8 @@ export const getSuratCutiByDivisi = async (req, res) => {
     try {
         const response = await SuratCuti.findAll({
             where: {
-                divisi: req.params.divisi
+                divisi: req.params.divisi,
+                status: req.headers.status
             }
         });
         res.status(200).json(response);
@@ -134,6 +138,30 @@ export const createSuratCuti = async (req, res) => {
 
 }
 
+export const acceptedSuratCuti = async (req, res) => {
+    const suratCuti = await SuratCuti.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+
+    if (!suratCuti) return res.status(404).json({ msg: "Surat Cuti Tidak Ditemukan" })
+
+    const status = req.body.status;
+    try {
+        await SuratCuti.update({
+            status: status
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.status(200).json({ msg: "Surat Cuti Updated" });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const updateSuratCuti = async (req, res) => {
     const suratCuti = await SuratCuti.findOne({
         where: {
@@ -163,13 +191,13 @@ export const updateSuratCuti = async (req, res) => {
             tglmulai: tglmulai,
             tglselesai: tglselesai,
             jeniscuti: jeniscuti,
-            alasan: alasan
+            alasan: alasan,
         }, {
             where: {
                 id: req.params.id
             }
         });
-        res.status(200).json({ msg: "User Updated" });
+        res.status(200).json({ msg: "Surat Cuti Updated" });
     } catch (error) {
         console.log(error.message);
     }

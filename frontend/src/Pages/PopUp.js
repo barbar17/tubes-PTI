@@ -10,7 +10,6 @@ function PopUp(props) {
   const finishDate = new Date(props.detailCuti.tglselesai);
   const totalTime = finishDate.getTime() - startDate.getTime()
   const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24)) * -1;
-  console.log(totalDay)
 
   const deletePengajuanCuti = async (id) => {
     try {
@@ -67,15 +66,15 @@ function PopUp(props) {
             </tr>
             <tr>
               <td className="w-52">Tanggal Diajukan</td>
-              <td>: {props.detailCuti.tglpengajuan}</td>
+              <td>: {props.detailCuti.tglpengajuan.split('-').reverse().join("-")}</td>
             </tr>
             <tr>
               <td>Tanggal Mulai</td>
-              <td>: {props.detailCuti.tglmulai}</td>
+              <td>: {props.detailCuti.tglmulai.split('-').reverse().join("-")}</td>
             </tr>
             <tr>
               <td>Tanggal Selesai</td>
-              <td>: {props.detailCuti.tglselesai}</td>
+              <td>: {props.detailCuti.tglselesai.split('-').reverse().join("-")}</td>
             </tr>
             <tr>
               <td>Alasan Cuti</td>

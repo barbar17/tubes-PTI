@@ -19,7 +19,8 @@ const Admin = db.define('admin', {
     foto: { type: DataTypes.STRING },
     fotourl: { type: DataTypes.STRING },
     ttd: { type: DataTypes.STRING },
-    ttdurl: { type: DataTypes.STRING }
+    ttdurl: { type: DataTypes.STRING },
+    adminlvl: { type: DataTypes.STRING }
 }, {
     freezeTableName: true
 })

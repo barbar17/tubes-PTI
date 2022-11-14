@@ -30,7 +30,9 @@ export const Login = async (req, res) => {
             else {
                 const tipeakun = account.tipeakun
                 const divisi = account.divisi
-                const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: tipeakun, divisi: divisi, cutiDiambil: account.cutidiambil }, "tokenizer2022");
+                const adminlvl = account?.adminlvl
+                console.log(adminlvl)
+                const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: tipeakun, divisi: divisi, cutiDiambil: account.cutidiambil, adminlvl: adminlvl }, "tokenizer2022");
                 res.send({ accessToken: accessToken, tipeakun: tipeakun });
             }
         })

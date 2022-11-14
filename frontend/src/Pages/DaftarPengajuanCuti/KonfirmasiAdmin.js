@@ -1,9 +1,33 @@
 import React from "react";
 import { IoIosClose } from "react-icons/io";
+import axios from "axios";
 
 function KonfirmasiAdmin(props) {
 
     console.log(props)
+
+    const handleSetuju = async () => {
+        let status = '';
+        if (props.adminlvl === "Admin 1") {
+            status = "Admin 2"
+        } else if (props.adminlvl === "Admin 2") {
+            status = "HRD"
+        } else {
+            status = "Diterima"
+        }
+
+        try {
+            await axios.patch(`http://localhost:5000/suratCuti/accepted/${props.detailCuti.id}`, { status: status }, {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        props.setTrigger(false)
+        props.getSuraCutiByDivisi()
+    }
 
     return props.trigger ? (
         <div className="flex flex-col my-10 border border-gray-400 shadow-2xl rounded-xl">
@@ -67,7 +91,7 @@ function KonfirmasiAdmin(props) {
                     <tbody>
                         <tr>
                             <td className="space-x-3">
-                                <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                <button onClick={() => handleSetuju()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                     Setuju
                                 </button>
                                 <button className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
