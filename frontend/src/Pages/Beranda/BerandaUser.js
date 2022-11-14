@@ -86,9 +86,9 @@ function BerandaUser() {
                                     <tr key={index} className="border-b-2">
                                         <td className="py-2">{index + 1}</td>
                                         <td>{item.id}</td>
-                                        <td>{item.tglpengajuan}</td>
-                                        <td>{item.tglmulai}</td>
-                                        <td>{item.tglselesai}</td>
+                                        <td>{item.tglpengajuan.split('-').reverse().join("-")}</td>
+                                        <td>{item.tglmulai.split('-').reverse().join("-")}</td>
+                                        <td>{item.tglselesai.split('-').reverse().join("-")}</td>
                                         <td>{item.alasan}</td>
                                         <td>{item.status}</td>
                                         <td>

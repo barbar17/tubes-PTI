@@ -10,6 +10,7 @@ function App() {
   const [user, setUser] = useState();
   const userId = user?.id
   const divisi = user?.divisi
+  console.log(user)
   const [authState, setAuthState] = useState(false);
 
   const now = new Date()

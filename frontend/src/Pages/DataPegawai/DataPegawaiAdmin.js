@@ -10,6 +10,8 @@ function DataPegawaiAdmin() {
 
   const props = useContext(AuthContext)
 
+  console.log(props)
+
   let [searchParams, setSearchParams] = useSearchParams()
 
   const getPegawaiByDivisi = async () => {

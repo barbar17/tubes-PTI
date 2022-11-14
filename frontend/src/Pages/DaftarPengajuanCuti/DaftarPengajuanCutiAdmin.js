@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import KonfirmasiAdmin from "./KonfirmasiAdmin";
 import axios from "axios";
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { AuthContext } from "../../Function/AuthContext";
 import { BiSearchAlt } from "react-icons/bi"
 
@@ -9,7 +9,7 @@ function DaftarPengajuanCutiAdmin() {
     const [buttonKonfirmAdm, setButtonKonfirmAdm] = useState(false);
 
     const [suratCuti, setSuratCuti] = useState();
-
+    console.log(suratCuti)
     const props = useContext(AuthContext)
 
     let [searchParams, setSearchParams] = useSearchParams();
@@ -24,6 +24,8 @@ function DaftarPengajuanCutiAdmin() {
         getSuraCutiByDivisi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.divisi])
+
+    console.log(props)
 
     return (
         <div className="flex flex-col w-full">
@@ -100,9 +102,9 @@ function DaftarPengajuanCutiAdmin() {
                                                 <td>{item.alasan}</td>
                                                 <td>
                                                     <div className="w-full h-full flex justify-evenly">
-                                                        <button className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                                        <Link to={`/profil/user/${item.userid}`} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                             Profil
-                                                        </button>
+                                                        </Link>
                                                         <button onClick={() => setButtonKonfirmAdm(true)} className="my-auto text-white bg-btn-purple h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                             Detail
                                                         </button>
