@@ -19,6 +19,16 @@ function DataPegawaiAdmin() {
     setPegawai(response.data.rows)
   }
 
+  const deletePegawai = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/pegawai/${id}`)
+
+      getPegawaiByDivisi();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getPegawaiByDivisi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,10 +100,10 @@ function DataPegawaiAdmin() {
                     <td>{item?.telepon}</td>
                     <td>
                       <div className="w-full h-full flex justify-evenly">
-                        <Link to={'/admin/data_pegawai/edit'} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
+                        <Link to={`/admin/data_pegawai/edit/${item.id}`} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
                           Edit
                         </Link>
-                        <button className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">
+                        <button onClick={() => deletePegawai(item.id)} className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">
                           Hapus
                         </button>
                       </div>

@@ -30,7 +30,7 @@ function BerandaAdmin() {
     useEffect(() => {
         getPegawaiByDivisi()
         getSuraCutiByDivisi()
-    }, [])
+    }, [props])
 
 
     return (

@@ -41,7 +41,7 @@ function BerandaUser() {
         <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
             <div className="flex justify-around w-full">
                 <div className="absolute w-[800px] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                    <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp} detailCuti={detailCuti} getPengajuanCuti={getPengajuanCuti} />
+                    <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp} detailCuti={detailCuti} getPengajuanCuti={getPengajuanCuti} getPegawaiById={getPegawaiById} />
                 </div>
                 <div className="flex w-[500px] bg-card-green rounded-lg justify-end">
                     <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">

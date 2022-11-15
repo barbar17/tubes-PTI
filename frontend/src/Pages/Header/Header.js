@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Header({ user, id, tipeakun }) {
   let navigation = tipeakun === "user" ? MenusUser() :
     tipeakun === "admin" ? MenusAdmin() : MenusSuper();
-
+  // console.log(tipeakun)
   // let navigation = MenusAdmin()
 
   const go = useNavigate();

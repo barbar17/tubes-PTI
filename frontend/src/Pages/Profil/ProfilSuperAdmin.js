@@ -56,10 +56,6 @@ function ProfilSuperAdmin() {
                                             <td className='p-2'>: {profil?.jeniskelamin}</td>
                                         </tr>
                                         <tr>
-                                            <td>Divisi</td>
-                                            <td className='p-2'>: {profil?.divisi}</td>
-                                        </tr>
-                                        <tr>
                                             <td>Agama</td>
                                             <td className='p-2'>: {profil?.agama}</td>
                                         </tr>

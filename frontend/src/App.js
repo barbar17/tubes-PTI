@@ -11,7 +11,7 @@ function App() {
   const userId = user?.id
   const divisi = user?.divisi
   const adminlvl = user?.adminlvl
-  console.log(user)
+
   const [authState, setAuthState] = useState(false);
 
   const now = new Date()

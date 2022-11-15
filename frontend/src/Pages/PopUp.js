@@ -21,6 +21,7 @@ function PopUp(props) {
         }
       });
 
+      props.getPegawaiById()
       props.getPengajuanCuti();
       props.setTrigger(false);
     } catch (error) {

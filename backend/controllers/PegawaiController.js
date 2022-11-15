@@ -1,5 +1,5 @@
 import Pegawai from "../models/PegawaiModel.js";
-import bcrypt from 'bcrypt';
+import bcrypt, { hash } from 'bcrypt';
 import fs from "fs"
 import path from "path";
 import { Sequelize } from "sequelize";
@@ -245,27 +245,57 @@ export const updatePegawai = async (req, res) => {
     const alamat = req.body.alamat;
     const telepon = req.body.telepon;
     const email = req.body.email;
-
+    const username = req.body.username;
+    const password = req.body.password;
+    console.log(password)
     try {
-        Pegawai.update({
-            name: name,
-            id: id,
-            ttl: ttl,
-            jeniskelamin: jeniskelamin,
-            divisi: divisi,
-            agama: agama,
-            alamat: alamat,
-            telepon: telepon,
-            email: email,
-            foto: filenameFoto,
-            fotourl: fotourl ? fotourl : pegawai.fotourl,
-            ttd: filenameTtd,
-            ttdurl: ttdurl ? ttdurl : pegawai.ttdurl
-        }, {
-            where: {
-                id: req.params.id
-            }
-        });
+        if (password) {
+            await bcrypt.hash(password, 10).then((hash) => {
+                Pegawai.update({
+                    name: name,
+                    id: id,
+                    ttl: ttl,
+                    jeniskelamin: jeniskelamin,
+                    divisi: divisi,
+                    agama: agama,
+                    alamat: alamat,
+                    telepon: telepon,
+                    email: email,
+                    foto: filenameFoto,
+                    fotourl: fotourl ? fotourl : pegawai.fotourl,
+                    ttd: filenameTtd,
+                    ttdurl: ttdurl ? ttdurl : pegawai.ttdurl,
+                    username: username,
+                    password: hash
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                });
+            })
+
+        } else {
+            Pegawai.update({
+                name: name,
+                id: id,
+                ttl: ttl,
+                jeniskelamin: jeniskelamin,
+                divisi: divisi,
+                agama: agama,
+                alamat: alamat,
+                telepon: telepon,
+                email: email,
+                foto: filenameFoto,
+                fotourl: fotourl ? fotourl : pegawai.fotourl,
+                ttd: filenameTtd,
+                ttdurl: ttdurl ? ttdurl : pegawai.ttdurl,
+                username: username,
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            });
+        }
         res.status(200).json({ msg: "User Updated" });
     } catch (error) {
         console.log(error.message);
@@ -284,8 +314,10 @@ export const deletePegawai = async (req, res) => {
     try {
         const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
         const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
-        fs.unlinkSync(filepathFoto);
-        fs.unlinkSync(filepathTtd);
+        if (filepathFoto && filepathTtd) {
+            fs.unlinkSync(filepathFoto);
+            fs.unlinkSync(filepathTtd);
+        }
         await Pegawai.destroy({
             where: {
                 id: req.params.id

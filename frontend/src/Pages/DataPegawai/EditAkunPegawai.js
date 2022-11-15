@@ -1,11 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function EditAkunPegawai() {
+
+  const go = useNavigate()
+
   const [nama, setNama] = useState("");
-  const [nip, setNip] = useState("");
+  const [userId, setUserId] = useState("");
   const [divisi, setDivisi] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  console.log(password)
+  const { id } = useParams();
+
+  const getPegawaiById = async () => {
+    const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
+    console.log(response.data)
+    setNama(response.data.name)
+    setUserId(response.data.id)
+    setDivisi(response.data.divisi)
+    setUsername(response.data.username)
+  }
+
+  const updatePegawai = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.patch(`http://localhost:5000/pegawai/${id}`, {
+        name: nama,
+        id: userId,
+        divisi: divisi,
+        username: username,
+        password: password,
+      }, {
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+      go('/admin/data_pegawai')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getPegawaiById()
+  }, [id])
+
 
   return (
     <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
@@ -13,7 +54,7 @@ function EditAkunPegawai() {
         <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg text-center">
           Edit Akun Pegawai
         </div>
-        <div className=" w-full flex items-center justify-center bg-white text-xl p-10">
+        <form className=" w-full flex items-center justify-center bg-white text-xl p-10" onSubmit={updatePegawai}>
           <table className="border-separate border-spacing-y-2 border-spacing-x-5">
             <tbody>
               <tr>
@@ -24,7 +65,7 @@ function EditAkunPegawai() {
                   :{" "}
                   <input
                     type={"text"}
-                    className="rounded-lg border-slate-400 border "
+                    className="rounded-lg border-slate-400 border px-2 py-1 "
                     placeholder="WIdodo "
                     value={nama}
                     onChange={(event) => setNama(event.target.value)}
@@ -34,16 +75,16 @@ function EditAkunPegawai() {
               </tr>
               <tr>
                 <td>
-                  <span>NIP/ID</span>
+                  <span>ID</span>
                 </td>
                 <td>
                   :{" "}
                   <input
                     type="text"
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border px-2 py-1"
                     placeholder="12345 "
-                    value={nip}
-                    onChange={(event) => setNip(event.target.value)}
+                    value={userId}
+                    onChange={(event) => setUserId(event.target.value)}
                     required
                   />
                 </td>
@@ -56,7 +97,7 @@ function EditAkunPegawai() {
                   :{" "}
                   <input
                     type="text"
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border px-2 py-1"
                     placeholder="Produksi "
                     value={divisi}
                     onChange={(event) => setDivisi(event.target.value)}
@@ -72,7 +113,7 @@ function EditAkunPegawai() {
                   :{" "}
                   <input
                     type="text"
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border px-2 py-1"
                     placeholder="Widodo2000 "
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
@@ -87,28 +128,28 @@ function EditAkunPegawai() {
                 <td>
                   :{" "}
                   <input
-                    type="text"
-                    className="rounded-lg border-slate-400 border"
+                    type="password"
+                    className="rounded-lg border-slate-400 border px-2 py-1"
                     placeholder="passwordku123 "
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    required
                   />
                 </td>
               </tr>
               <tr>
                 <td>{""}</td>
-                <div className="flex justify-end w-full pr-1">
-                  <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
-                    Submit
-                  </button>
-                </div>
+                <td>
+                  <div className="flex justify-end w-full pr-1">
+                    <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                      Submit
+                    </button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
 
-          <hr className="border-gray-400 border-2 my-5" />
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -27,6 +27,7 @@ import DaftarPengajuanCutiSuper from "./Pages/DaftarPengajuanCuti/DaftarPengajua
 import BioPegawaiSuper from "./Pages/Profil/BioPegawaiSuper";
 import PopUpDeleteSuper from "./Pages/DataPegawai/PopUpDeleteSuper";
 import LaporanCutiSuperAdmin from "./Pages/LaporanCuti/LaporanCutiSuperAdmin";
+import ProfilSuperAdmin from "./Pages/Profil/ProfilSuperAdmin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -45,7 +46,7 @@ root.render(
         <Route path="data_pegawai" element={<DataPegawaiAdmin />} />
         <Route path="daftar_pengajuan_cuti" element={<DaftarPengajuanCutiAdmin />} />
         <Route path="laporan_cuti" element={<LaporanCutiAdmin />} />
-        <Route path="data_pegawai/edit" element={<EditAkunPegawai />} />
+        <Route path="data_pegawai/edit/:id" element={<EditAkunPegawai />} />
         <Route path="tambah_pegawai" element={<TambahAkunPegawai />} />
       </Route>
 
@@ -62,6 +63,9 @@ root.render(
 
       <Route path="profil/admin/:id" element={<ProfilAdmin />} />
       <Route path="profil/admin/edit/:id" element={<EditProfilAdmin />} />
+
+      <Route path="profil/super/:id" element={<ProfilSuperAdmin />} />
+
     </Routes>
   </BrowserRouter>
 );
