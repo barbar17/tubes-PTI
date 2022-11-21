@@ -29,7 +29,7 @@ function PopUp(props) {
       console.log(error)
     }
   }
-
+  console.log(props)
   return props.trigger ? (
     <div className="flex flex-col my-10 border border-gray-400 shadow-2xl rounded-xl">
       <div className="w-full flex bg-main h-20 items-center text-white text-3xl px-8 rounded-t-xl justify-between">
@@ -110,7 +110,7 @@ function PopUp(props) {
           <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
             Hapus
           </button>
-          <Link to={`/user/surat-cuti/${props.detailCuti.id}`}>
+          <Link to={`/user/surat-cuti/${props.detailCuti.id}`} className={props.detailCuti.status === "Diterima" ? "visible" : "invisible"}>
             <button className="text-white bg-card-green mt-5 h-8 w-28 items-center justify-center text-lg rounded-lg">
               Lihat Surat
             </button>

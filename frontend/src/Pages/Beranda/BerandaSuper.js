@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../Function/AuthContext'
 import { FiUser, FiUsers, FiFileText, FiUserX } from "react-icons/fi";
 
 function BerandaSuper() {
+
+  const props = useContext(AuthContext)
+
+  const [jumlahPegawai, setJumlahPegawai] = useState('');
+  const [jumlahSuratCuti, setJumlahSuratCuti] = useState('');
+
+  const getPegawai = async () => {
+    const response = await axios.get('http://localhost:5000/pegawai');
+    setJumlahPegawai(response.data.count)
+  }
+
+  const getSuraCuti = async () => {
+    const response = await axios.get('http://localhost:5000/suratCuti/super');
+    setJumlahSuratCuti(response.data.count)
+
+  }
+
+  useEffect(() => {
+    getPegawai()
+    getSuraCuti()
+  }, [props])
+
   return (
     <div className="flex flex-col w-full items-center justify-center py-10 px-20 gap-20">
       <div className="w-full grid grid-cols-2 place-items-center gap-y-10">
         <div className="flex w-[500px] bg-card-blue rounded-lg justify-end">
-          <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
+          <Link to={'/super/data_pegawai'} className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
             <div className="flex flex-col ">
               <span className="text-card-blue text-2xl">Jumlah</span>
-              <span className="text-4xl">660 Pegawai</span>
+              <span className="text-4xl">{jumlahPegawai} Pegawai</span>
             </div>
             <FiUsers className="text-8xl" />
-          </div>
+          </Link>
         </div>
 
         <div className="flex w-[500px] bg-card-green rounded-lg justify-end">
@@ -26,13 +51,13 @@ function BerandaSuper() {
         </div>
 
         <div className="flex w-[500px] bg-card-yellow rounded-lg justify-end">
-          <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
+          <Link to={'/super/daftar_pengajuan_cuti'} className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
             <div className="flex flex-col ">
               <span className="text-card-yellow text-2xl">Pengajuan Cuti</span>
-              <span className="text-4xl">12 Pegawai</span>
+              <span className="text-4xl">{jumlahSuratCuti} Pegawai</span>
             </div>
             <FiFileText className="text-8xl" />
-          </div>
+          </Link>
         </div>
 
         <div className="flex w-[500px] bg-card-red rounded-lg justify-end">

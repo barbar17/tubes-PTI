@@ -6,11 +6,11 @@ function TambahAkunPegawai() {
 
     const go = useNavigate()
 
-    const [nama, setNama] = useState();
-    const [id, setId] = useState();
-    const [divisi, setDivisi] = useState();
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [nama, setNama] = useState('');
+    const [id, setId] = useState('');
+    const [divisi, setDivisi] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const createPegawai = async (event) => {
         event.preventDefault();
@@ -115,11 +115,13 @@ function TambahAkunPegawai() {
                             </tr>
                             <tr>
                                 <td>{""}</td>
-                                <div className="flex justify-end w-full pr-1">
-                                    <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
-                                        Submit
-                                    </button>
-                                </div>
+                                <td>
+                                    <div className="flex justify-end w-full pr-1">
+                                        <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

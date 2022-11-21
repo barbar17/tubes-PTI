@@ -5,7 +5,7 @@ import { Sequelize } from "sequelize";
 
 export const getSuratCuti = async (req, res) => {
     try {
-        const response = await SuratCuti.findAndAll();
+        const response = await SuratCuti.findAll();
         res.status(200).json(response);
     } catch (error) {
         console.log(error.message);

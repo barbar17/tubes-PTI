@@ -53,7 +53,7 @@ function TambahAkunPegawaiSuper() {
                     type="text"
                     value={nama}
                     onChange={(event) => setNama(event.target.value)}
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border p-1 px-2"
                   />
                 </td>
               </tr>
@@ -67,7 +67,7 @@ function TambahAkunPegawaiSuper() {
                     type="text"
                     value={id}
                     onChange={(event) => setId(event.target.value)}
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border p-1 px-2"
                   />
                 </td>
               </tr>
@@ -81,7 +81,7 @@ function TambahAkunPegawaiSuper() {
                     type="text"
                     value={divisi}
                     onChange={(event) => setDivisi(event.target.value)}
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border p-1 px-2"
                   />
                 </td>
               </tr>
@@ -95,7 +95,7 @@ function TambahAkunPegawaiSuper() {
                     type="text"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border p-1 px-2"
                   />
                 </td>
               </tr>
@@ -109,7 +109,7 @@ function TambahAkunPegawaiSuper() {
                     type="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    className="rounded-lg border-slate-400 border"
+                    className="rounded-lg border-slate-400 border p-1 px-2"
                   />
                 </td>
               </tr>
