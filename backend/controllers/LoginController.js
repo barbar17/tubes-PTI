@@ -68,6 +68,14 @@ export const resetToken = async (req, res) => {
         })
     }
 
+    if (!account) {
+        account = await Super.findOne({
+            where: {
+                username: username
+            }
+        })
+    }
+
     if (account) {
         const accessToken = jwt.sign({ name: account.name, id: account.id, tipeakun: account.tipeakun, cutiDiambil: account.cutidiambil }, "tokenizer2022");
         res.send(accessToken);

@@ -1,4 +1,4 @@
-import SuperAdmin from "../models/SuperAdminModel.js";
+import Super from "../models/SuperAdminModel.js";
 import bcrypt from 'bcrypt';
 import fs from "fs"
 import path from "path";
@@ -6,7 +6,7 @@ import { Sequelize } from "sequelize";
 
 export const getSuperAdmin = async (req, res) => {
     try {
-        const response = await SuperAdmin.findAll();
+        const response = await Super.findAll();
         res.status(200).json(response);
     } catch (error) {
         console.log(error.massage);
@@ -15,7 +15,7 @@ export const getSuperAdmin = async (req, res) => {
 
 export const getSuperAdminById = async (req, res) => {
     try {
-        const response = await SuperAdmin.findOne({
+        const response = await Super.findOne({
             where: {
                 id: req.params.id
             }
@@ -41,7 +41,7 @@ export const createSuperAdmin = async (req, res) => {
 
     try {
         await bcrypt.hash(password, 10).then((hash) => {
-            SuperAdmin.create({
+            Super.create({
                 name: name,
                 id: id,
                 ttl: ttl,
@@ -62,13 +62,13 @@ export const createSuperAdmin = async (req, res) => {
 }
 
 export const updateSuperAdmin = async (req, res) => {
-    const superadmin = await SuperAdmin.findOne({
+    const superadmin = await Super.findOne({
         where: {
             id: req.params.id
         }
     })
 
-    if (!SuperAdmin) return res.status(404).json({ msg: "Super Admin tidak Ditemukan" })
+    if (!superadmin) return res.status(404).json({ msg: "Super Admin tidak Ditemukan" })
 
     let filenameFoto = "";
     let filenameTtd = "";
@@ -180,7 +180,7 @@ export const updateSuperAdmin = async (req, res) => {
     const email = req.body.email;
 
     try {
-        SuperAdmin.update({
+        Super.update({
             name: name,
             id: id,
             ttl: ttl,
@@ -191,11 +191,11 @@ export const updateSuperAdmin = async (req, res) => {
             email: email,
             foto: filenameFoto,
             fotourl: fotourl ? fotourl : superadmin.fotourl,
-            ttdd: filenameTtd,
+            ttd: filenameTtd,
             ttdurl: ttdurl ? ttdurl : superadmin.ttdurl
         }, {
             where: {
-                id: req.params
+                id: req.params.id
             }
         });
         res.status(200).json({ msg: "Super Admin Updated" });
@@ -205,7 +205,7 @@ export const updateSuperAdmin = async (req, res) => {
 }
 
 export const deleteSuperAdmin = async (req, res) => {
-    const superadmin = await SuperAdmin.findOne({
+    const superadmin = await Super.findOne({
         where: {
             id: req.params.id
         }

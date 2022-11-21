@@ -12,7 +12,7 @@ function DaftarPengajuanCutiAdmin() {
     const [detailCuti, setDetailCuti] = useState('');
 
     const props = useContext(AuthContext)
-    console.log(detailCuti)
+
     let [searchParams, setSearchParams] = useSearchParams();
 
     const getSuraCutiByDivisi = async () => {

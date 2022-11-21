@@ -5,7 +5,7 @@ import { Sequelize } from "sequelize";
 
 export const getSuratCuti = async (req, res) => {
     try {
-        const response = await SuratCuti.findAll();
+        const response = await SuratCuti.findAndAll();
         res.status(200).json(response);
     } catch (error) {
         console.log(error.message);
@@ -47,6 +47,32 @@ export const getSuratCutiByDivisi = async (req, res) => {
             where: {
                 divisi: req.params.divisi,
                 status: req.headers.status
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const getSuratCutiForSuperAdmin = async (req, res) => {
+    try {
+        const response = await SuratCuti.findAndCountAll({
+            where: {
+                status: "Super"
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const getSuratCutiForLaporan = async (req, res) => {
+    try {
+        const response = await SuratCuti.findAll({
+            where: {
+                status: "Diterima"
             }
         });
         res.status(200).json(response);

@@ -11,7 +11,7 @@ function EditAkunPegawai() {
   const [divisi, setDivisi] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  console.log(password)
+
   const { id } = useParams();
 
   const getPegawaiById = async () => {
@@ -66,7 +66,7 @@ function EditAkunPegawai() {
                   <input
                     type={"text"}
                     className="rounded-lg border-slate-400 border px-2 py-1 "
-                    placeholder="WIdodo "
+                    placeholder="Nama"
                     value={nama}
                     onChange={(event) => setNama(event.target.value)}
                     required

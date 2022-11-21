@@ -33,7 +33,7 @@ function ProfilSuperAdmin() {
                         <div className='flex'>
                             <div className="flex flex-col item-center justify-center mx-10 space-y-10">
                                 <img src={profil?.fotourl} alt='fotoprofil' className="w-[250px] h-[333px] object-cover object-center" />
-                                <img src="/gambar/ttd.jpeg" alt='ttd' className="w-[250px] h-fit object-cover object-center" />
+                                <img src={profil?.ttdurl} alt='ttd' className="w-[250px] h-fit object-cover object-center" />
                             </div>
 
                             <div className="flex flex-col h-full items-center justify-center">
@@ -78,7 +78,7 @@ function ProfilSuperAdmin() {
 
                         <div className='flex items-start justify-start p-5'>
                             <Link
-                                to={`/profil/admin/edit/${id}`}
+                                to={`/profil/super/edit/${id}`}
                                 className="text-white bg-emerald-400 h-12 w-24 px-5 items-center justify-center text-3xl rounded-lg">
                                 Edit
                             </Link>

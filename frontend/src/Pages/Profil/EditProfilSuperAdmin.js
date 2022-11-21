@@ -15,45 +15,59 @@ function EditProfilSuperAdmin() {
   const [userId, setUserId] = useState('')
   const [ttl, setTtl] = useState('')
   const [jeniskelamin, setJeniskelamin] = useState('')
-  const [divisi, setDivisi] = useState('')
   const [agama, setAgama] = useState('')
   const [alamat, setAlamat] = useState('')
   const [telepon, setTelepon] = useState('')
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
-  const [fotoadmin, setFotoadmin] = useState('')
+  const [fotosuper, setFotosuper] = useState('')
   const [previewfoto, setPreviewfoto] = useState('')
+  const [ttdsuper, setTtdsuper] = useState('')
+  const [previewttd, setPreviewttd] = useState('')
+  const [isFotoChange, setIsFotoChange] = useState(false);
+  const [isTtdChange, setIsTtdChange] = useState(false);
 
   const loadFoto = (event) => {
+    setIsFotoChange(true)
     const foto = event.target.files[0];
-    setFotoadmin(foto);
+    setFotosuper(foto);
     setPreviewfoto(URL.createObjectURL(foto));
   }
 
-  const getProfilAdmin = async () => {
+  const loadTtd = (event) => {
+    setIsTtdChange(true)
+    const ttd = event.target.files[0];
+    setTtdsuper(ttd);
+    setPreviewttd(URL.createObjectURL(ttd));
+  }
+
+  const getProfilSuperAdmin = async () => {
     const response = await axios.get(`http://localhost:5000/superadmin/${id}`);
     setName(response.data.name);
     setUserId(response.data.id);
     setTtl(response.data.ttl);
     setJeniskelamin(response.data.jeniskelamin);
-    setDivisi(response.data.divisi);
     setAgama(response.data.agama);
     setAlamat(response.data.alamat);
     setTelepon(response.data.telepon);
     setEmail(response.data.email);
     setUsername(response.data.username);
+    setPreviewttd(response.data.ttdurl)
+    setPreviewfoto(response.data.fotourl)
   }
 
   const updateProfil = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
-    formData.append("file", fotoadmin);
+    formData.append("file", fotosuper);
+    formData.append("file", ttdsuper);
+    formData.append("isFotoChange", isFotoChange);
+    formData.append("isTtdChange", isTtdChange);
     formData.append("name", name);
     formData.append("id", id);
     formData.append("ttl", ttl);
     formData.append("jeniskelamin", jeniskelamin);
-    formData.append("divisi", divisi);
     formData.append("agama", agama);
     formData.append("alamat", alamat);
     formData.append("telepon", telepon);
@@ -66,6 +80,8 @@ function EditProfilSuperAdmin() {
         }
       });
       resetToken(username)
+      setIsFotoChange(false)
+      setIsTtdChange(false)
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +108,7 @@ function EditProfilSuperAdmin() {
   }
 
   useEffect(() => {
-    getProfilAdmin();
+    getProfilSuperAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -122,10 +138,16 @@ function EditProfilSuperAdmin() {
                 </div>
 
                 <div className="relative flex border border-gray-400 shadow-2xl w-[250px] h-[150px] object-cover object-center items-center justify-center ">
-                  <button className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center text-xl rounded-lg">
+                  {
+                    previewttd ? (
+                      <img src={previewttd} alt='fotoprofil' className="w-[250px] h-[150px] object-cover object-center" />
+                    ) : (<></>)
+                  }
+                  <input type={'file'} id="ttd" style={{ display: "none" }} accept={'image/*'} onChange={loadTtd} />
+                  <label htmlFor="ttd" className="text-white bg-main pb-1 flex space-x-2 py-2 px-5 absolute bottom-1 left-1/2 -translate-x-1/2 items-center justify-center text-xl rounded-lg">
                     <BsUpload />
                     <span>TTD</span>
-                  </button>
+                  </label>
                 </div>
               </div>
 
@@ -136,10 +158,6 @@ function EditProfilSuperAdmin() {
                       <td>nama</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setName(event.target.value)} value={name} /></td>
                     </tr>
-                    {/* <tr>
-                      <td>ID</td>
-                      <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setUserId(event.target.value)} value={userId} /></td>
-                    </tr> */}
                     <tr>
                       <td>Tempat/Tgl Lahir</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setTtl(event.target.value)} value={ttl} /></td>
@@ -147,10 +165,6 @@ function EditProfilSuperAdmin() {
                     <tr>
                       <td>Jenis Kelamin</td>
                       <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setJeniskelamin(event.target.value)} value={jeniskelamin} /></td>
-                    </tr>
-                    <tr>
-                      <td>Divisi</td>
-                      <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setDivisi(event.target.value)} value={divisi} /></td>
                     </tr>
                     <tr>
                       <td>Agama</td>

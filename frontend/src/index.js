@@ -24,10 +24,10 @@ import BerandaSuper from "./Pages/Beranda/BerandaSuper";
 import EditAkunPegawaiSuper from "./Pages/DataPegawai/EditAkunPegawaiSuper";
 import TambahAkunPegawaiSuper from "./Pages/DataPegawai/TambahAkunPegawaiSuper";
 import DaftarPengajuanCutiSuper from "./Pages/DaftarPengajuanCuti/DaftarPengajuanCutiSuper";
-import BioPegawaiSuper from "./Pages/Profil/BioPegawaiSuper";
 import PopUpDeleteSuper from "./Pages/DataPegawai/PopUpDeleteSuper";
 import LaporanCutiSuperAdmin from "./Pages/LaporanCuti/LaporanCutiSuperAdmin";
 import ProfilSuperAdmin from "./Pages/Profil/ProfilSuperAdmin";
+import EditProfilSuperAdmin from "./Pages/Profil/EditProfilSuperAdmin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -54,8 +54,9 @@ root.render(
         <Route path="beranda" element={<BerandaSuper />} />
         <Route path="data_pegawai" element={<DataPegawaiSuper />} />
         <Route path="daftar_pengajuan_cuti" element={<DaftarPengajuanCutiSuper />} />
-        <Route path="data_pegawai" element={<TambahAkunPegawaiSuper />} />
+        <Route path="tambah_pegawai" element={<TambahAkunPegawaiSuper />} />
         <Route path="laporan_cuti" element={<LaporanCutiSuperAdmin />} />
+        <Route path="data_pegawai/edit/:id" element={<EditAkunPegawaiSuper />} />
       </Route>
 
       <Route path="profil/user/:id" element={<Profil />} />
@@ -65,6 +66,7 @@ root.render(
       <Route path="profil/admin/edit/:id" element={<EditProfilAdmin />} />
 
       <Route path="profil/super/:id" element={<ProfilSuperAdmin />} />
+      <Route path="profil/super/edit/:id" element={<EditProfilSuperAdmin />} />
 
     </Routes>
   </BrowserRouter>

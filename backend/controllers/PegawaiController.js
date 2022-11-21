@@ -6,7 +6,7 @@ import { Sequelize } from "sequelize";
 
 export const getPegawai = async (req, res) => {
     try {
-        const response = await Pegawai.findAll();
+        const response = await Pegawai.findAndCountAll();
         res.status(200).json(response);
     } catch (error) {
         console.log(error.message);
@@ -312,9 +312,11 @@ export const deletePegawai = async (req, res) => {
     if (!pegawai) return res.status(404).json({ msg: "Pegawai Tidak Ditemukan" });
 
     try {
-        const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
-        const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
-        if (filepathFoto && filepathTtd) {
+        let filepathFoto = ''
+        let filepathTtd = ''
+        if (pegawai.foto && pegawai.ttd) {
+            filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
+            filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
             fs.unlinkSync(filepathFoto);
             fs.unlinkSync(filepathTtd);
         }

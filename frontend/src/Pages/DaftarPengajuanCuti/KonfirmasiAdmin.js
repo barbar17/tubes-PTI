@@ -4,8 +4,6 @@ import axios from "axios";
 
 function KonfirmasiAdmin(props) {
 
-    console.log(props)
-
     const [komentar, setKomentar] = useState('');
 
     const handleSetuju = async () => {
@@ -13,7 +11,7 @@ function KonfirmasiAdmin(props) {
         if (props.adminlvl === "Admin 1") {
             status = "Admin 2"
         } else if (props.adminlvl === "Admin 2") {
-            status = "HRD"
+            status = "Super"
         } else {
             status = "Diterima"
         }
