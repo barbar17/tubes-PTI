@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { IoArrowBackSharp } from "react-icons/io5";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { IoArrowBackSharp } from "react-icons/io5";
 import Footer from '../Footer/Footer';
 
 function Profil() {

@@ -1,29 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Function/AuthContext";
 
-function KonfirmasiAdmin(props) {
-
-    const [komentar, setKomentar] = useState('');
-    const [ttdAdmin, setTtdAdmin] = useState('');
-    const [nama, setNama] = useState('');
+function KonfirmasiSuperAdmin(props) {
     const context = useContext(AuthContext)
 
+    const [komentar, setKomentar] = useState('');
+    const [ttdSuper, setTtdSuper] = useState('');
+    const [nama, setNama] = useState('');
 
-    const getAdmin = async () => {
-        const response = await axios.get(`http://localhost:5000/admin/${context.userId}`);
-        setTtdAdmin(response.data.ttdurl)
+    const getSuperAdmin = async () => {
+        const response = await axios.get(`http://localhost:5000/superadmin/${context.userId}`);
+        setTtdSuper(response.data.ttdurl)
         setNama(response.data.name)
     }
 
     const handleSetuju = async () => {
-        let data = JSON.stringify();
-        if (props.adminlvl === "Admin 1") {
-            data = { status: "Admin 2", ttdAdmin1: ttdAdmin, admin1: nama }
-        } else if (props.adminlvl === "Admin 2") {
-            data = { status: "Super", ttdAdmin2: ttdAdmin, admin2: nama }
-        }
+        let data = JSON.stringify({ ttdSuper: ttdSuper, super: nama });
 
         try {
             await axios.patch(`http://localhost:5000/suratCuti/accepted/${props.detailCuti.id}`, data, {
@@ -55,9 +50,8 @@ function KonfirmasiAdmin(props) {
     }
 
     useEffect(() => {
-        getAdmin()
+        getSuperAdmin()
     }, [context])
-
 
     return props.trigger ? (
         <div className="flex flex-col my-10 border border-gray-400 shadow-2xl rounded-xl">
@@ -137,9 +131,11 @@ function KonfirmasiAdmin(props) {
                     <tbody>
                         <tr>
                             <td className="space-x-3">
-                                <button onClick={() => handleSetuju()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
-                                    Setuju
-                                </button>
+                                <Link to={`/surat-cuti/${props.detailCuti.id}`}>
+                                    <button onClick={() => handleSetuju()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                                        Setuju
+                                    </button>
+                                </Link>
                                 <button onClick={() => handleTolak()} className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                     Tolak
                                 </button>
@@ -154,4 +150,4 @@ function KonfirmasiAdmin(props) {
     );
 }
 
-export default KonfirmasiAdmin;
+export default KonfirmasiSuperAdmin;

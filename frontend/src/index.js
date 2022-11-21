@@ -28,6 +28,8 @@ import PopUpDeleteSuper from "./Pages/DataPegawai/PopUpDeleteSuper";
 import LaporanCutiSuperAdmin from "./Pages/LaporanCuti/LaporanCutiSuperAdmin";
 import ProfilSuperAdmin from "./Pages/Profil/ProfilSuperAdmin";
 import EditProfilSuperAdmin from "./Pages/Profil/EditProfilSuperAdmin";
+import SuratCuti from "./Pages/SuratCuti/SuratCuti";
+import SuratCutiPegawai from "./Pages/SuratCuti/SuratCutiPegawai";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -67,6 +69,9 @@ root.render(
 
       <Route path="profil/super/:id" element={<ProfilSuperAdmin />} />
       <Route path="profil/super/edit/:id" element={<EditProfilSuperAdmin />} />
+
+      <Route path="surat-cuti/:id" element={<SuratCuti />} />
+      <Route path="user/surat-cuti/:id" element={<SuratCutiPegawai />} />
 
     </Routes>
   </BrowserRouter>

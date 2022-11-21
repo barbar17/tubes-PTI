@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import KonfirmasiAdmin from "./KonfirmasiAdmin";
+import KonfirmasiSuperAdmin from "./KonfirmasiSuperAdmin";
 import { BiSearchAlt } from "react-icons/bi"
 import { Link, useSearchParams } from 'react-router-dom'
 import axios from "axios";
@@ -33,7 +33,7 @@ function DaftarPengajuanCutiSuper() {
   return (
     <div className="flex flex-col w-full">
       <div className="absolute w-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-        <KonfirmasiAdmin
+        <KonfirmasiSuperAdmin
           trigger={buttonKonfirmAdm}
           setTrigger={setButtonKonfirmAdm}
           getSuraCutiByDivisi={getSuratCuti}

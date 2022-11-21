@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { IoIosClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function PopUp(props) {
 
@@ -105,9 +106,16 @@ function PopUp(props) {
         <div className="w-full h-24 text-xl bg-slate-300 px-2 py-1">
           <p>{props.detailCuti.komentar}</p>
         </div>
-        <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
-          Hapus
-        </button>
+        <div className="flex space-x-4">
+          <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
+            Hapus
+          </button>
+          <Link to={`/user/surat-cuti/${props.detailCuti.id}`}>
+            <button className="text-white bg-card-green mt-5 h-8 w-28 items-center justify-center text-lg rounded-lg">
+              Lihat Surat
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   ) : (

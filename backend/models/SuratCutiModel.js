@@ -5,6 +5,7 @@ const DataTypes = Sequelize;
 
 const SuratCuti = db.define('suratCuti', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    nosurat: { type: DataTypes.STRING },
     name: { type: DataTypes.STRING, allowNull: false },
     userid: { type: DataTypes.STRING, allowNull: false },
     divisi: { type: DataTypes.STRING, allowNull: false },
@@ -18,7 +19,14 @@ const SuratCuti = db.define('suratCuti', {
     komentar: { type: DataTypes.TEXT },
     file: { type: DataTypes.STRING },
     fileurl: { type: DataTypes.STRING },
-    status: { type: DataTypes.STRING }
+    status: { type: DataTypes.STRING },
+    ttdpegawai: { type: DataTypes.STRING },
+    admin1: { type: DataTypes.STRING },
+    ttdadmin1: { type: DataTypes.STRING },
+    admin2: { type: DataTypes.STRING },
+    ttdadmin2: { type: DataTypes.STRING },
+    super: { type: DataTypes.STRING },
+    ttdsuper: { type: DataTypes.STRING }
 }, {
     freezeTableName: true
 })

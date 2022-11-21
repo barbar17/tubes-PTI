@@ -107,6 +107,7 @@ export const createSuratCuti = async (req, res) => {
     const userid = req.body.userid;
     const status = req.body.status;
     const file = req?.files?.file;
+    const ttdPegawai = req.body.ttdPegawai
 
     if (file) {
         const fileSize = file.data.length;
@@ -135,6 +136,7 @@ export const createSuratCuti = async (req, res) => {
                     status: status,
                     file: fileName,
                     fileurl: url,
+                    ttdpegawai: ttdPegawai
                 });
                 res.status(201).json({ msg: "Surat Created" });
             } catch (error) {
@@ -155,6 +157,7 @@ export const createSuratCuti = async (req, res) => {
                 jeniscuti: jeniscuti,
                 alasan: alasan,
                 status: status,
+                ttdpegawai: ttdPegawai
             });
             res.status(201).json({ msg: "Surat Created" });
         } catch (error) {
@@ -174,9 +177,24 @@ export const acceptedSuratCuti = async (req, res) => {
     if (!suratCuti) return res.status(404).json({ msg: "Surat Cuti Tidak Ditemukan" })
 
     const status = req.body.status;
+    const admin1 = req.body.admin1;
+    const ttdAdmin1 = req.body.ttdAdmin1;
+    const admin2 = req.body.admin2;
+    const ttdAdmin2 = req.body.ttdAdmin2;
+    const superAdmin = req.body.super;
+    const ttdSuperAdmin = req.body.ttdSuper;
+    const nosurat = req.body.noSurat
+
     try {
         await SuratCuti.update({
-            status: status
+            status: status,
+            admin1: admin1,
+            ttdadmin1: ttdAdmin1,
+            admin2: admin2,
+            ttdadmin2: ttdAdmin2,
+            super: superAdmin,
+            ttdsuper: ttdSuperAdmin,
+            nosurat: nosurat
         }, {
             where: {
                 id: req.params.id

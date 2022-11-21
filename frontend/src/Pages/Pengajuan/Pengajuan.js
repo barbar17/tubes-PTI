@@ -5,7 +5,7 @@ import { AuthContext } from "../../Function/AuthContext";
 
 function Pengajuan() {
   const props = useContext(AuthContext)
-  console.log(props)
+
   const [nama, setNama] = useState('')
   const [id, setId] = useState('')
   const [divisi, setDivisi] = useState('')
@@ -17,6 +17,7 @@ function Pengajuan() {
   const [file, setFile] = useState('')
   const [previewfile, setPreviewFile] = useState('')
   const [cutiDiambil, setCutiDiambil] = useState('')
+  const [ttdPegawai, setTtdPegawai] = useState()
 
   const now = new Date();
   const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
@@ -40,6 +41,7 @@ function Pengajuan() {
     setNama(response.data.name)
     setId(response.data.id)
     setDivisi(response.data.divisi)
+    setTtdPegawai(response.data.ttdurl)
   }
 
   const savePengajuanCuti = async (event) => {
@@ -59,6 +61,7 @@ function Pengajuan() {
     formData.append("jeniscuti", jeniscuti)
     formData.append("alasan", alasancuti)
     formData.append("status", "Admin 1")
+    formData.append("ttdPegawai", ttdPegawai)
 
     try {
       await axios.post("http://localhost:5000/suratCuti", formData, {
