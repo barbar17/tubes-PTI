@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GoCalendar } from "react-icons/go";
-import { BiSearchAlt2 } from "react-icons/bi";
 import PopUpBatalkan from "./PopUpBatalkan";
 import { useSearchParams } from 'react-router-dom'
 import { AuthContext } from "../../Function/AuthContext";
 import axios from "axios";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel'
 
 function LaporanCutiAdmin() {
   const [buttonPopUpBatalkan, setButtonPopUpBatalkan] = useState(false);
@@ -62,6 +62,15 @@ function LaporanCutiAdmin() {
                   </div>
                 </div>
 
+                <ReactHTMLTableToExcel
+                  className="bg-card-green rounded-md h-10 px-2 text-white self-end"
+                  id="table-to-excel"
+                  table='tabel'
+                  filename="Laporan_Cuti"
+                  sheet="Laporan"
+                  buttonText="Download Laporan Cuti"
+                />
+
                 {/* <div className="flex flex-col space-y-2">
                   <label htmlFor="enddate">Tanggal Akhir</label>
                   <div className="relative w-80">
@@ -83,7 +92,7 @@ function LaporanCutiAdmin() {
                 </div> */}
               </div>
 
-              <table className="table-auto w-full text-center text-xl ">
+              <table className="table-auto w-full text-center text-xl " id="tabel">
                 <thead>
                   <tr className="border-y-2">
                     <th className="py-2">#</th>
