@@ -16,22 +16,18 @@ function PopUpBatalkan(props) {
       console.log(error);
     }
     props.setTrigger(false)
-    props.getSuraCutiByDivisi()
+    props.getSuraCuti()
   }
 
   return props.trigger ? (
-    <div className="flex justify-between rounded-xl mt-80">
-      <table className="text-xl rounded-b-xl">
-        <tbody>
-          <div className="text bg-slate-400 bg-center p-5 rounded-t-xl"> Apakah anda yakin ingin menghapus pengajuan ini?</div>
-          <div className="flex justify-around bg-slate-400 pb-5 rounded-b-xl">
-            <button onClick={() => handleTolak()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">Iya</button>
-            <button onClick={() => props.setTrigger(false)} className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
-              Tidak
-            </button>
-          </div>
-        </tbody>
-      </table>
+    <div className="flex justify-between rounded-md text-xl flex-col">
+      <div className="text bg-slate-400 bg-center p-5 rounded-t-xl"> Apakah anda yakin ingin menghapus pengajuan ini?</div>
+      <div className="flex justify-around bg-slate-400 pb-5 rounded-b-xl">
+        <button onClick={() => handleTolak()} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">Iya</button>
+        <button onClick={() => props.setTrigger(false)} className="my-auto text-white bg-red-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+          Tidak
+        </button>
+      </div>
     </div>
   ) : (
     <></>

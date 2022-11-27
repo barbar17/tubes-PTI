@@ -73,6 +73,23 @@ export const getSuratCutiForLaporan = async (req, res) => {
         const response = await SuratCuti.findAll({
             where: {
                 status: "Diterima"
+            },
+            order: [
+                ['tglmulai', 'DESC'],
+            ],
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const getSuratCutiForLaporanAdmin = async (req, res) => {
+    try {
+        const response = await SuratCuti.findAll({
+            where: {
+                status: "Diterima",
+                divisi: req.params.divisi,
             }
         });
         res.status(200).json(response);
@@ -80,6 +97,7 @@ export const getSuratCutiForLaporan = async (req, res) => {
         console.log(error.message);
     }
 }
+
 
 // export const getTotalCutiByPegawai = async (req, res) => {
 //     try {

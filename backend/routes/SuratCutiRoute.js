@@ -9,7 +9,8 @@ import {
     deleteSuratCuti,
     acceptedSuratCuti,
     getSuratCutiForSuperAdmin,
-    getSuratCutiForLaporan
+    getSuratCutiForLaporan,
+    getSuratCutiForLaporanAdmin
 } from "../controllers/SuratCutiControler.js";
 
 const router = express.Router();
@@ -17,6 +18,7 @@ const router = express.Router();
 router.get('/suratCuti', getSuratCuti);
 router.get('/suratCuti/super', getSuratCutiForSuperAdmin);
 router.get('/suratCuti/laporan', getSuratCutiForLaporan);
+router.get('/suratCuti/laporan/:divisi', getSuratCutiForLaporanAdmin);
 router.get('/suratCuti/:id', getSuratCutiById);
 router.get('/suratCuti/pegawai/:id', getSuratCutiByPegawai);
 router.get('/suratCuti/divisi/:divisi', getSuratCutiByDivisi);

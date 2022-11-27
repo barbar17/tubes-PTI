@@ -10,6 +10,7 @@ function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const login = async (account) => {
         await axios.post("http://localhost:5000/login", account, {
@@ -40,6 +41,8 @@ function Login() {
         })
     }
 
+    console.log(showPassword)
+
     return (
         <div className='min-h-screen flex flex-col bg-login bg-no-repeat bg-cover justify-between'>
             <div className='flex justify-center items-center grow gap-20'>
@@ -60,13 +63,16 @@ function Login() {
                     />
                     <span className='text-white text-xl'>Password</span>
                     <input
-                        type={'password'}
+                        type={showPassword ? 'text' : 'password'}
                         className='bg-white border-none my-2 p-3 text-lg rounded-md focus:outline-none '
                         placeholder='Password'
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         required
                     />
+                    <button type='button' onClick={() => setShowPassword(!showPassword)} className='bg-card-green rounded-md flex w-fit px-2 py-1 text-white mb-8'>
+                        <span>Lihat Password</span>
+                    </button>
                     <button className='bg-slate-200 w-1/3 px-2 py-2 rounded-md self-center flex items-center justify-center gap-2 '>
                         <span>Login</span>
                         <FiLogIn />

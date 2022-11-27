@@ -5,17 +5,20 @@ import Footer from "../Footer/Footer";
 import axios from "axios";
 
 function SuratCutiPegawai() {
-  const print = (surat) => {
-    var restorepage = document.body.innerHTML;
-    var printcontent = document.getElementById(surat).innerHTML;
-    document.body.innerHTML = printcontent;
-    window.print();
-    document.body.innerHTML = restorepage;
-  };
+
 
   const { id } = useParams();
 
   const navigation = useNavigate();
+
+  const print = (surat) => {
+    let restorepage = document.body.innerHTML;
+    let printcontent = document.getElementById(surat).innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+    window.location.reload()
+  };
 
   const now = new Date();
   const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -34,6 +37,7 @@ function SuratCutiPegawai() {
   const [jeniscuti, setJenisCuti] = useState("");
   const [tglmulai, setTglMulai] = useState("");
   const [tglselesai, setTglSelesai] = useState("");
+  const [tglpengajuan, setTglPengajuan] = useState("");
   const [noSurat, setNoSurat] = useState("");
 
   const getPengajuanCutiDetail = async () => {
@@ -51,6 +55,7 @@ function SuratCutiPegawai() {
     setTglMulai(response.data.tglmulai);
     setTglSelesai(response.data.tglselesai);
     setNoSurat(response.data.nosurat);
+    setTglPengajuan(response.data.tglpengajuan)
   };
 
   useEffect(() => {
@@ -62,7 +67,7 @@ function SuratCutiPegawai() {
       <div className="min-h-screen flex flex-col justify-between">
         <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl items-center">
           <div className="w-full flex bg-main h-20 items-center text-white text-5xl px-8">
-            <IoArrowBackSharp onClick={() => navigation(-1)} className="hover:cursor-pointer" />
+            <IoArrowBackSharp onClick={() => navigation("/user/beranda")} className="hover:cursor-pointer" />
             <span className="px-8">Surat Cuti</span>
           </div>
           <div className="w-11/12 flex flex-col bg-white grow mt-10 my-5 px-12 text-xl py-12" id="surat">
@@ -71,7 +76,7 @@ function SuratCutiPegawai() {
                 <tr>
                   <td>Nomor</td>
                   <td className="pl-2">
-                    : <input className="rounded-lg border-slate-400 border px-2" type={"text"} value={noSurat} onChange={(event) => setNoSurat(event.target.value)} />
+                    : {noSurat}
                   </td>
                 </tr>
                 <tr>
@@ -104,7 +109,7 @@ function SuratCutiPegawai() {
             </div>
             <div className="flex space-x-12 mt-12 justify-center">
               <div className="w-1/3 h-52 border-[1px] border-black flex flex-col justify-between">
-                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Diajukan Tanggal: 21 November 2022</div>
+                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Diajukan Tanggal: {tglpengajuan}</div>
                 <div className="w-full h-2/4 flex flex-col items-center justify-center">
                   <img src={ttdPegawai} className="h-full object-cover" />
                 </div>
@@ -114,34 +119,34 @@ function SuratCutiPegawai() {
                 </div>
               </div>
               <div className="w-1/3 h-52 border-[1px] border-black flex flex-col justify-between">
-                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Diajukan Tanggal: 21 November 2022</div>
+                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Persetujuan Pertama</div>
                 <div className="w-full h-2/4 flex flex-col items-center justify-center">
                   <img src={ttdAdmin1} className="h-full object-cover" />
                 </div>
                 <div className="text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center">
-                  <span>Karyawan yang bersangkutan</span>
+                  <span>Atasan Yang Bersangkutan</span>
                   <u className="text-lg font-bold">{admin1}</u>
                 </div>
               </div>
             </div>
             <div className="flex space-x-12 mt-12 justify-center ">
               <div className="w-1/3 h-52 border-[1px] border-black flex flex-col justify-between">
-                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Diajukan Tanggal: 21 November 2022</div>
+                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Persetujuan Terakhir</div>
                 <div className="w-full h-2/4 flex flex-col items-center justify-center">
                   <img src={ttdAdmin2} className="h-full object-cover" />
                 </div>
                 <div className="text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center">
-                  <span>Karyawan yang bersangkutan</span>
+                  <span>Atasan Yang Berwenang</span>
                   <u className="text-lg font-bold">{admin2}</u>
                 </div>
               </div>
               <div className="w-1/3 h-52 border-[1px] border-black flex flex-col justify-between">
-                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Diajukan Tanggal: 21 November 2022</div>
+                <div className="text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center">Mengesahkan</div>
                 <div className="w-full h-2/4 flex flex-col items-center justify-center">
                   <img src={ttdSuperAdmin} className="h-full object-cover" />
                 </div>
                 <div className="text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center">
-                  <span>Karyawan yang bersangkutan</span>
+                  <span>Personalia</span>
                   <u className="text-lg font-bold">{superAdmin}</u>
                 </div>
               </div>

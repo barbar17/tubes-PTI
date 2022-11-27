@@ -5,11 +5,11 @@ import { useSearchParams } from 'react-router-dom'
 import PopUpBatalkan from "./PopUpBatalkan";
 import axios from "axios";
 
-function LaporanCutiAdmin() {
+function LaporanCutiSuperAdmin() {
   const [buttonPopUpBatalkan, setButtonPopUpBatalkan] = useState(false);
 
   const [suratCuti, setSuratCuti] = useState();
-  const [detailCuti, setDetailCuti] = useState('');
+  const [detailCuti, setDetailCuti] = useState();
 
   const getSuratCuti = async () => {
     const response = await axios.get('http://localhost:5000/suratCuti/laporan');
@@ -18,17 +18,23 @@ function LaporanCutiAdmin() {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
+  const now = new Date();
+  const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+
+  const handlePopUp = (item) => {
+    setButtonPopUpBatalkan(true)
+    setDetailCuti(item)
+  }
+
   useEffect(() => {
     getSuratCuti();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex justify-around w-full">
-        <div className="absolute w-4/5 -mt-64 ml-[900px]">
-          <PopUpBatalkan trigger={buttonPopUpBatalkan} setTrigger={setButtonPopUpBatalkan} />
-        </div>
+    <div className="flex flex-col w-full relative">
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">
+        <PopUpBatalkan trigger={buttonPopUpBatalkan} detailCuti={detailCuti} setTrigger={setButtonPopUpBatalkan} getSuraCuti={getSuratCuti} />
       </div>
 
       <div className="w-full p-10 h-full">
@@ -39,7 +45,7 @@ function LaporanCutiAdmin() {
               <h1 className="font-bold text-2xl mb-5">Filter Berdasarkan Tanggal Mulai Cuti</h1>
               <div className="flex space-x-10 mb-5">
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="enddate">Tanggal Awal</label>
+                  <label htmlFor="enddate">Tanggal Mulai</label>
                   <div className="relative w-80">
                     <input
                       id="enddate"
@@ -55,16 +61,6 @@ function LaporanCutiAdmin() {
                       }}
                       value={searchParams.get("filter") || ""}
                     />
-                    <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
-                      <GoCalendar className="text-2xl" color="black" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col space-y-2">
-                  <label htmlFor="enddate">Tanggal Akhir</label>
-                  <div className="relative w-80">
-                    <input id="enddate" type={"date"} className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-8 text-sm focus:shadow-slate-400 focus:shadow-md transition-all" />
                     <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
                       <GoCalendar className="text-2xl" color="black" />
                     </div>
@@ -116,7 +112,7 @@ function LaporanCutiAdmin() {
                           <td>{item.alasan}</td>
                           <td>
                             <div className="w-full h-full flex justify-evenly">
-                              <button onClick={() => setButtonPopUpBatalkan(true)} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                              <button onClick={() => handlePopUp(item)} disabled={item.tglmulai < currentDate ? true : false} className="disabled:hover:cursor-not-allowed disabled:opacity-80 my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                 Batalkan
                               </button>
                             </div>
@@ -135,4 +131,4 @@ function LaporanCutiAdmin() {
   );
 }
 
-export default LaporanCutiAdmin;
+export default LaporanCutiSuperAdmin;

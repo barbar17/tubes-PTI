@@ -26,7 +26,8 @@ function SuratCuti() {
     const [jeniscuti, setJenisCuti] = useState('');
     const [tglmulai, setTglMulai] = useState('');
     const [tglselesai, setTglSelesai] = useState('');
-    const [noSurat, setNoSurat] = useState('')
+    const [tglpengajuan, setTglPengajuan] = useState("");
+    const [noSurat, setNoSurat] = useState('');
 
     const getPengajuanCutiDetail = async () => {
         const response = await axios.get(`http://localhost:5000/suratCuti/${id}`);
@@ -43,7 +44,8 @@ function SuratCuti() {
         setTglMulai(response.data.tglmulai)
         setTglSelesai(response.data.tglselesai)
         setNoSurat(response.data.nosurat)
-    }
+        setTglPengajuan(response.data.tglpengajuan)
+    };
 
     const handleSetuju = async () => {
         try {
@@ -128,7 +130,7 @@ function SuratCuti() {
                         </div>
                         <div className='flex space-x-12 mt-12 justify-center'>
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
-                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: 21 November 2022</div>
+                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: {tglpengajuan}</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
                                     <img src={ttdPegawai} className="h-full object-cover" />
                                 </div>
@@ -138,34 +140,34 @@ function SuratCuti() {
                                 </div>
                             </div>
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
-                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: 21 November 2022</div>
+                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Persetujuan Pertama</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
                                     <img src={ttdAdmin1} className="h-full object-cover" />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
-                                    <span>Karyawan yang bersangkutan</span>
+                                    <span>Atasan Yang Bersangkutan</span>
                                     <u className='text-lg font-bold'>{admin1}</u>
                                 </div>
                             </div>
                         </div>
                         <div className='flex space-x-12 mt-12 justify-center '>
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
-                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: 21 November 2022</div>
+                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Persetujuan Terakhir</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
                                     <img src={ttdAdmin2} className="h-full object-cover" />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
-                                    <span>Karyawan yang bersangkutan</span>
+                                    <span>Atasan Yang Berwenang</span>
                                     <u className='text-lg font-bold'>{admin2}</u>
                                 </div>
                             </div>
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
-                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: 21 November 2022</div>
+                                <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Mengesahkan</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
                                     <img src={ttdSuperAdmin} className="h-full object-cover" />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
-                                    <span>Karyawan yang bersangkutan</span>
+                                    <span>Personalia</span>
                                     <u className='text-lg font-bold'>{superAdmin}</u>
                                 </div>
                             </div>
