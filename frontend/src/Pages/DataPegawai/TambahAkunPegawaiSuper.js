@@ -77,12 +77,11 @@ function TambahAkunPegawaiSuper() {
                 </td>
                 <td>
                   :{" "}
-                  <input
-                    type="text"
-                    value={divisi}
-                    onChange={(event) => setDivisi(event.target.value)}
-                    className="rounded-lg border-slate-400 border p-1 px-2"
-                  />
+                  <select className="rounded-lg border-slate-400 border p-1 px-2" onChange={(event) => setDivisi(event.target.value)} >
+                    <option>Produksi</option>
+                    <option>Sistem Administrasi</option>
+                    <option>QA</option>
+                  </select>
                 </td>
               </tr>
               <tr>
