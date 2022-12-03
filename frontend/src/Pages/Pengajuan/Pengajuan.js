@@ -6,6 +6,7 @@ import { AuthContext } from "../../Function/AuthContext";
 function Pengajuan() {
   const props = useContext(AuthContext)
 
+  const [pegawaiCuti, setPegawaiCuti] = useState('');
   const [nama, setNama] = useState('')
   const [id, setId] = useState('')
   const [divisi, setDivisi] = useState('')
@@ -33,6 +34,11 @@ function Pengajuan() {
     setFile(foto);
   }
 
+  const getLaporanCutiByDivisi = async () => {
+    const response = await axios.get(`http://localhost:5000/suratCuti/laporan/${props.divisi}`);
+    setPegawaiCuti(response.data.length)
+  }
+
   const getPegawaiById = async () => {
     const response = await axios.get(`http://localhost:5000/pegawai/${props.userId}`);
     setCutiDiambil(response.data.cutidiambil)
@@ -45,6 +51,7 @@ function Pengajuan() {
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
     if (jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
+    if (pegawaiCuti >= 3) return alert(`Sudah terdapat 3 pegawai cuti di divisi ${props.divisi}`)
     const totalDayValid = jeniscuti === "Cuti Dispensasi" ? 0 : totalDay
 
     const formData = new FormData();
@@ -83,6 +90,7 @@ function Pengajuan() {
 
   useEffect(() => {
     getPegawaiById()
+    getLaporanCutiByDivisi()
   }, [props])
 
   return (

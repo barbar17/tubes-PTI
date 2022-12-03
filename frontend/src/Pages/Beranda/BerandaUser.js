@@ -87,10 +87,13 @@ function BerandaUser() {
                                         <td>{item.tglmulai.split('-').reverse().join("-")}</td>
                                         <td>{item.tglselesai.split('-').reverse().join("-")}</td>
                                         <td>{item.alasan}</td>
-                                        <td>{
-                                            item.status.includes("Ditolak") ? item.status :
-                                                item.status === "Diterima" ? item.status : "Diproses " + item.status
-                                        }</td>
+                                        <td>
+                                            {
+                                                item.status.includes("Ditolak") ? item.status :
+                                                    item.status === "Diterima" ? item.status :
+                                                        item.status.includes("Admin 1") ? "Diproses oleh Officer" : "Diproses Oleh Manajer"
+                                            }
+                                        </td>
                                         <td>
                                             <button onClick={() => handlePopUp(item)} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                 Detail

@@ -82,7 +82,7 @@ function PopUp(props) {
               <td>
                 <span>Total Hari</span>
               </td>
-              <td> : {totalDay ? totalDay : 0}
+              <td> : {totalDay ? -totalDay : 0}
               </td>
             </tr>
             <tr>

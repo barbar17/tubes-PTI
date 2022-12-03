@@ -15,7 +15,6 @@ function KonfirmasiAdmin(props) {
     const totalTime = finishDate.getTime() - startDate.getTime()
     const totalDay = -Math.ceil(totalTime / (1000 * 3600 * 24));
 
-    console.log(props.detailCuti)
     const getAdmin = async () => {
         const response = await axios.get(`http://localhost:5000/admin/${context.userId}`);
         setTtdAdmin(response.data.ttdurl)
@@ -44,7 +43,7 @@ function KonfirmasiAdmin(props) {
     }
 
     const handleTolak = async () => {
-        let status = `Ditolak oleh ${context.adminlvl}`;
+        let status = context.adminlvl === "Admin 1" ? "Ditolak oleh Officer" : "Ditolak oleh Manajer"
 
         try {
             await axios.patch(`http://localhost:5000/suratCuti/declined/${props.detailCuti.id}`, { status: status, komentar: komentar }, {

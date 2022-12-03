@@ -13,18 +13,10 @@ function LaporanCutiSuperAdmin() {
   const [detailCuti, setDetailCuti] = useState();
 
   const now = new Date();
-  const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+
   const getSuratCuti = async () => {
     const response = await axios.get('http://localhost:5000/suratCuti/laporan');
     setSuratCuti(response.data)
-
-    let pegawaiCuti = 0;
-    for (let index = 0; index < response.data.length; index++) {
-      const element = response.data[index].tglselesai;
-      if (element >= currentDate) {
-        pegawaiCuti += 1
-      }
-    }
   }
 
   let [searchParams, setSearchParams] = useSearchParams();
@@ -143,8 +135,9 @@ function LaporanCutiSuperAdmin() {
                           <td>{item.tglselesai.split('-').reverse().join("-")}</td>
                           <td>{item.alasan}</td>
                           <td>
+                            {console.log(new Date(item.tglmulai) < now)}
                             <div className="w-full h-full flex justify-evenly">
-                              <button onClick={() => handlePopUp(item)} disabled={item.tglmulai < currentDate ? true : false} className="disabled:hover:cursor-not-allowed disabled:opacity-80 my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                              <button onClick={() => handlePopUp(item)} disabled={new Date(item.tglmulai) < now ? true : false} className="disabled:hover:cursor-not-allowed disabled:opacity-80 my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                 Batalkan
                               </button>
                             </div>
