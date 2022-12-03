@@ -10,6 +10,10 @@ function BerandaSuper() {
 
   const [jumlahPegawai, setJumlahPegawai] = useState('');
   const [jumlahSuratCuti, setJumlahSuratCuti] = useState('');
+  const [pegawaiCuti, setPegawaiCuti] = useState('');
+
+  const now = new Date();
+  const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
 
   const getPegawai = async () => {
     const response = await axios.get('http://localhost:5000/pegawai');
@@ -22,9 +26,23 @@ function BerandaSuper() {
 
   }
 
+  const getLaporanCuti = async () => {
+    const response = await axios.get('http://localhost:5000/suratCuti/laporan');
+
+    let pegawaiCuti = 0;
+    for (let index = 0; index < response.data.length; index++) {
+      const element = response.data[index].tglselesai;
+      if (element >= currentDate) {
+        pegawaiCuti += 1
+      }
+    }
+    setPegawaiCuti(pegawaiCuti)
+  }
+
   useEffect(() => {
     getPegawai()
     getSuraCuti()
+    getLaporanCuti()
   }, [props])
 
   return (
@@ -44,7 +62,7 @@ function BerandaSuper() {
           <div className="flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10">
             <div className="flex flex-col ">
               <span className="text-card-green text-2xl">Pegawai Bekerja</span>
-              <span className="text-4xl">643 Pegawai</span>
+              <span className="text-4xl">{jumlahPegawai - pegawaiCuti} Pegawai</span>
             </div>
             <FiUser className="text-8xl" />
           </div>
@@ -66,7 +84,7 @@ function BerandaSuper() {
               <span className="text-card-red text-2xl">
                 Pegawai Sedang Cuti
               </span>
-              <span className="text-4xl">5 Pegawai</span>
+              <span className="text-4xl">{pegawaiCuti} Pegawai</span>
             </div>
             <FiUserX className="text-8xl" />
           </div>

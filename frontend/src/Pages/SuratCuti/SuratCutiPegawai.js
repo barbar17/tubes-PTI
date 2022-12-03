@@ -81,7 +81,7 @@ function SuratCutiPegawai() {
                 </tr>
                 <tr>
                   <td>Tanggal</td>
-                  <td className="pl-2">: {currentDate}</td>
+                  <td className="pl-2">: {currentDate.split('-').reverse().join("-")}</td>
                 </tr>
               </table>
             </div>
@@ -99,11 +99,11 @@ function SuratCutiPegawai() {
                 </tr>
                 <tr>
                   <td>Tanggal Mulai</td>
-                  <td className="pl-2">: {tglmulai}</td>
+                  <td className="pl-2">: {tglmulai.split('-').reverse().join("-")}</td>
                 </tr>
                 <tr>
                   <td>Tanggal Selesai</td>
-                  <td className="pl-2">: {tglselesai}</td>
+                  <td className="pl-2">: {tglselesai.split('-').reverse().join("-")}</td>
                 </tr>
               </table>
             </div>

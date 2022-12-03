@@ -13,18 +13,18 @@ function EditAkunPegawaiSuper() {
 
   const { id } = useParams();
 
-  const getPegawaiById = async () => {
-    const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
+  const getAdminById = async () => {
+    const response = await axios.get(`http://localhost:5000/admin/${id}`);
     setNama(response.data.name)
     setUserId(response.data.id)
     setDivisi(response.data.divisi)
     setUsername(response.data.username)
   }
 
-  const updatePegawai = async (event) => {
+  const updateAdmin = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/pegawai/${id}`, {
+      await axios.patch(`http://localhost:5000/admin/${id}`, {
         name: nama,
         id: userId,
         divisi: divisi,
@@ -42,7 +42,7 @@ function EditAkunPegawaiSuper() {
   }
 
   useEffect(() => {
-    getPegawaiById()
+    getAdminById()
   }, [id])
 
   return (
@@ -51,7 +51,7 @@ function EditAkunPegawaiSuper() {
         <div className="bg-main w-full text-white py-2 px-5 text-2xl rounded-tl-lg rounded-tr-lg text-center">
           Edit Akun Pegawai
         </div>
-        <form onSubmit={updatePegawai} className=" w-full flex items-center justify-center bg-white text-xl p-10">
+        <form onSubmit={updateAdmin} className=" w-full flex items-center justify-center bg-white text-xl p-10">
           <table className="border-separate border-spacing-y-2 border-spacing-x-5">
             <tbody>
               <tr>
@@ -92,14 +92,15 @@ function EditAkunPegawaiSuper() {
                 </td>
                 <td>
                   :{" "}
-                  <input
-                    type="text"
-                    className="rounded-lg border-slate-400 border"
+                  <select className="rounded-lg border-slate-400 border px-2 py-1"
                     placeholder="Produksi "
                     value={divisi}
                     onChange={(event) => setDivisi(event.target.value)}
-                    required
-                  />
+                    required>
+                    <option>Produksi</option>
+                    <option>Sistem Administrasi</option>
+                    <option>QA</option>
+                  </select>
                 </td>
               </tr>
               <tr>

@@ -12,10 +12,9 @@ function Pengajuan() {
   const [jatahcuti, setJatahcuti] = useState(20)
   const [tglmulai, setTglmulai] = useState('')
   const [tglselesai, setTglselesai] = useState('')
-  const [jeniscuti, setJeniscuti] = useState('')
+  const [jeniscuti, setJeniscuti] = useState('Cuti')
   const [alasancuti, setAlasancuti] = useState('')
   const [file, setFile] = useState('')
-  const [previewfile, setPreviewFile] = useState('')
   const [cutiDiambil, setCutiDiambil] = useState('')
   const [ttdPegawai, setTtdPegawai] = useState()
 
@@ -32,7 +31,6 @@ function Pengajuan() {
   const loadFoto = (event) => {
     const foto = event.target.files[0];
     setFile(foto);
-    setPreviewFile(URL.createObjectURL(foto));
   }
 
   const getPegawaiById = async () => {
@@ -47,6 +45,7 @@ function Pengajuan() {
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
     if (jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
+    const totalDayValid = jeniscuti === "Cuti Dispensasi" ? 0 : totalDay
 
     const formData = new FormData();
 
@@ -70,7 +69,7 @@ function Pengajuan() {
         }
       });
 
-      await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.userId}`, { "totalCuti": totalDay }, {
+      await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.userId}`, { "totalCuti": totalDayValid }, {
         headers: {
           "Content-type": "application/json"
         }
@@ -139,7 +138,7 @@ function Pengajuan() {
               </tr>
               <tr>
                 <td>
-                  <span>Jatah Cuti Tahunan</span>
+                  <span>Sisa Cuti Tahunan</span>
                 </td>
                 <td> :
                   <input
@@ -169,14 +168,21 @@ function Pengajuan() {
                 <td>
                   <span>Tanggal Mulai</span>
                 </td>
-                <td> : <input type="date" className="form-control" onChange={(event) => setTglmulai(event.target.value)} min={currentDate} />
+                <td> : <input type="date" className="form-control" onChange={(event) => setTglmulai(event.target.value)} min={currentDate} required />
                 </td>
               </tr>
               <tr>
                 <td>
                   <span>Tanggal Selesai</span>
                 </td>
-                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} min={currentDate} />
+                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} min={currentDate} required />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>Total Hari</span>
+                </td>
+                <td> : {totalDay ? totalDay + " Hari" : 0 + " Hari"}
                 </td>
               </tr>
               <tr>
@@ -185,10 +191,7 @@ function Pengajuan() {
                 </td>
                 <td> :
                   <select className="border ml-2 border-slate-400 rounded-lg" onChange={(event) => setJeniscuti(event.target.value)} >
-                    <option>Hari Minggu</option>
                     <option>Cuti Tahunan</option>
-                    <option>Cuti Izin</option>
-                    <option>Libur Nasional</option>
                     <option>Cuti Dispensasi</option>
                   </select>
                 </td>
@@ -202,6 +205,7 @@ function Pengajuan() {
                     type="text"
                     className="rounded-lg ml-2 border-slate-400 border py-1 px-2"
                     onChange={(event) => setAlasancuti(event.target.value)}
+                    required
                   />
                 </td>
               </tr>

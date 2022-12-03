@@ -27,7 +27,12 @@ function SuratCuti() {
     const [tglmulai, setTglMulai] = useState('');
     const [tglselesai, setTglSelesai] = useState('');
     const [tglpengajuan, setTglPengajuan] = useState("");
-    const [noSurat, setNoSurat] = useState('');
+    const [noSurat, setNoSurat] = useState('CT/2022/');
+
+    const startDate = new Date(tglmulai);
+    const finishDate = new Date(tglselesai);
+    const totalTime = finishDate.getTime() - startDate.getTime()
+    const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24));
 
     const getPengajuanCutiDetail = async () => {
         const response = await axios.get(`http://localhost:5000/suratCuti/${id}`);
@@ -62,7 +67,7 @@ function SuratCuti() {
 
     const handleTolak = async () => {
         try {
-            await axios.patch(`http://localhost:5000/suratCuti/declined/${id}`, { status: "Ditolak" }, {
+            await axios.patch(`http://localhost:5000/suratCuti/declined/${id}`, { status: "Ditolak oleh HRD" }, {
                 headers: {
                     "Content-type": "application/json"
                 }
@@ -89,50 +94,60 @@ function SuratCuti() {
                     <div className='w-11/12 flex flex-col bg-white grow mt-10 my-5 px-12 text-xl py-12'>
                         <div className='text-2xl'>
                             <table>
-                                <tr>
-                                    <td>Nomor</td>
-                                    <td className='pl-2'>: {" "}
-                                        <input
-                                            className="rounded-lg border-slate-400 border px-2"
-                                            type={'text'}
-                                            value={noSurat}
-                                            onChange={(event) => setNoSurat(event.target.value)}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal</td>
-                                    <td className='pl-2'>: {currentDate}</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>Nomor</td>
+                                        <td className='pl-2'>: {" "}
+                                            <input
+                                                className="rounded-lg border-slate-400 border px-2"
+                                                type={'text'}
+                                                value={noSurat}
+                                                onChange={(event) => setNoSurat(event.target.value)}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal</td>
+                                        <td className='pl-2'>: {currentDate.split('-').reverse().join("-")}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <hr className='border-[1px] border-black mt-2' />
                         <p className='mt-12 mb-3 text-2xl'>KEPERLUAN</p>
                         <div>
                             <table>
-                                <tr>
-                                    <td>Jenis Cuti</td>
-                                    <td className='pl-2'>: {jeniscuti}</td>
-                                </tr>
-                                <tr>
-                                    <td>Alasan Cuti</td>
-                                    <td className='pl-2'>: {alasan}</td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal Mulai</td>
-                                    <td className='pl-2'>: {tglmulai}</td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal Selesai</td>
-                                    <td className='pl-2'>: {tglselesai}</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>Jenis Cuti</td>
+                                        <td className='pl-2'>: {jeniscuti}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alasan Cuti</td>
+                                        <td className='pl-2'>: {alasan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Mulai</td>
+                                        <td className='pl-2'>: {tglmulai.split('-').reverse().join("-")}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Selesai</td>
+                                        <td className='pl-2'>: {tglselesai.split('-').reverse().join("-")}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Total Hari</span>
+                                        </td>
+                                        <td className='pl-2'> : {totalDay ? totalDay + " Hari" : 0 + " Hari"}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div className='flex space-x-12 mt-12 justify-center'>
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
                                 <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Diajukan Tanggal: {tglpengajuan}</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
-                                    <img src={ttdPegawai} className="h-full object-cover" />
+                                    <img src={ttdPegawai} className="h-full object-cover" alt='ttdpegawai' />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
                                     <span>Karyawan yang bersangkutan</span>
@@ -142,7 +157,7 @@ function SuratCuti() {
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
                                 <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Persetujuan Pertama</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
-                                    <img src={ttdAdmin1} className="h-full object-cover" />
+                                    <img src={ttdAdmin1} className="h-full object-cover" alt='ttdadmin1' />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
                                     <span>Atasan Yang Bersangkutan</span>
@@ -154,7 +169,7 @@ function SuratCuti() {
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
                                 <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Persetujuan Terakhir</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
-                                    <img src={ttdAdmin2} className="h-full object-cover" />
+                                    <img src={ttdAdmin2} className="h-full object-cover" alt='ttdadmin2' />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
                                     <span>Atasan Yang Berwenang</span>
@@ -164,7 +179,7 @@ function SuratCuti() {
                             <div className='w-1/3 h-52 border-[1px] border-black flex flex-col justify-between'>
                                 <div className='text-base flex w-full h-1/5 border-b-[1px] border-black p-1 justify-center items-center'>Mengesahkan</div>
                                 <div className='w-full h-2/4 flex flex-col items-center justify-center'>
-                                    <img src={ttdSuperAdmin} className="h-full object-cover" />
+                                    <img src={ttdSuperAdmin} className="h-full object-cover" alt='ttdhrd' />
                                 </div>
                                 <div className='text-base flex flex-col w-full h-1/4 border-t-[1px] border-black justify-center items-center'>
                                     <span>Personalia</span>

@@ -29,16 +29,16 @@ export const getAdminById = async (req, res) => {
 export const createAdmin = async (req, res) => {
     const name = req.body.name;
     const id = req.body.id;
-    const ttl = req.body.ttl;
-    const jeniskelamin = req.body.jeniskelamin;
+    // const ttl = req.body.ttl;
+    // const jeniskelamin = req.body.jeniskelamin;
     const divisi = req.body.divisi;
-    const agama = req.body.agama;
-    const alamat = req.body.alamat;
-    const telepon = req.body.telepon;
-    const email = req.body.email;
+    // const agama = req.body.agama;
+    // const alamat = req.body.alamat;
+    // const telepon = req.body.telepon;
+    // const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    const tipeakun = req.body.tipeakun;
+    const tipeakun = "admin";
     const adminlvl = req.body.adminlvl
 
     try {
@@ -46,13 +46,13 @@ export const createAdmin = async (req, res) => {
             Admin.create({
                 name: name,
                 id: id,
-                ttl: ttl,
-                jeniskelamin: jeniskelamin,
+                // ttl: ttl,
+                // jeniskelamin: jeniskelamin,
                 divisi: divisi,
-                agama: agama,
-                alamat: alamat,
-                telepon: telepon,
-                email: email,
+                // agama: agama,
+                // alamat: alamat,
+                // telepon: telepon,
+                // email: email,
                 username: username,
                 password: hash,
                 tipeakun: tipeakun,
@@ -221,13 +221,17 @@ export const deleteAdmin = async (req, res) => {
         }
     })
 
-    if (!admin) return res.status(404).json({ msg: "Pegawai Tidak Ditemukan" });
+    if (!admin) return res.status(404).json({ msg: "Admin Tidak Ditemukan" });
 
     try {
-        const filepathFoto = `./public/pegawai/foto/${pegawai.foto}`
-        const filepathTtd = `./public/pegawai/ttd/${pegawai.ttd}`
-        fs.unlinkSync(filepathFoto);
-        fs.unlinkSync(filepathTtd);
+        let filepathFoto = ''
+        let filepathTtd = ''
+        if (admin.foto && admin.ttd) {
+            filepathFoto = `./public/admin/foto/${admin.foto}`
+            filepathTtd = `./public/admin/ttd/${admin.ttd}`
+            fs.unlinkSync(filepathFoto);
+            fs.unlinkSync(filepathTtd);
+        }
         await Admin.destroy({
             where: {
                 id: req.params.id

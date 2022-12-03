@@ -3,6 +3,7 @@ import axios from "axios"
 import Footer from './Footer/Footer'
 import { FiLogIn } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function Login() {
 
@@ -41,8 +42,6 @@ function Login() {
         })
     }
 
-    console.log(showPassword)
-
     return (
         <div className='min-h-screen flex flex-col bg-login bg-no-repeat bg-cover justify-between'>
             <div className='flex justify-center items-center grow gap-20'>
@@ -62,14 +61,20 @@ function Login() {
                         required
                     />
                     <span className='text-white text-xl'>Password</span>
-                    <input
-                        type={showPassword ? 'text' : 'password'}
-                        className='bg-white border-none my-2 p-3 text-lg rounded-md focus:outline-none '
-                        placeholder='Password'
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        required
-                    />
+                    <div className='flex items-center justify-between'>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            className='bg-white border-none my-2 p-3 text-lg rounded-tl-md rounded-bl-md focus:outline-none grow'
+                            placeholder='Password'
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            required
+                        />
+                        {
+                            showPassword ? <div className='h-full flex py-2'> <AiFillEyeInvisible className='text-gray-700 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
+                                : <div className='h-full flex py-2'><AiFillEye className='text-gray-700 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
+                        }
+                    </div>
                     <button type='button' onClick={() => setShowPassword(!showPassword)} className='bg-card-green rounded-md flex w-fit px-2 py-1 text-white mb-8'>
                         <span>Lihat Password</span>
                     </button>

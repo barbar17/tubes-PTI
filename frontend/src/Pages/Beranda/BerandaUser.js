@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from 'axios';
-import { FiUser, FiUserX } from "react-icons/fi";
 import { BsWallet, BsWallet2 } from "react-icons/bs";
 import PopUp from "../PopUp";
 import { useState } from "react";
@@ -69,7 +68,6 @@ function BerandaUser() {
                 <table className="table-auto w-full text-center bg-white text-xl ">
                     <thead>
                         <tr className="border-b-2">
-                            <th className="py-2">#</th>
                             <th>ID</th>
                             <th>Tgl Pengajuan</th>
                             <th>Tgl Mulai</th>
@@ -84,13 +82,15 @@ function BerandaUser() {
                             pengajuanCuti?.map((item, index) => {
                                 return (
                                     <tr key={index} className="border-b-2">
-                                        <td className="py-2">{index + 1}</td>
                                         <td>{item.id}</td>
                                         <td>{item.tglpengajuan.split('-').reverse().join("-")}</td>
                                         <td>{item.tglmulai.split('-').reverse().join("-")}</td>
                                         <td>{item.tglselesai.split('-').reverse().join("-")}</td>
                                         <td>{item.alasan}</td>
-                                        <td>{item.status}</td>
+                                        <td>{
+                                            item.status.includes("Ditolak") ? item.status :
+                                                item.status === "Diterima" ? item.status : "Diproses " + item.status
+                                        }</td>
                                         <td>
                                             <button onClick={() => handlePopUp(item)} className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
                                                 Detail

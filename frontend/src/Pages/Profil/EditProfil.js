@@ -167,11 +167,18 @@ function EditProfil() {
                     </tr>
                     <tr>
                       <td>Jenis Kelamin</td>
-                      <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setJeniskelamin(event.target.value)} value={jeniskelamin} /></td>
+                      <td>: <select className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setJeniskelamin(event.target.value)} value={jeniskelamin}>
+                        <option>Pria</option>
+                        <option>Wanita</option>
+                      </select></td>
                     </tr>
                     <tr>
                       <td>Divisi</td>
-                      <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setDivisi(event.target.value)} value={divisi} /></td>
+                      <td>: <select className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setDivisi(event.target.value)} value={divisi} >
+                        <option>Produksi</option>
+                        <option>Sistem Administrasi</option>
+                        <option>QA</option>
+                      </select></td>
                     </tr>
                     <tr>
                       <td>Agama</td>

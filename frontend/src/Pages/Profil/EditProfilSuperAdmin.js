@@ -164,7 +164,10 @@ function EditProfilSuperAdmin() {
                     </tr>
                     <tr>
                       <td>Jenis Kelamin</td>
-                      <td>: <input type="text" className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setJeniskelamin(event.target.value)} value={jeniskelamin} /></td>
+                      <td>: <select className="rounded-md p-2 w-96 border-gray-600" onChange={(event) => setJeniskelamin(event.target.value)} value={jeniskelamin}>
+                        <option>Pria</option>
+                        <option>Wanita</option>
+                      </select></td>
                     </tr>
                     <tr>
                       <td>Agama</td>

@@ -1,26 +1,30 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from "react";
 import axios from 'axios';
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function TambahAkunPegawaiSuper() {
 
   const go = useNavigate()
 
+  const [showPassword, setShowPassword] = useState(false);
   const [nama, setNama] = useState();
   const [id, setId] = useState();
-  const [divisi, setDivisi] = useState();
+  const [divisi, setDivisi] = useState("Produksi");
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [adminlvl, setAdminLvl] = useState("Admin 1");
 
   const createPegawai = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5000/pegawai", {
+      await axios.post("http://localhost:5000/admin", {
         name: nama,
         id: id,
         divisi: divisi,
         username: username,
         password: password,
+        adminlvl: adminlvl
       }, {
         headers: {
           "Content-type": "application/json"
@@ -100,30 +104,58 @@ function TambahAkunPegawaiSuper() {
               </tr>
               <tr>
                 <td>
-                  <span>Password</span>
+                  <span>Level Admin</span>
                 </td>
                 <td>
                   :{" "}
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    className="rounded-lg border-slate-400 border p-1 px-2"
-                  />
+                  <select className="rounded-lg border-slate-400 border p-1 px-2" onChange={(event) => setAdminLvl(event.target.value)} >
+                    <option>Admin 1</option>
+                    <option>Admin 2</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>Password</span>
+                </td>
+                <td className="flex items-center">
+                  :
+                  <div className='flex items-center justify-between ml-1'>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      className="rounded-tl-lg h-10 rounded-bl-lg border-slate-400 border py-1 px-2"
+                    />
+                    {
+                      showPassword ? <div className='h-10 flex'> <AiFillEyeInvisible className='text-gray-700 pr-2 text-4xl bg-gray-300 h-full rounded-tr-lg rounded-br-lg' /></div>
+                        : <div className='h-10 flex'><AiFillEye className='text-gray-700 pr-2 text-4xl bg-gray-300 h-full rounded-tr-lg rounded-br-lg' /></div>
+                    }
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {" "}
+                </td>
+                <td>
+                  <button type='button' onClick={() => setShowPassword(!showPassword)} className='bg-card-green rounded-md flex w-fit px-2 py-1 text-white mb-8'>
+                    <span>Lihat Password</span>
+                  </button>
                 </td>
               </tr>
               <tr>
                 <td>{""}</td>
-                <div className="flex justify-end w-full pr-1">
-                  <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
-                    Submit
-                  </button>
-                </div>
+                <td>
+                  <div className="flex justify-end w-full pr-1">
+                    <button className="my-auto text-white bg-indigo-500 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                      Submit
+                    </button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
-
-          <hr className="border-gray-400 border-2 my-5" />
         </form>
       </div>
     </div>

@@ -11,6 +11,11 @@ function KonfirmasiSuperAdmin(props) {
     const [ttdSuper, setTtdSuper] = useState('');
     const [nama, setNama] = useState('');
 
+    const startDate = new Date(props.detailCuti.tglmulai);
+    const finishDate = new Date(props.detailCuti.tglselesai);
+    const totalTime = finishDate.getTime() - startDate.getTime()
+    const totalDay = -Math.ceil(totalTime / (1000 * 3600 * 24));
+
     const getSuperAdmin = async () => {
         const response = await axios.get(`http://localhost:5000/superadmin/${context.userId}`);
         setTtdSuper(response.data.ttdurl)
@@ -31,13 +36,20 @@ function KonfirmasiSuperAdmin(props) {
         }
         props.setTrigger(false)
         props.getSuraCutiByDivisi()
+        window.location.reload()
     }
 
     const handleTolak = async () => {
-        let status = 'Ditolak';
+        let status = 'Ditolak oleh HRD';
 
         try {
             await axios.patch(`http://localhost:5000/suratCuti/declined/${props.detailCuti.id}`, { status: status, komentar: komentar }, {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+
+            await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.detailCuti.userid}`, { "totalCuti": totalDay }, {
                 headers: {
                     "Content-type": "application/json"
                 }
@@ -97,6 +109,13 @@ function KonfirmasiSuperAdmin(props) {
                         <tr>
                             <td>Tanggal Selesai</td>
                             <td>: {props.detailCuti.tglselesai.split('-').reverse().join("-")}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Total Hari</span>
+                            </td>
+                            <td> : {totalDay ? -totalDay + " Hari" : 0}
+                            </td>
                         </tr>
                         <tr>
                             <td>Alasan Cuti</td>

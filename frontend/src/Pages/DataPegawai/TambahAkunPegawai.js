@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function TambahAkunPegawai() {
 
     const go = useNavigate()
 
+    const [showPassword, setShowPassword] = useState(false);
     const [nama, setNama] = useState('');
     const [id, setId] = useState('');
-    const [divisi, setDivisi] = useState('');
+    const [divisi, setDivisi] = useState('Produksi');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -102,14 +104,30 @@ function TambahAkunPegawai() {
                                 <td>
                                     <span>Password</span>
                                 </td>
+                                <td className="flex items-center">
+                                    :
+                                    <div className='flex items-center justify-between ml-1'>
+                                        <input
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={password}
+                                            onChange={(event) => setPassword(event.target.value)}
+                                            className="rounded-tl-lg h-10 rounded-bl-lg border-slate-400 border py-1 px-2"
+                                        />
+                                        {
+                                            showPassword ? <div className='h-10 flex'> <AiFillEyeInvisible className='text-gray-700 pr-2 text-4xl bg-gray-300 h-full rounded-tr-lg rounded-br-lg' /></div>
+                                                : <div className='h-10 flex'><AiFillEye className='text-gray-700 pr-2 text-4xl bg-gray-300 h-full rounded-tr-lg rounded-br-lg' /></div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    :{" "}
-                                    <input
-                                        type="password"
-                                        value={password}
-                                        onChange={(event) => setPassword(event.target.value)}
-                                        className="rounded-lg border-slate-400 border py-1 px-2"
-                                    />
+                                    {" "}
+                                </td>
+                                <td>
+                                    <button type='button' onClick={() => setShowPassword(!showPassword)} className='bg-card-green rounded-md flex w-fit px-2 py-1 text-white mb-8'>
+                                        <span>Lihat Password</span>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -124,8 +142,6 @@ function TambahAkunPegawai() {
                             </tr>
                         </tbody>
                     </table>
-
-                    <hr className="border-gray-400 border-2 my-5" />
                 </form>
             </div>
         </div>

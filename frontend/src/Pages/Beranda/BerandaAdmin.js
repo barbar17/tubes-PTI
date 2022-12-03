@@ -10,6 +10,10 @@ function BerandaAdmin() {
 
     const [jumlahPegawaiDivisi, setJumlahPegawaiDivisi] = useState('');
     const [jumlahSuratCutiDivisi, setJumlahSuratCutiDivisi] = useState('');
+    const [pegawaiCuti, setPegawaiCuti] = useState('');
+
+    const now = new Date();
+    const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
 
     const getPegawaiByDivisi = async () => {
         const response = await axios.get(`http://localhost:5000/pegawai-per-divisi/${props.divisi}`);
@@ -27,9 +31,23 @@ function BerandaAdmin() {
 
     }
 
+    const getLaporanCutiByDivisi = async () => {
+        const response = await axios.get(`http://localhost:5000/suratCuti/laporan/${props.divisi}`);
+
+        let pegawaiCuti = 0;
+        for (let index = 0; index < response.data.length; index++) {
+            const element = response.data[index].tglselesai;
+            if (element >= currentDate) {
+                pegawaiCuti += 1
+            }
+        }
+        setPegawaiCuti(pegawaiCuti)
+    }
+
     useEffect(() => {
         getPegawaiByDivisi()
         getSuraCutiByDivisi()
+        getLaporanCutiByDivisi()
     }, [props])
 
 
@@ -50,7 +68,7 @@ function BerandaAdmin() {
                     <div className='flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10'>
                         <div className='flex flex-col '>
                             <span className='text-card-green text-2xl'>Pegawai Bekerja</span>
-                            <span className='text-4xl'>98 Pegawai</span>
+                            <span className='text-4xl'>{jumlahPegawaiDivisi - pegawaiCuti} Pegawai</span>
                         </div>
                         <FiUser className='text-8xl' />
                     </div>
@@ -70,7 +88,7 @@ function BerandaAdmin() {
                     <div className='flex items-center justify-between bg-white w-[490px] rounded-tr-lg rounded-br-lg p-10'>
                         <div className='flex flex-col '>
                             <span className='text-card-red text-2xl'>Pegawai Sedang Cuti</span>
-                            <span className='text-4xl'>2 Pegawai</span>
+                            <span className='text-4xl'>{pegawaiCuti} Pegawai</span>
                         </div>
                         <FiUserX className='text-8xl' />
                     </div>

@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { AuthContext } from "../../Function/AuthContext";
 import axios from "axios";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel'
+import { BiSearchAlt } from 'react-icons/bi'
 
 function LaporanCutiAdmin() {
   const [buttonPopUpBatalkan, setButtonPopUpBatalkan] = useState(false);
@@ -44,7 +45,7 @@ function LaporanCutiAdmin() {
                   <div className="relative w-80">
                     <input
                       id="enddate"
-                      type={"date"}
+                      type={"month"}
                       className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-8 text-sm focus:shadow-slate-400 focus:shadow-md transition-all"
                       onChange={(event) => {
                         let filter = event.target.value;
@@ -62,6 +63,28 @@ function LaporanCutiAdmin() {
                   </div>
                 </div>
 
+                <div className="flex flex-col space-y-2 mt-8">
+                  <div className="relative w-80">
+                    <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
+                      <BiSearchAlt className='text-2xl' color='black' />
+                    </div>
+                    <input
+                      type={'text'}
+                      className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-10 text-sm focus:shadow-slate-400 focus:shadow-md transition-all"
+                      placeholder='Ketik untuk mencari... '
+                      onChange={(event) => {
+                        let find = event.target.value;
+                        if (find) {
+                          setSearchParams({ find });
+                        } else {
+                          setSearchParams({});
+                        }
+                      }}
+                      value={searchParams.get("find") || ""}
+                    />
+                  </div>
+                </div>
+
                 <ReactHTMLTableToExcel
                   className="bg-card-green rounded-md h-10 px-2 text-white self-end"
                   id="table-to-excel"
@@ -70,26 +93,6 @@ function LaporanCutiAdmin() {
                   sheet="Laporan"
                   buttonText="Download Laporan Cuti"
                 />
-
-                {/* <div className="flex flex-col space-y-2">
-                  <label htmlFor="enddate">Tanggal Akhir</label>
-                  <div className="relative w-80">
-                    <input id="enddate" type={"date"} className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-8 text-sm focus:shadow-slate-400 focus:shadow-md transition-all" />
-                    <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 border-r-2 h-full border-r-slate-400 flex items-center">
-                      <GoCalendar className="text-2xl" color="black" />
-                    </div>
-                  </div>
-                </div> */}
-
-                {/* <div className="flex flex-col space-y-2 mt-8">
-                  <div className="relative w-10">
-                    <button className="w-full h-10 bg-slate-100 outline outline-2 outline-slate-400 rounded-md pl-14 pr-8 text-sm focus:shadow-slate-400 focus:shadow-md transition-all">
-                      <div className="absolute top-1/2 -translate-y-1/2 left-2 pr-1 h-full flex items-center">
-                        <BiSearchAlt2 className="text-2xl mr-2" /> Cari
-                      </div>
-                    </button>
-                  </div>
-                </div> */}
               </div>
 
               <table className="table-auto w-full text-center text-xl " id="tabel">
@@ -109,10 +112,13 @@ function LaporanCutiAdmin() {
                   {
                     suratCuti?.filter((item) => {
                       let filter = searchParams.get("filter");
-                      if (!filter) return true;
-                      let tglmulai = item.tglmulai.toLowerCase();
+                      let find = searchParams.get("find");
+                      if (!filter && !find) return true;
+                      let tglmulai = item.tglmulai;
+                      let name = item?.name?.toLowerCase();
                       return (
-                        tglmulai.includes(filter.toLowerCase())
+                        tglmulai.includes(filter) ||
+                        name.includes(find?.toLowerCase())
                       )
                     }).map((item, index) => {
                       return (

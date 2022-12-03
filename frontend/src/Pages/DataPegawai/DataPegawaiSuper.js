@@ -12,23 +12,23 @@ function DataPegawaiSuper() {
 
   let [searchParams, setSearchParams] = useSearchParams()
 
-  const getPegawai = async () => {
-    const response = await axios.get('http://localhost:5000/pegawai');
-    setPegawai(response.data.rows)
+  const getAdmin = async () => {
+    const response = await axios.get('http://localhost:5000/admin');
+    setPegawai(response.data)
   }
 
-  const deletePegawai = async (id) => {
+  const deleteAdmin = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/pegawai/${id}`)
+      await axios.delete(`http://localhost:5000/admin/${id}`)
 
-      getPegawai();
+      getAdmin();
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    getPegawai();
+    getAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props])
 
@@ -101,7 +101,7 @@ function DataPegawaiSuper() {
                         <Link to={`/super/data_pegawai/edit/${item.id}`} className="my-auto text-white bg-card-green h-8 w-24 items-center justify-center text-lg rounded-lg">
                           Edit
                         </Link>
-                        <button onClick={() => deletePegawai(item.id)} className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">
+                        <button onClick={() => deleteAdmin(item.id)} className="my-auto text-white bg-card-red h-8 w-24 items-center justify-center text-lg rounded-lg">
                           Hapus
                         </button>
                       </div>

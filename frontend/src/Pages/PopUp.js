@@ -10,7 +10,7 @@ function PopUp(props) {
   const startDate = new Date(props.detailCuti.tglmulai);
   const finishDate = new Date(props.detailCuti.tglselesai);
   const totalTime = finishDate.getTime() - startDate.getTime()
-  const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24)) * -1;
+  const totalDay = props.detailCuti.status?.includes("Ditolak") ? 0 : Math.ceil(totalTime / (1000 * 3600 * 24)) * -1;
 
   const deletePengajuanCuti = async (id) => {
     try {
@@ -29,7 +29,7 @@ function PopUp(props) {
       console.log(error)
     }
   }
-  console.log(props)
+
   return props.trigger ? (
     <div className="flex flex-col my-10 border border-gray-400 shadow-2xl rounded-xl">
       <div className="w-full flex bg-main h-20 items-center text-white text-3xl px-8 rounded-t-xl justify-between">
@@ -77,6 +77,13 @@ function PopUp(props) {
             <tr>
               <td>Tanggal Selesai</td>
               <td>: {props.detailCuti.tglselesai.split('-').reverse().join("-")}</td>
+            </tr>
+            <tr>
+              <td>
+                <span>Total Hari</span>
+              </td>
+              <td> : {totalDay ? totalDay : 0}
+              </td>
             </tr>
             <tr>
               <td>Alasan Cuti</td>
