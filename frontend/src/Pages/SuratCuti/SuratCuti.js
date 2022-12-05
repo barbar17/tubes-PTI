@@ -13,6 +13,7 @@ function SuratCuti() {
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     const month = months[now.getMonth()]
     const currentDate = `${now.getDate()} ${month} ${now.getFullYear()}`
+    const year = now.getFullYear();
 
     const [nama, setNama] = useState('');
     const [ttdPegawai, setTtdPegawai] = useState('');
@@ -27,7 +28,7 @@ function SuratCuti() {
     const [tglmulai, setTglMulai] = useState('');
     const [tglselesai, setTglSelesai] = useState('');
     const [tglpengajuan, setTglPengajuan] = useState("");
-    const [noSurat, setNoSurat] = useState('CT/2022/');
+    const [noSurat, setNoSurat] = useState(`CT/${year}/`);
 
     const startDate = new Date(tglmulai);
     const finishDate = new Date(tglselesai);
@@ -189,9 +190,9 @@ function SuratCuti() {
                         </div>
                     </div>
                     <div className='w-11/12 flex justify-end space-x-4 mb-5'>
-                        <button onClick={() => handleTolak()} className="my-auto text-white bg-card-red h-10 w-24 items-center justify-center text-lg rounded-lg">
+                        {/* <button onClick={() => handleTolak()} className="my-auto text-white bg-card-red h-10 w-24 items-center justify-center text-lg rounded-lg">
                             Tolak
-                        </button>
+                        </button> */}
                         <button onClick={() => handleSetuju()} className="my-auto text-white bg-card-blue h-10 w-24 items-center justify-center text-lg rounded-lg">
                             Simpan
                         </button>

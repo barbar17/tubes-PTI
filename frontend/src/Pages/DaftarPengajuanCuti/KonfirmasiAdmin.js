@@ -13,7 +13,7 @@ function KonfirmasiAdmin(props) {
     const startDate = new Date(props.detailCuti.tglmulai);
     const finishDate = new Date(props.detailCuti.tglselesai);
     const totalTime = finishDate.getTime() - startDate.getTime()
-    const totalDay = -Math.ceil(totalTime / (1000 * 3600 * 24));
+    const totalDay = -Math.ceil(totalTime / (1000 * 3600 * 24)) - 1;
 
     const getAdmin = async () => {
         const response = await axios.get(`http://localhost:5000/admin/${context.userId}`);
@@ -42,6 +42,7 @@ function KonfirmasiAdmin(props) {
         props.getSuraCutiByDivisi()
     }
 
+
     const handleTolak = async () => {
         let status = context.adminlvl === "Admin 1" ? "Ditolak oleh Officer" : "Ditolak oleh Manajer"
 
@@ -52,11 +53,13 @@ function KonfirmasiAdmin(props) {
                 }
             });
 
-            await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.detailCuti.userid}`, { "totalCuti": totalDay }, {
-                headers: {
-                    "Content-type": "application/json"
-                }
-            });
+            if (props.detailCuti.jeniscuti !== "Cuti Dispensasi") {
+                await axios.patch(`http://localhost:5000/pegawai/totalCuti/${props.detailCuti.userid}`, { "totalCuti": totalDay }, {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+            }
         } catch (error) {
             console.log(error);
         }

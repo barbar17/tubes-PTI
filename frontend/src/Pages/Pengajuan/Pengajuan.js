@@ -19,13 +19,12 @@ function Pengajuan() {
   const [cutiDiambil, setCutiDiambil] = useState('')
   const [ttdPegawai, setTtdPegawai] = useState()
 
-  const now = new Date();
-  const currentDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+  const currentDate = new Date().toISOString().split('T')[0];
 
   const startDate = new Date(tglmulai);
   const finishDate = new Date(tglselesai);
   const totalTime = finishDate.getTime() - startDate.getTime()
-  const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24));
+  const totalDay = Math.ceil(totalTime / (1000 * 3600 * 24)) + 1;
 
   const go = useNavigate()
 
@@ -50,7 +49,7 @@ function Pengajuan() {
 
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
-    if (jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
+    if (jeniscuti !== "Cuti Dispensasi" && jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
     if (pegawaiCuti >= 3) return alert(`Sudah terdapat 3 pegawai cuti di divisi ${props.divisi}`)
     const totalDayValid = jeniscuti === "Cuti Dispensasi" ? 0 : totalDay
 
@@ -100,7 +99,7 @@ function Pengajuan() {
           Formulir Pengajuan Cuti
         </div>
         <form className="w-full bg-white text-xl p-10" onSubmit={savePengajuanCuti}>
-          <table className="border-separate border-spacing-y-2 border-spacing-x-5">
+          <table className="border-separate border-spacing-y-2 border-spacing-x-5 ">
             <tbody>
               <tr>
                 <td>
@@ -109,7 +108,7 @@ function Pengajuan() {
                 <td> :
                   <input
                     type="text"
-                    className="rounded-md ml-2 border-slate-400 border py-1 px-2 "
+                    className="rounded-md ml-2 border-slate-400 border py-1 px-2 text-gray-500"
                     value={nama}
                     disabled
                     readOnly
@@ -123,7 +122,7 @@ function Pengajuan() {
                 <td> :
                   <input
                     type="text"
-                    className="rounded-md ml-2 border-slate-400 border py-1 px-2"
+                    className="rounded-md ml-2 border-slate-400 border py-1 px-2 text-gray-500"
                     value={id}
                     disabled
                     readOnly
@@ -137,7 +136,7 @@ function Pengajuan() {
                 <td> :
                   <input
                     type="text"
-                    className="rounded-md ml-2 border-slate-400 border py-1 px-2"
+                    className="rounded-md ml-2 border-slate-400 border py-1 px-2 text-gray-500"
                     value={divisi}
                     disabled
                     readOnly
@@ -151,7 +150,7 @@ function Pengajuan() {
                 <td> :
                   <input
                     type="text"
-                    className="rounded-md ml-2 border-slate-400 border py-1 px-2"
+                    className="rounded-md ml-2 border-slate-400 border py-1 px-2 text-gray-500"
                     value={(jatahcuti - cutiDiambil) + " Hari"}
                     disabled
                     readOnly
@@ -183,7 +182,7 @@ function Pengajuan() {
                 <td>
                   <span>Tanggal Selesai</span>
                 </td>
-                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} min={currentDate} required />
+                <td> : <input type="date" className="form-control" onChange={(event) => setTglselesai(event.target.value)} min={tglmulai} required />
                 </td>
               </tr>
               <tr>

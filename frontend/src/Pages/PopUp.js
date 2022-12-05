@@ -10,7 +10,7 @@ function PopUp(props) {
   const startDate = new Date(props.detailCuti.tglmulai);
   const finishDate = new Date(props.detailCuti.tglselesai);
   const totalTime = finishDate.getTime() - startDate.getTime()
-  const totalDay = props.detailCuti.status?.includes("Ditolak") ? 0 : Math.ceil(totalTime / (1000 * 3600 * 24)) * -1;
+  const totalDay = props.detailCuti.status?.includes("Ditolak") ? 0 : (Math.ceil(totalTime / (1000 * 3600 * 24)) + 1) * -1;
 
   const deletePengajuanCuti = async (id) => {
     try {
@@ -114,9 +114,12 @@ function PopUp(props) {
           <p>{props.detailCuti.komentar}</p>
         </div>
         <div className="flex space-x-4">
-          <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
-            Hapus
-          </button>
+          {
+            props.detailCuti.status === "Diterima" ?
+              <></> : <button onClick={() => deletePengajuanCuti(props.detailCuti.id)} className="text-white bg-card-red mt-5 h-8 w-24 items-center justify-center text-lg rounded-lg">
+                Hapus
+              </button>
+          }
           <Link to={`/user/surat-cuti/${props.detailCuti.id}`} className={props.detailCuti.status === "Diterima" ? "visible" : "invisible"}>
             <button className="text-white bg-card-green mt-5 h-8 w-28 items-center justify-center text-lg rounded-lg">
               Lihat Surat
