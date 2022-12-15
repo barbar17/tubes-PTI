@@ -20,7 +20,8 @@ function Pengajuan() {
   const [ttdPegawai, setTtdPegawai] = useState()
 
   const currentDate = new Date().toISOString().split('T')[0];
-
+  const now = new Date();
+  now.setHours(0, 0, 0, 0)
   const startDate = new Date(tglmulai);
   const finishDate = new Date(tglselesai);
   const totalTime = finishDate.getTime() - startDate.getTime()
@@ -35,7 +36,20 @@ function Pengajuan() {
 
   const getLaporanCutiByDivisi = async () => {
     const response = await axios.get(`http://localhost:5000/suratCuti/laporan/${props.divisi}`);
-    setPegawaiCuti(response.data.length)
+
+    let pegawaiCuti = 0;
+    for (let index = 0; index < response.data.length; index++) {
+      const start = new Date(response.data[index].tglmulai);
+      start.setHours(0, 0, 0, 0)
+      const end = new Date(response.data[index].tglselesai);
+      end.setHours(0, 0, 0, 0)
+      console.log(start, now)
+      if (start <= now && now <= end) {
+        pegawaiCuti += 1
+      }
+    }
+    setPegawaiCuti(pegawaiCuti)
+    console.log(pegawaiCuti)
   }
 
   const getPegawaiById = async () => {

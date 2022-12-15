@@ -45,7 +45,7 @@ function LaporanCutiSuperAdmin() {
               <h1 className="font-bold text-2xl mb-5">Filter Berdasarkan Tanggal Mulai Cuti</h1>
               <div className="flex space-x-10 mb-5">
                 <div className="flex flex-col space-y-2">
-                  <label htmlFor="enddate">Tanggal Mulai</label>
+                  <label htmlFor="enddate">Bulan Mulai</label>
                   <div className="relative w-80">
                     <input
                       id="startdate"

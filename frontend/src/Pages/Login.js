@@ -71,8 +71,8 @@ function Login() {
                             required
                         />
                         {
-                            showPassword ? <div className='h-full flex py-2'> <AiFillEyeInvisible className='text-gray-700 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
-                                : <div className='h-full flex py-2'><AiFillEye className='text-gray-700 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
+                            showPassword ? <div className='h-full flex py-2'> <AiFillEyeInvisible className='text-gray-500 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
+                                : <div className='h-full flex py-2'><AiFillEye className='text-gray-500 pr-2 text-4xl bg-white h-full rounded-tr-md rounded-br-md' /></div>
                         }
                     </div>
                     <button type='button' onClick={() => setShowPassword(!showPassword)} className='bg-card-green rounded-md flex w-fit px-2 py-1 text-white mb-8'>

@@ -36,8 +36,12 @@ function BerandaAdmin() {
 
         let pegawaiCuti = 0;
         for (let index = 0; index < response.data.length; index++) {
-            const element = response.data[index].tglselesai;
-            if (element >= currentDate) {
+            const start = new Date(response.data[index].tglmulai);
+            start.setHours(0, 0, 0, 0)
+            const end = new Date(response.data[index].tglselesai);
+            end.setHours(0, 0, 0, 0)
+            console.log(start, now)
+            if (start <= now && now <= end) {
                 pegawaiCuti += 1
             }
         }
