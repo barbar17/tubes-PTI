@@ -1,11 +1,12 @@
 import Footer from "./Pages/Footer/Footer";
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Header from "./Pages/Header/Header";
 import { useEffect, useState } from "react"
 import { AuthContext } from "./Function/AuthContext";
 import axios from "axios";
 
 function App() {
+  const go = useNavigate()
 
   const [user, setUser] = useState();
   const userId = user?.id
@@ -50,6 +51,10 @@ function App() {
     })
   }
 
+  const goBackToLogin = () => {
+    go('/')
+  }
+
   useEffect(() => {
     checkToken(userToken);
     // eslint-disable-next-line
@@ -59,10 +64,18 @@ function App() {
     <div className="min-h-screen w-full bg-login bg-no-repeat bg-cover font-display">
       <div className="min-h-screen flex flex-col justify-between">
         <AuthContext.Provider value={{ authState, setAuthState, divisi, userId, adminlvl }}>
-          <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl">
-            <Header user={user?.name} id={user?.id} tipeakun={user?.tipeakun} />
-            <Outlet context={{ userId, divisi }} />
-          </div>
+          {
+            authState
+              ? <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl">
+                <Header user={user?.name} id={user?.id} tipeakun={user?.tipeakun} />
+                <Outlet context={{ userId, divisi }} />
+              </div>
+
+              : <div className="container flex flex-col grow mx-auto my-10 border bg-slate-200 border-gray-400 shadow-2xl items-center justify-center space-y-8">
+                <span className="text-3xl font-bold">Anda Perlu Login Untuk Mengakses Halaman Ini</span>
+                <button className="text-white bg-main h-10 w-24 text-xl rounded-lg" onClick={goBackToLogin}>Login</button>
+              </div>
+          }
           <Footer />
         </AuthContext.Provider>
       </div>

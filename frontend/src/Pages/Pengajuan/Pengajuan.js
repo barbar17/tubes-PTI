@@ -18,6 +18,7 @@ function Pengajuan() {
   const [file, setFile] = useState('')
   const [cutiDiambil, setCutiDiambil] = useState('')
   const [ttdPegawai, setTtdPegawai] = useState()
+  const [cancelPengajuan, setCancelPengajuan] = useState(false)
 
   const currentDate = new Date().toISOString().split('T')[0];
   const now = new Date();
@@ -33,7 +34,7 @@ function Pengajuan() {
     const foto = event.target.files[0];
     setFile(foto);
   }
-
+  console.log(cancelPengajuan)
   const getLaporanCutiByDivisi = async () => {
     const response = await axios.get(`http://localhost:5000/suratCuti/laporan/${props.divisi}`);
 
@@ -43,13 +44,21 @@ function Pengajuan() {
       start.setHours(0, 0, 0, 0)
       const end = new Date(response.data[index].tglselesai);
       end.setHours(0, 0, 0, 0)
-      console.log(start, now)
       if (start <= now && now <= end) {
         pegawaiCuti += 1
       }
     }
     setPegawaiCuti(pegawaiCuti)
-    console.log(pegawaiCuti)
+  }
+
+  const getPengajuanCuti = async () => {
+    const response = await axios.get(`http://localhost:5000/suratCuti/pegawai/${props.userId}`);
+    for (let index = 0; index < response.data.length; index++) {
+      const status = response.data[index].status;
+      if (!status.includes('Ditolak') || status === 'Diterima') {
+        setCancelPengajuan(true)
+      }
+    }
   }
 
   const getPegawaiById = async () => {
@@ -63,6 +72,7 @@ function Pengajuan() {
 
   const savePengajuanCuti = async (event) => {
     event.preventDefault();
+    if (cancelPengajuan === true) return alert("Pengajuan cuti anda sebelumnya masih dalam proses")
     if (jeniscuti !== "Cuti Dispensasi" && jatahcuti - cutiDiambil - totalDay < 0) return alert("Cuti melebihih batas hari")
     if (pegawaiCuti >= 3) return alert(`Sudah terdapat 3 pegawai cuti di divisi ${props.divisi}`)
     const totalDayValid = jeniscuti === "Cuti Dispensasi" ? 0 : totalDay
@@ -104,6 +114,7 @@ function Pengajuan() {
   useEffect(() => {
     getPegawaiById()
     getLaporanCutiByDivisi()
+    getPengajuanCuti()
   }, [props])
 
   return (
