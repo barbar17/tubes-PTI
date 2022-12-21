@@ -55,9 +55,11 @@ function Pengajuan() {
     const response = await axios.get(`http://localhost:5000/suratCuti/pegawai/${props.userId}`);
     for (let index = 0; index < response.data.length; index++) {
       const status = response.data[index].status;
-      if (!status.includes('Ditolak') || status === 'Diterima') {
+      if (!status.includes('Ditolak') && status !== 'Diterima') {
+        console.log('hai')
         setCancelPengajuan(true)
       }
+      console.log(status)
     }
   }
 
